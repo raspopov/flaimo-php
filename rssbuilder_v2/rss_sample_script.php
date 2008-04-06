@@ -36,7 +36,7 @@ $publisher = (string) 'Flaimo'; // person, an organization, or a service
 $creator = (string) 'Flaimo'; // person, an organization, or a service
 $date = (string) time();
 $language = (string) 'en';
-$rights = (string) 'Copyright © 2003 Flaimo.com';
+$rights = (string) 'Copyright © 2008 Flaimo.com';
 $coverage = (string) ''; // spatial location , temporal period or jurisdiction
 $contributor = (string) 'Flaimo'; // person, an organization, or a service
 $rssfile->addDCdata($publisher,	$creator, $date, $language,	$rights, $coverage, $contributor);
