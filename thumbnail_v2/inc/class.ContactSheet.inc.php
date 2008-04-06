@@ -178,8 +178,9 @@ class ContactSheet {
 		    $sub_dirs = (boolean) $sub_dirs;
 		    $handle = @opendir($folder);
 		    while ($file = @readdir($handle)) {
-			    if ($sub_dirs === TRUE && !eregi("^\.{1,2}$",$file)
-			    	&& is_dir($folder . '/' . $file)) {
+			    if ($sub_dirs === TRUE && !eregi("^\.{1,2}$", $file)
+			    	&& is_dir($folder . '/' . $file) && $file{0} != '.') {
+			    	
 			    	$this->readFolder($folder . '/' . $file, $sub_dirs);
 			    } elseif (!eregi("^\.{1,2}$",$file) && !is_dir($folder . '/' . $file)
 			    		  && eregi("\.(jpg|gif|png|wbmp)", $file)) {
