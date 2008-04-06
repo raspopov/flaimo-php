@@ -1,22 +1,20 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 //+----------------------------------------------------------------------+
-//| WAMP (XP-SP1/1.3.33/5.0.15/5.1.0)                                   |
+//| WAMP (XP-SP2/2.2/5.2/5.1.0)                                          |
 //+----------------------------------------------------------------------+
-//| Copyright(c) 2001-2006 Michael Wimmer                                |
+//| Copyright(c) 2001-2008 Michael Wimmer                                |
 //+----------------------------------------------------------------------+
-//| I don't have the time to read through all the licences to find out   |
-//| what the exactly say. But it's simple. It's free for non commercial  |
-//| projects, but as soon as you make money with it, i want my share :-) |
+//| Licence: GNU General Public License v3                               |
 //+----------------------------------------------------------------------+
-//| Authors: Michael Wimmer <flaimo@gmx.net>                             |
+//| Authors: Michael Wimmer <flaimo@gmail.com>                           |
 //+----------------------------------------------------------------------+
 //
 // $Id$
 
 /**
 * @package AtomBuilder
-* @category FLP
+* @category flaimo-php
 * @filesource
 */
 error_reporting(E_ALL);
@@ -42,7 +40,7 @@ $atom->addLink('http://example.com/', 'Example.com – HTML Homepage', 'alternat
 $atom->addCategory('Webdesign', 'http://www.example.com/tags', 'Web 2.0 Webdesign'); // optional
 $atom->addCategory('PHP'); // optional
 
-/* add entries... */
+/* now start adding entries... */
 $entry_1 = $atom->newEntry('The title of the first news item', 'http://example.com/linktofeedhomepage/permalink_to_the_first_news_item', 'tag:flaimo@flaimo.com,2004-12-31:linktofeedhomepage/detail/1'); // required infos: title, link, id
 $entry_1->setUpdated('2005-10-29T14:44:00Z'); // required (last modified/updated)
 $entry_1->setPublished('2005-10-29T14:34:00.25Z'); // optional
@@ -61,7 +59,7 @@ $entry_1->setContent('The whole content of the entry. This <b>and</b> the summar
 //$entry_1->setContent('dgwgtgfgg897dfg87fdgd876gdf86g…', 'image/png'); // you can also use other mime types
 $atom->addEntry($entry_1); // add the created entry to the feed
 
-
+/* add another entry... */
 $entry_2 = $atom->newEntry('The title of the second news item', 'http://example.com/linktofeedhomepage/permalink_to_the_second_news_item', 'tag:flaimo@flaimo.com,2004-12-31:linktofeedhomepage/detail/2');
 $entry_2->setUpdated('2005-10-29T15:54:00+01:00');
 $entry_2->setPublished('2005-10-29T15:34:00.11+01:00');
