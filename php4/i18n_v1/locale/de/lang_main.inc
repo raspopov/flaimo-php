@@ -1,0 +1,16 @@
+Yes = Ja
+No = Nein
+hour = Uhr
+timezone_is = Zeit­zone:
+time = Zeit
+switch_to = Wechsle zu
+de_at = Öster­reichisch
+de = Deutsch
+en = Englisch
+es = Spanisch
+fr = Französisch
+it = Italienisch
+en_gb = Englisch (UK)
+ru = Russisch
+ar = Arabisch
+no_records_found = Kein Datensatz gefunden! 

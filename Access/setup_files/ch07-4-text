@@ -1,0 +1,66 @@
+<?php
+
+/* mysql_connect() */
+/* mysql_select_db() */
+
+$clean = array();
+$mysql = array();
+
+$now = time();
+$salt = 'SHIFLETT';
+
+list($identifier, $token) = explode(':', $_COOKIE['auth']);
+
+if (ctype_alnum($identifier) && ctype_alnum($token))
+{
+    $clean['identifier'] = $identifier;
+    $clean['token'] = $token;
+}
+else
+{
+    /* ... */
+}
+
+$mysql['identifier'] = mysql_real_escape_string($clean['identifier']);
+
+$sql = "SELECT username, token, timeout
+        FROM   users
+        WHERE  identifier = '{$mysql['identifier']}'";
+
+if ($result = mysql_query($sql))
+{
+    if (mysql_num_rows($result))
+    {
+        $record = mysql_fetch_assoc($result);
+
+        if ($clean['token'] != $record['token'])
+        {
+            /* Failed Login (wrong token) */
+        }
+        elseif ($now > $record['timeout'])
+        {
+            /* Failed Login (timeout) */
+        }
+        elseif ($clean['identifier'] !=
+                md5($salt . md5($record['username'] . $salt)))
+        {
+            /* Failed Login (invalid identifier) */
+        }
+        else
+        {
+            /* Successful Login */
+        }
+    }
+    else
+    {
+        /* Failed Login (invalid identifier) */
+    }
+}
+else
+{
+    /* Error */
+}
+
+?>
+</body>
+</html>

@@ -1,0 +1,58 @@
+name, id, type, required, valtype
+
+// wenn alles passt dann daten is session schreiben. session namen als class const defnineren
+// ziel url nach erfolgreichen ausfüllen
+$form = new Form('gewinnspiel_1', 'http://www.example.com/write2db.php');
+
+$form->startGroup('Pflichtangaben');
+$form->addEntry('Benutzername', F_TEXT, F_REQ, FV_STR, array(0, 35)); // name, typ, required, valtype, default value, add arguments
+$form->addEntry('Passwort', F_TEXT, F_REQ, FV_STR, '', array(0, 35));
+$form->addEntry('Passwort wiederholen', F_TEXT, F_REQ, FV_STR, '', array(0, 35));
+$form->addEntry('E-Mail', F_TEXT, F_REQ, FV_STR, '', array(0, 35));
+$form->endGroup('Pflichtangaben');
+
+$form->startGroup('Weitere Daten');
+$form->addEntry('Vorname', F_TEXT, F_OPT, FV_STR, '', array(0, 35));
+$form->addEntry('Nachname', F_TEXT, F_OPT, FV_STR, '', array(0, 35));
+$form->addEntry('Geburtstag', F_DATE, F_OPT, FV_DATE, '1950-01-01', '16'); // min age in years // ev noch datelist als dropdown mit anfangs und endwert
+$form->addEntry('Beschreibung', F_TEXTAREA, F_OPT, FV_STR, 'Geben Sie hier ihre Beschreibung ein', array(0, 255));
+$form->addEntry('Antwort', F_LIST, F_OPT, FV_STR, '0', array(0 => 'Antwort 1', 1 => 'Antwort 2', 2 => 'Antwort 3'));
+$form->addEntry('Anzahl Kinder', F_LIST, F_OPT, FV_INT, array(0, 99));
+$form->endGroup('Weitere Daten');
+
+$form->addEntry('Abschicken', F_SEND, F_REQ, FV_BUTTON, '');
+
+// id wird aus name generiert oder per zufall string erzeugt und dann verknüpfung zu name in session gemacht.
+
+oder daten so laden:
+
+// pfad und dateiendung in klasse angeben. error catchen wenn nicht gefunden
+$form->loadTemplate('gewinnspiel1');
+/* template könnte so aussehen
+
+SG = Pflichtangaben
+AE = Benutzername, F_TEXT, F_REQ, FV_STR, , array(0,35)
+AE = Passwort, F_TEXT, F_REQ, FV_STR, , array(0,35)
+AE = Passwort wiederholen, F_TEXT, F_REQ, FV_STR, , array(0,35)
+AE = Beschreibung, F_TEXTAREA, F_OPT, FV_STR, Geben Sie hier ihre Beschreibung ein, array(0,255)
+EG = TRUE;
+
+
+*/
+echo $form->getErrors('anchors');
+echo $form->getCode('XHTML1');
+
+
+FormBase ->Form
+FormBase -> FormEntryBase -> FormEntryIntList / FormEntryText
+
+FormBase -> FormValidatorBase -> FormValidatorString
+
+
+factory_methode schreiben dafür
+FormValidatorString->validate($value, $arguments);
+
+
+in __construct checken ob daten gesendet wurden oder nicht und dann validieren oder nicht
+
+form absichern mit anderer tokenklasse, dass nicht doppelt abgeschickt wird

@@ -1,0 +1,37 @@
+=======================
+1.02
+-----------------------
+* Added attribute to the saveAtom method, so a custom filename can be specified
+* Cosmetic changes to the XHTML-code-parser
+
+=======================
+1.00
+-----------------------
+* Changed all classnames from Atom* to AtomBuilder*
+* Converted class-files to UTF-8
+* Corrected <head> bug
+* Corrected mode bug
+* Corrected rel bugs
+* Corrected XHTML-Content bug
+
+=======================
+1.00RC3
+-----------------------
+* Changed the input format for date and time values from unix-timestamp to ISO.8601.1988 format. this way is more flexible with timezones.
+
+=======================
+
+1.00RC2
+-----------------------
+* Added a check for dublicate logo and icon links
+* Corrected dedection for dublicate alternate links
+* Default summary is now set if content is base64 encoded and no summery has been set
+* Rsc attribute for content element now supported
+
+
+=======================
+
+1.00RC
+-----------------------
+
+* initial release

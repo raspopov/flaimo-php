@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<title>SMS/E-Mail Ticker &#8211; Einf&uuml;hrung</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="doc.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<p><a href="ticker_manual_english.htm" lang="en" xml:lang="en">Switch to english version&#8230;</a></p>
+<h1><acronym title="Short Message Service" lang="en" xml:lang="en">SMS</acronym>/E-Mail Ticker &#8211; Ein&#173;f&uuml;hrung</h1>
+<h2>In&#173;halt</h2>
+<ul>
+				<li><a href="#intro">Intro</a></li>
+                <li><a href="#preparation">Vor&#173;bereitung</a></li>
+                <li><a href="#user">Auf&#173;gabe des Benutzers</a></li>
+                <li><a href="#scripts">Ein&#173;binden des Scripts</a></li>
+                <li><a href="#otheroptions">Weitere Optionen</a></li>
+                <li><a href="#notes">Hin&#173;weise</a></li>
+</ul>
+<h2><a id="#intro">Intro</a></h2>
+<p>Mit&#173;hilfe der Ticker Klassen l&auml;sst sich ein kleiner Ticker auf einer <span lang="en" xml:lang="en">Homepage</span>
+				einbauen, der auf einem <span lang="en" xml:lang="en">E-Mail Account</span> basiert. Der eigentliche
+				Sinn des	Scripts ist es als eine Art SMS-Ticker &#8222;f&uuml;r Arme&#8220; zu
+				fungieren.	Wenn das Handy des Benutzers &uuml;ber SMS-Funktionalit&auml;t
+				verf&uuml;gt,
+				so l&auml;sst sich im Normal&#173;fall auch eine SMS an eine E-Mail Adresse schicken.
+				Auf diese Weise kann ein SMS-Ticker emuliert werden wie sie des &Ouml;fteren
+				im Fern&#173;sehen zu sehen sind, ohne aber Miete an einen teuren SMS-<span lang="en" xml:lang="en">Carrier</span>
+				zahlen	zu m&uuml;ssen. (und billiger ist es f&uuml;r den Handy&#173;benutzer meist
+				auch)<br />
+				Nat&uuml;rlich kann auch ein normaler E-Mail Client ver&#173;wendet werden um eine
+				Nach&#173;richt an den Ticker zu senden. Die Idee basiert auf den <a href="http://www.fraikin.net/sms2email-liveticker/index.php?l=de">Scripts
+				von Markus
+				Fraikin</a>. Aller&#173;dings wurde hier der gesamte
+				Code objekt&#173;orientiert geschrieben.</p>
+<h2><a id="preparation">Vor&#173;bereitung</a></h2>
+<p>Voraussetzung ist, dass die installierte PHP Version die <a href="http://www.php.net/imap">IMAP/POP
+	Funktionen</a>	unterst&uuml;tzt.	Dann	sollte	eine	eigene	E-Mail	Adresse
+	f&uuml;r
+	den	Ticker	eingerichtet	werden, zum Bei&#173;spiel ticker@meindomain.com. Danach
+	m&uuml;ssen
+	die	<span lang="en" xml:lang="en">Mailbox</span>&#173;ein&#173;stellungen
+				in der <var lang="en" xml:lang="en">ticker_settings.ini</var> Datei an&#173;gepasst werden.</p>
+<h2><a id="user">Aufgabe des Benutzers</a></h2>
+<p>Dieser muss nun <a href="sms2mail.htm">&uuml;ber sein Handy</a> oder per Mail&#173;programm
+				eine SMS/Mail an die ein&#173;gerichtete Adresse schicken. Um zu ver&#173;hindern, dass
+				eventuell eintreffene
+				Spam Mails angezeigt werden kann eine Zeichen&#173;folge in der <var lang="en" xml:lang="en">ticker_settings.ini</var>	definiert werden die der Benutzer vor der eigentlichen Nach&#173;richt
+				ein&#173;geben	muss.<br />
+				Da fast alle SMS die an Mail&#173;adressen gesendet werden einen Werbe&#173;text
+				als An&#173;hang haben, sollte der Benutzer nach der eigentlichen Nachricht
+				noch	eine Schluss&#173;zeichen&#173;folge eingeben an der der Text sp&auml;ter ab&#173;geschnitten
+				wird. Diese Ein&#173;stellung sowie die maximale Anzahl an Zeichen die sp&auml;ter
+				angezeigt werden soll kann ebenfalls in der <var lang="en" xml:lang="en">ticker_settings.ini</var> definiert
+werden.</p>
+<h2><a id="scripts">Ein&#173;binden des Scripts</a></h2>
+<p>Die eigentliche Ein&#173;bindung in die PHP Seiten ist dann
+								relativ	einfach:</p>
+								<p lang="en" xml:lang="en"><code>ob_start();<br />
+								include_once('class.Ticker.inc.php');<br />
+								$ticker
+																= new Ticker(6);<br />
+																<br />
+								foreach
+								($ticker->getMessageList()  as $id) {<br />
+								&nbsp;&nbsp;$message = $ticker->getMessage($id);<br />
+								&nbsp;&nbsp;echo '&lt;p&gt;ID: ' . $message->getID()
+								. '&lt;br /&gt;';<br />
+								&nbsp;&nbsp;echo 'Datum: ' . $message->getTimestamp() . '&lt;br
+								/&gt;';<br />
+								&nbsp;&nbsp;echo 'Text: ' . $message->getText() . '&lt;/p&gt;';<br />
+								} // end foreach<br />
+								<br />
+								ob_end_flush();</code>
+</p>
+								<p>Man erzeugt zun&auml;chst ein neues Ticker Objekt mit der Anzahl an
+												Ticker Nach&#173;richten die aus&#173;gegeben
+												werden sollen und geht diese
+												dann in einer Schleife durch
+												in welcher die Daten dann aus&#173;gegeben
+												werden. Die	Formatierung und
+								Ein&#173;bindung obliegt den Web&#173;designer.</p>
+								<h2><a id="otheroptions">Weitere Optionen</a></h2>
+								<p>&#8230;die in der <var lang="en" xml:lang="en">ticker_settings.ini</var> ein&#173;gestellt werden k&ouml;nnen:</p>
+								<ul>
+									<li>Alte Ticker&#173;meldungen l&ouml;schen</li>
+									<li>Nicht valide Ticker&#173;meldungen l&ouml;schen</li>
+									<li>Alte Ticker&#173;meldungen in eine <span lang="en" xml:lang="en">MySQL</span> Tabelle sichern</li>
+									<li>Liste mit erlaubten Ab&#173;sendern definieren</li>
+								</ul>
+								<h2><a id="notes">Hin&#173;weise</a></h2>
+								<ul>
+												<li>Um die <span lang="en" xml:lang="en">Mail&#173;box</span> nicht zu sehr
+
+												zu belasten empfiehlt es sich
+																die Aus&#173;gabe auf irgendeine	Art zu cachen.
+				Dazu gibt es etliche	Scripts im Internet.</li>
+								</ul>
+								<hr />
+<p> <strong>Autor:</strong> <a href="mailto:flaimo 'at' gmx 'dot' net">Flaimo</a><br />
+				<strong>Datum:</strong> 2003-05-27<br />
+				<strong>URLs:</strong><br />
+				<a href="http://sourceforge.net/projects/php-flp/">Projekt&#173;seite</a><br />
+				<a href="http://www.flaimo.com/">Beispiel&#173;script</a></p>
+<hr />
+<form action="http://www.hotscripts.com/cgi-bin/rate.cgi" method="post"><p>
+				<input type="hidden" name="ID" value="22420" />
+				<strong lang="en" xml:lang="en">Rate Our Script @ <a href="http://www.hotscripts.com">HotScripts.com</a></strong>
+				<select name="ex_rate" size="1">
+								<option selected="selected">Select</option>
+								<option value="5">Excellent!</option>
+								<option value="4">Very Good</option>
+								<option value="3">Good</option>
+								<option value="2">Fair</option>
+								<option value="1">Poor</option>
+				</select>
+				<input type="submit" value="Go!" /></p>
+</form>
+<form action="http://www.php-resource.de/vote4.php" method="post" target="new"><p>
+		<input type="hidden" name="LKID" value="4197" />
+<input type="hidden" name="act" value="update" />
+				<strong lang="en" xml:lang="en">Rate Our Script @ <a href="http://www.php-resource.de">PHP-Resource.de</a></strong>
+				<select size="1" name="Votenr">
+								<option value="5">5 Stars</option>
+								<option value="4">4 Stars</option>
+								<option value="3">3 Stars</option>
+								<option value="2">2 Stars</option>
+								<option value="1">1 Stars</option>
+								<option value="0" selected="selected">Vote</option>
+				</select>
+				<input type="submit" value="Vote" /></p>
+</form>
+
+<form method="post" action="http://www.phparchiv.de/cgi-bin/links/ratehome.cgi" target="new"><p>
+				<strong lang="en" xml:lang="en">Rate Our Script @ phparchiv.de</strong> (10 is best)
+				<input type="hidden" name="ID" value="3962" />
+				<select name="R" size="1">
+								<option>1 </option>
+								<option>2 </option>
+								<option>3 </option>
+								<option>4 </option>
+								<option>5 </option>
+								<option>6 </option>
+								<option>7 </option>
+								<option>8 </option>
+								<option>9 </option>
+								<option selected="selected">10 </option>
+				</select>
+				<input type="submit" value="Vote" /></p>
+</form>
+
+</body>
+</html>

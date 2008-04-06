@@ -1,0 +1,60 @@
+# FLP Translation file.
+# Copyright (C) 2003 Flaimo.com.
+# Flaimo <flaimo@gmx.net>, 2003.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FLP\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2003-01-05 04:04+0100\n"
+"Last-Translator: Flaimo <flaimo@gmx.net>\n"
+"Language-Team: Italian <flaimo@gmx.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Yes"
+msgstr "Sí"
+
+msgid "No"
+msgstr "No"
+
+msgid "hour"
+msgstr "ora"
+
+msgid "timezone_is"
+msgstr "Tutte le volte:"
+
+msgid "time"
+msgstr "tempo"
+
+msgid "switch_to"
+msgstr "commuti a"
+
+msgid "de_at"
+msgstr "Austriaco"
+
+msgid "de"
+msgstr "Tedesco"
+
+msgid "en"
+msgstr "Inglese"
+
+msgid "es"
+msgstr "Spagnolo"
+
+msgid "fr"
+msgstr "Francese"
+
+msgid "it"
+msgstr "Italiano"
+
+msgid "en_gb"
+msgstr "Inglese (UK)"
+
+msgid "ru"
+msgstr "Russo"
+
+msgid "ar"
+msgstr "Arabo"

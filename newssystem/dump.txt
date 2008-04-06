@@ -1,0 +1,154 @@
+
+# phpMyAdmin MySQL-Dump
+# version 2.3.0-rc1
+# http://phpwizard.net/phpMyAdmin/
+# http://www.phpmyadmin.net/ (download page)
+#
+# Host: localhost
+# Erstellungszeit: 29. Juni 2002 um 03:30
+# Server Version: 3.23.42
+# PHP-Version: 4.1.2
+# Datenbank: `newssystem`
+# --------------------------------------------------------
+
+#
+# Tabellenstruktur für Tabelle `tbl_author`
+#
+
+CREATE TABLE tbl_author (
+  IDAuthor tinyint(3) unsigned NOT NULL auto_increment,
+  Language varchar(4) NOT NULL default 'de',
+  AuthorNick text,
+  AuthorRealName text,
+  AuthorPassword text,
+  AuthorLevel tinyint(3) unsigned default NULL,
+  AuthorEmail text,
+  AuthorPicture text,
+  AuthorHomepage text,
+  AuthorICQ text,
+  AuthorAIM text,
+  AuthorYahoo text,
+  PRIMARY KEY  (IDAuthor),
+  KEY Language (Language)
+) TYPE=MyISAM;
+
+#
+# Daten für Tabelle `tbl_author`
+#
+
+INSERT INTO tbl_author VALUES (1, 'de', 'admin', 'Administrator', 'alyssa05te', 1, 'admin@yourhost.com', '', 'http://', '1234567890', 'Adminstrator', 'Adminstrator');
+INSERT INTO tbl_author VALUES (2, 'de', 'Flaimo', '', 'alyssa04pc', 1, 'flaimo@flaimo.com', '', 'http://flaimo.com/', '', '', '');
+INSERT INTO tbl_author VALUES (3, 'de', 'Patrick', 'Patrick Butterer', 'maxmobil', 3, 'patrick@charmed-net.de', '', 'http://charmed-net.de', '71436548', '', '');
+INSERT INTO tbl_author VALUES (4, 'de', 'Simone', 'Simone', 'maxmobil', 1, 'Simone@charmed-net.de', 'http://charmed-net.de/forum/avatars/avar_sim.jpg', 'http://charmed-net.de/', '63623688', '', '');
+INSERT INTO tbl_author VALUES (5, 'en', 'Seeker', 'Seeker', 'charmednew', 1, 'seeker@charmed-net.de', '', 'http://', '108151425', '', '');
+INSERT INTO tbl_author VALUES (6, 'en', 'Herb', 'Marcus Herberger', 'amnews01', 3, '', '', 'http://', '57660909', '', '');
+INSERT INTO tbl_author VALUES (7, 'de', 'Eiko', 'Heike', 'charmednew', 3, 'eiko@charmed-net.de', '', 'http://', '133397670', '', '');
+# --------------------------------------------------------
+
+#
+# Tabellenstruktur für Tabelle `tbl_category`
+#
+
+CREATE TABLE tbl_category (
+  IDCategory tinyint(3) unsigned NOT NULL auto_increment,
+  Language varchar(4) NOT NULL default 'de',
+  CategoryName text,
+  CategoryPosition tinyint(3) unsigned default NULL,
+  CategoryPassword text,
+  PRIMARY KEY  (IDCategory),
+  KEY Language (Language)
+) TYPE=MyISAM;
+
+#
+# Daten für Tabelle `tbl_category`
+#
+
+INSERT INTO tbl_category VALUES (2, 'de', 'Charmed-Net', 2, '');
+INSERT INTO tbl_category VALUES (3, 'de', 'Cast', 2, '');
+INSERT INTO tbl_category VALUES (4, 'en', 'Offtopic', 3, '');
+INSERT INTO tbl_category VALUES (5, 'de', 'Charmed', 4, '');
+INSERT INTO tbl_category VALUES (6, 'de', 'Alyssa Milano', 5, '');
+INSERT INTO tbl_category VALUES (7, 'de', 'Shannen Doherty', 6, '');
+INSERT INTO tbl_category VALUES (8, 'en', 'Holly Marie Combs', 7, '');
+INSERT INTO tbl_category VALUES (9, 'de', 'Rose McGowan', 8, '');
+INSERT INTO tbl_category VALUES (10, 'en', 'Station-Check', 9, '');
+# --------------------------------------------------------
+
+#
+# Tabellenstruktur für Tabelle `tbl_comment`
+#
+
+CREATE TABLE tbl_comment (
+  IDComment int(11) unsigned NOT NULL auto_increment,
+  NewsID int(11) unsigned NOT NULL default '0',
+  Language varchar(4) NOT NULL default 'de',
+  CommentText mediumtext,
+  CommentAuthor tinytext,
+  CommentEmail tinytext,
+  CommentDate datetime default NULL,
+  CommentIP tinytext,
+  PRIMARY KEY  (IDComment),
+  KEY NewsID (NewsID),
+  KEY Language (Language)
+) TYPE=MyISAM;
+
+#
+# Daten für Tabelle `tbl_comment`
+#
+
+INSERT INTO tbl_comment VALUES (1, 1, 'de', 'p7zop7zozouzg', 'Flaimo', 'http://flaimo.com', '2002-06-29 00:50:52', '127.0.0.1');
+# --------------------------------------------------------
+
+#
+# Tabellenstruktur für Tabelle `tbl_news`
+#
+
+CREATE TABLE tbl_news (
+  IDNews int(11) unsigned NOT NULL auto_increment,
+  Language varchar(4) NOT NULL default 'de',
+  NewsHeadline text,
+  NewsText mediumtext,
+  NewsSource tinytext,
+  NewsSourceLink tinytext,
+  NewsDate datetime default NULL,
+  NewsAuthor int(11) unsigned default NULL,
+  NewsCategory int(11) unsigned NOT NULL default '0',
+  NewsChangedBy int(11) unsigned default NULL,
+  NewsChangedDate datetime default NULL,
+  NewsRead int(11) unsigned NOT NULL default '0',
+  NewsImage tinytext,
+  NewsLinks text,
+  expireDate datetime default NULL,
+  releaseDate datetime default NULL,
+  NoComments char(1) NOT NULL default '0',
+  PRIMARY KEY  (IDNews),
+  KEY NewsAuthor (NewsAuthor),
+  KEY NewsCategory (NewsCategory),
+  KEY Language (Language)
+) TYPE=MyISAM;
+
+#
+# Daten für Tabelle `tbl_news`
+#
+
+INSERT INTO tbl_news VALUES (1, 'de', 'Erste Nachricht in Deutsch', 'Erste Nachricht in Deutsch', NULL, NULL, '2002-06-29 00:05:45', 2, 2, NULL, '2002-06-29 00:05:45', 2, NULL, NULL, '2002-06-29 00:05:45', '2002-06-29 00:05:45', '');
+INSERT INTO tbl_news VALUES (2, 'en', 'English News', 'English News', NULL, NULL, '2002-06-29 00:06:25', 5, 4, NULL, '2002-06-29 00:06:25', 1, NULL, NULL, '2002-06-29 00:06:25', '2002-06-29 00:06:25', '');
+INSERT INTO tbl_news VALUES (3, 'de', 'ouztouztou Buffy z.B.', 'ouztouztou Buffy z.B.', '', '', '2002-06-29 01:04:52', 2, 6, NULL, NULL, 0, '', '', NULL, NULL, '0');
+# --------------------------------------------------------
+
+#
+# Tabellenstruktur für Tabelle `tbl_useronline`
+#
+
+CREATE TABLE tbl_useronline (
+  ip char(15) NOT NULL default '',
+  expire int(10) unsigned NOT NULL default '0',
+  KEY ip (ip)
+) TYPE=HEAP;
+
+#
+# Daten für Tabelle `tbl_useronline`
+#
+
+
+    

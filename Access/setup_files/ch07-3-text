@@ -1,0 +1,25 @@
+<?php
+
+/*
++------------+------------------+------+-----+---------+-------+
+| Field      | Type             | Null | Key | Default | Extra |
++------------+------------------+------+-----+---------+-------+
+| username   | varchar(25)      |      | PRI |         |       |
+| password   | varchar(32)      | YES  |     | NULL    |       |
+| identifier | varchar(32)      | YES  | MUL | NULL    |       |
+| token      | varchar(32)      | YES  |     | NULL    |       |
+| timeout    | int(10) unsigned | YES  |     | NULL    |       |
++------------+------------------+------+-----+---------+-------+
+*/
+
+$salt = 'SHIFLETT';
+
+$identifier = md5($salt . md5($username . $salt));
+$token = md5(uniqid(rand(), TRUE));
+$timeout = time() + 60 * 60 * 24 * 7;
+
+setcookie('auth', "$identifier:$token", $timeout);
+
+?>
+</body>
+</html>

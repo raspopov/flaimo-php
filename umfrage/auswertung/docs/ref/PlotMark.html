@@ -1,0 +1,252 @@
+<style type="text/css">
+		<!--
+		A:link        {font-family: helvetica, arial, geneva, sans-serif; font-size: x-small; text-decoration: none; color: #0000ff}
+		A:visited     {font-family: helvetica, arial, geneva, sans-serif; font-size: x-small; text-decoration: none; color: #0000ff}
+		A:hover       {font-family: helvetica, arial, geneva, sans-serif; font-size: x-small; text-decoration: underline; color: #FF0000}
+		th            {font-family: helvetica, arial; color : blue; font-size:85%; background : lightgrey; border-right:black solid 1pt; border-bottom:black solid 1pt;}
+		//-->
+		</style><hr><a name="_C_PLOTMARK"><div style="background-color:yellow;font-family:courier new;"></a>CLASS <b>PlotMark</b></div>
+<i>(Defined in: jpgraph.php : 6108)</i><table border=1><tr><td>&nbsp;<a href="PlotMark.html" style="font-family:arial;font-weight:bold;color:darkblue;">PlotMark</a>&nbsp;</td></tr><tr><td valign=top>&nbsp;<a href="PlotMark.html#_PLOTMARK_HIDE">Hide()</a>&nbsp;<br>
+&nbsp;<a href="PlotMark.html#_PLOTMARK_SETCALLBACK">SetCallback()</a>&nbsp;<br>
+&nbsp;<a href="PlotMark.html#_PLOTMARK_SETCOLOR">SetColor()</a>&nbsp;<br>
+&nbsp;<a href="PlotMark.html#_PLOTMARK_SETFILLCOLOR">SetFillColor()</a>&nbsp;<br>
+&nbsp;<a href="PlotMark.html#_PLOTMARK_SETSIZE">SetSize()</a>&nbsp;<br>
+&nbsp;<a href="PlotMark.html#_PLOTMARK_SETTYPE">SetType()</a>&nbsp;<br>
+&nbsp;<a href="PlotMark.html#_PLOTMARK_SETWIDTH">SetWidth()</a>&nbsp;<br>
+&nbsp;<a href="PlotMark.html#_PLOTMARK_SHOW">Show()</a>&nbsp;<br>
+</td></tr></table>&nbsp;<p><div style="font-weight:bold;font-family:arial;font-size:100%;">Class usage and Overview</div>In scatter plots and (possible) line plots each data point have a marker. This class implements these markers and the mtethod to modify it's apperance.
+<p>
+There are a number of possible marker, circle, filled circle, square, filled square, star, triangle and so on.
+See PlotMark::PlotMark() below for details on how to specify what mark.
+<p>
+Marks are accessed thtough the 'mark' property in line and scatter plot, i.e LinePlot::mark and ScatterPlot::mark. Marks in line plot are by default turned off. To enable marks use the construction $lineplot->mark->Show().
+<p>
+You can modify the type of plotmarks by calling the SetType() method. Possible plot marks are:
+
+<ol>
+<li>MARK_SQUARE, A filled square
+<lI>MARK_UTRIANGLE, A triangle pointed upwards
+<li>MARK_DTRIANGLE, A triangle pointed downwards
+<li>MARK_DIAMOND, A diamond
+<li>MARK_CIRCLE, A circle
+<li>MARK_FILLEDCIRCLE, A filled circle
+<li>MARK_CROSS, A cross
+<li>MARK_STAR, A star
+<li>MARK_X, An 'X'
+</ol>
+ <p> &nbsp;
+<div style="font-weight:bold;font-family:arial;font-size:85%;">See also related classes:</div><a href="LinePlot.html">LinePlot</a> and <a href="ScatterPlot.html">ScatterPlot</a> <p> &nbsp;<hr><span style="font-family:arial;font-size:120%;font-weight:bold;">Class Methods</span><hr><p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_PLOTMARK_HIDE"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">Hide</font><font color="#006600">(</font><font color="#0000CC">$aHide</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Hide plot mark</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aHide</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">true</font>
+</font>
+</code></td><td>True=Hide plot mark</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Hide plot mark
+&nbsp;<br>
+ &nbsp; <div style="font-weight:bold;font-family:arial;font-size:85%;">See also</div><a href="PlotMark.html#_PLOTMARK_SHOW">PlotMark::Show</a>
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC">$linerplot</font><font color="#006600">-&gt;</font><font color="#0000CC">mark</font><font color="#006600">-&gt;</font><font color="#0000CC">Hide</font><font color="#006600">();</font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_PLOTMARK_SETCALLBACK"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">SetCallback</font><font color="#006600">(</font><font color="#0000CC">$aFunc</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Specify callback function for plotmark</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aFunc</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'>&nbsp;</td><td>Function name</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Callback for plotmarks is only really used in one circumstance. Scatter plot. The callback can be used to individually adjust, sixe and color of the plot marks.
+<p>
+The specified callback function gets called with the Y-value for the current plotmark. The callback function should return an array consisting of three elements
+<ol>
+<li> Plot size
+<li> Color
+<li> Fill color
+</ol>
+&nbsp;<br>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">FCallback</font><font color="#006600">(</font><font color="#0000CC">$aVal</font><font color="#006600">)&nbsp;{<br /></font><font color="#FF9900">// This callback will adjust the fill color and size of<br />// the datapoint according to the data value according to<br />&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#006600">if(&nbsp;</font><font color="#0000CC">$aVal&nbsp;</font><font color="#006600">&lt;&nbsp;</font><font color="#0000CC">30&nbsp;</font><font color="#006600">)&nbsp;</font><font color="#0000CC">$c&nbsp;</font><font color="#006600">=&nbsp;</font><font color="#CC0000">"blue"</font><font color="#006600">;<br />&nbsp;&nbsp;&nbsp;&nbsp;elseif(&nbsp;</font><font color="#0000CC">$aVal&nbsp;</font><font color="#006600">&lt;&nbsp;</font><font color="#0000CC">70&nbsp;</font><font color="#006600">)&nbsp;</font><font color="#0000CC">$c&nbsp;</font><font color="#006600">=&nbsp;</font><font color="#CC0000">"green"</font><font color="#006600">;<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;</font><font color="#0000CC">$c</font><font color="#006600">=</font><font color="#CC0000">"red"</font><font color="#006600">;<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array(</font><font color="#0000CC">floor</font><font color="#006600">(</font><font color="#0000CC">$aVal</font><font color="#006600">/</font><font color="#0000CC">3</font><font color="#006600">),</font><font color="#CC0000">""</font><font color="#006600">,</font><font color="#0000CC">$c</font><font color="#006600">);<br />}<br /><br />...<br /><br /></font><font color="#FF9900">// Specify the callback<br /></font><font color="#0000CC">$scatterplot</font><font color="#006600">-&gt;</font><font color="#0000CC">mark</font><font color="#006600">-&gt;</font><font color="#0000CC">SetCallback</font><font color="#006600">(</font><font color="#CC0000">"FCallback"</font><font color="#006600">);<br /><br /><br /></font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_PLOTMARK_SETCOLOR"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">SetColor</font><font color="#006600">(</font><font color="#0000CC">$aColor</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Specify color for plot mark</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aColor</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'>&nbsp;</td><td>Color</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Specify the line color for plot mark
+&nbsp;<br>
+ &nbsp; <div style="font-weight:bold;font-family:arial;font-size:85%;">See also</div><a href="PlotMark.html#_PLOTMARK_SETFILLCOLOR">PlotMark::SetFillColor</a>
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC">$lineplot</font><font color="#006600">-&gt;</font><font color="#0000CC">mark</font><font color="#006600">-&gt;</font><font color="#0000CC">SetColor</font><font color="#006600">(</font><font color="#CC0000">'navy'</font><font color="#006600">);<br /></font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_PLOTMARK_SETFILLCOLOR"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">SetFillColor</font><font color="#006600">(</font><font color="#0000CC">$aFillColor</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Set fill color for mark</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aFillColor</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'>&nbsp;</td><td>Color</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Set fill color for mark&nbsp;<br>
+ &nbsp; <div style="font-weight:bold;font-family:arial;font-size:85%;">See also</div><a href="PlotMark.html#_PLOTMARK_SETCOLOR">PlotMark::SetColor</a>
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC">$lineplot</font><font color="#006600">-&gt;</font><font color="#0000CC">mark</font><font color="#006600">-&gt;</font><font color="#0000CC">SetFillColor</font><font color="#006600">(</font><font color="#CC0000">'blue'</font><font color="#006600">);<br /></font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_PLOTMARK_SETSIZE"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">SetSize</font><font color="#006600">(</font><font color="#0000CC">$aWidth</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Set size of mark</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aWidth</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'>&nbsp;</td><td>WIdth of mark in pixels</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Synonym for SetWidth()&nbsp;<br>
+ &nbsp; <div style="font-weight:bold;font-family:arial;font-size:85%;">See also</div><a href="PlotMark.html#_PLOTMARK_SETWIDTH">PlotMark::SetWidth</a>
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC">$lineplot</font><font color="#006600">-&gt;</font><font color="#0000CC">mark</font><font color="#006600">-&gt;</font><font color="#0000CC">SetSize</font><font color="#006600">(</font><font color="#0000CC">10</font><font color="#006600">);</font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_PLOTMARK_SETTYPE"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">SetType</font><font color="#006600">(</font><font color="#0000CC">$aType</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Specify type of plot mark</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aType</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'>&nbsp;</td><td>Type of plotmark</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>The following plot marks are available
+
+<ol>
+<li>MARK_SQUARE, A filled square
+<lI>MARK_UTRIANGLE, A triangle pointed upwards
+<li>MARK_DTRIANGLE, A triangle pointed downwards
+<li>MARK_DIAMOND, A diamond
+<li>MARK_CIRCLE, A circle
+<li>MARK_FILLEDCIRCLE, A filled circle
+<li>MARK_CROSS, A cross
+<li>MARK_STAR, A star
+<li>MARK_X, An 'X'
+</ol>
+&nbsp;<br>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC">$lineplot</font><font color="#006600">-&gt;</font><font color="#0000CC">mark</font><font color="#006600">-&gt;</font><font color="#0000CC">SetType</font><font color="#006600">(</font><font color="#0000CC">MARK_FILLEDCIRCLE</font><font color="#006600">);<br /></font><font color="#0000CC">$lineplot</font><font color="#006600">-&gt;</font><font color="#0000CC">mark</font><font color="#006600">-&gt;</font><font color="#0000CC">Show</font><font color="#006600">();<br /></font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_PLOTMARK_SETWIDTH"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">SetWidth</font><font color="#006600">(</font><font color="#0000CC">$aWidth</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Set width of plot mark</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aWidth</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'>&nbsp;</td><td>Width in pixels</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Set width of plot mark&nbsp;<br>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC">$lineplot</font><font color="#006600">-&gt;</font><font color="#0000CC">mark</font><font color="#006600">-&gt;</font><font color="#0000CC">SetWidth</font><font color="#006600">(</font><font color="#0000CC">10</font><font color="#006600">);<br /></font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_PLOTMARK_SHOW"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">Show</font><font color="#006600">(</font><font color="#0000CC">$aShow</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Enable or disable plotmarks</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aShow</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">true</font>
+</font>
+</code></td><td>True=Show plot marks</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Enable or disable plotmarks. By default plot marks are not shown so if you want to display them you need to use this method.
+&nbsp;<br>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC">$lineplot</font><font color="#006600">-&gt;</font><font color="#0000CC">mark</font><font color="#006600">-&gt;</font><font color="#0000CC">Show</font><font color="#006600">();</font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p> <hr> <p>

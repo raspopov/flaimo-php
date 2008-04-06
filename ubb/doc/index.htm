@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>UBBcode – Help</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="doc.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+		<h1>UBBcode – Help</h1>
+		<h2><acronym title="Table of Content">TOC</acronym></h2>
+		<ul>
+			<li>
+				<a href="#possiblecodes">UBB codes</a>
+				<ul>
+					<li><a href="#c-b">[B] <small>(bold)</small></a></li>
+					<li><a href="#c-i">[I] <small>(italic)</small></a></li>
+					<li><a href="#c-h">== <small>(headings)</small></a></li>
+					<li><a href="#c-url">[URL] <small>(links)</small></a></li>
+					<li><a href="#c-mail">[MAIL] <small>(links – e-mail)</small></a></li>
+					<li><a href="#c-c">[C] <small>(citation)</small></a></li>
+					<li><a href="#c-q">[Q] <small>(quotation – inline)</small></a></li>
+					<li><a href="#c-bq">[BQ] <small>(blockquote)</small></a></li>
+					<li><a href="#c-ab">[AB] <small>(abbreviated form)</small></a></li>
+					<li><a href="#c-ac">[AC] <small>(acronym)</small></a></li>
+					<li><a href="#c-ad">[AD] <small>(address)</small></a></li>
+					<li><a href="#c-sp">[SP] <small>(spoiler)</small></a></li>
+					<li><a href="#c-ul">[UL] / [OL] <small>(unordered/ordered list)</small></a></li>
+					<li><a href="#c-del">[DEL] <small>(deleted text)</small></a></li>
+					<li><a href="#c-ins">[INS] <small>(inserted text)</small></a></li>
+					<li><a href="#c-d">[D] <small>(definition)</small></a></li>
+					<li><a href="#c-sup">[;] <small>(superscript)</small></a></li>
+					<li><a href="#c-sub">[,] <small>(subscript)</small></a></li>
+					<li><a href="#c-v">[V] <small>(uppercase)</small></a></li>
+				</ul>
+			</li>
+			<li><a href="#php">PHP code</a></li>
+		</ul>
+		<h2 id="possiblecodes">UBB codes</h2>
+		<h3 id="c-b">[B] <small>(bold)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[b]</strong>consectetuer adipiscing elit<strong>[/b]</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;b&#62;</strong>consectetuer adipiscing elit<strong>&#60;/b&#62;</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <b>consectetuer adipiscing elit</b>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-i">[I] <small>(italic)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[i]</strong>consectetuer adipiscing elit<strong>[/i]</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;i&#62;</strong>consectetuer adipiscing elit<strong>&#60;/i&#62;</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <i>consectetuer adipiscing elit</i>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-h">== <small>(headings)</small></h3>
+		<p>Valid codes: <code>==</code> → &#60;h2&#62;, <code>===</code> → &#60;h3&#62;, <code>====</code> → &#60;h4&#62;</p>
+		<p><code><strong>===</strong>Lorem ipsum dolor<strong>===</strong></code></p>
+		<p><samp><strong>&#60;h3&#62;</strong>Lorem ipsum dolor<strong>&#60;/h3&#62;</strong></samp></p>
+		<h3><samp class="output-html">Lorem ipsum dolor</samp></h3>
+
+		<h3 id="c-url">[URL] <small>(links)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[url]</strong>http://www.example.com<strong>[/url]</strong>, sed diam <strong>[url=http://www.example.com]</strong>nonummy nibh<strong>[/url]</strong> euismod tincidunt ut laoreet <strong>[url=http://www.example.com|euismod tincidunt]</strong>dolore magna<strong>[/url]</strong> aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;a href=&#34;http://www.example.com&#34;&#62;</strong>http://www.example.com<strong>&#60;/a&#62;</strong>, sed diam <strong>&#60;a href=&#34;http://www.example.com&#34;&#62;</strong>nonummy nibh<strong>&#60;/a&#62;</strong> euismod tincidunt ut laoreet <strong>&#60;a href=&#34;http://www.example.com&#34; title=&#34;euismod tincidunt&#34;&#62;</strong>dolore magna<strong>&#60;/a&#62;</strong> aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <a href="http://www.example.com">http://www.example.com</a>, sed diam <a href="http://www.example.com">nonummy nibh</a> euismod tincidunt ut laoreet <a href="http://www.example.com" title="euismod tincidunt">dolore magna</a> aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-url">[MAIL] <small>(links – e-mail)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[mail]</strong>example@example.com<strong>[/mail]</strong>, sed diam <strong>[mail=example@example.com]</strong>nonummy nibh<strong>[/mail]</strong> euismod tincidunt ut laoreet <strong>[mail=example@example.com|euismod tincidunt]</strong>dolore magna<strong>[/mail]</strong> aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;a href=&#34;mailto:example@example.com&#34;&#62;</strong>example@example.com<strong>&#60;/a&#62;</strong>, sed diam <strong>&#60;a href=&#34;mailto:example@example.com&#34;&#62;</strong>nonummy nibh<strong>&#60;/a&#62;</strong> euismod tincidunt ut laoreet <strong>&#60;a href=&#34;mailto:example@example.com?subject=euismod tincidunt&#34;&#62;</strong>dolore magna<strong>&#60;/a&#62;</strong> aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <a href="mailto:example@example.com">example@example.com</a>, sed diam <a href="mailto:example@example.com">nonummy nibh</a> euismod tincidunt ut laoreet <a href="mailto:example@example.com?subject=euismod tincidunt">dolore magna</a> aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-c">[C] <small>(citation)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[c]</strong>consectetuer adipiscing elit<strong>[/c]</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;cite&#62;</strong>consectetuer adipiscing elit<strong>&#60;/cite&#62;</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <cite>consectetuer adipiscing elit</cite>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-q">[Q] <small>(quotation – inline)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[q]</strong>consectetuer adipiscing elit<strong>[/q]</strong>, sed diam <strong>[q=de]</strong>nonummy nibh<strong>[/q]</strong> euismod tincidunt ut laoreet <strong>[q=de-at|http://www.example.com]</strong>dolore magna<strong>[/q]</strong> aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;q&#62;</strong>consectetuer adipiscing elit<strong>&#60;/q&#62;</strong>, sed diam <strong>&#60;q lang=&#34;de&#34; XML:lang=&#34;de&#34;&#62;</strong>nonummy nibh<strong>&#60;/q&#62;</strong> euismod tincidunt ut laoreet <strong>&#60;q lang=&#34;de-at&#34; XML:lang=&#34;de-at&#34; cite=&#34;http://www.example.com&#34;&#62;</strong>dolore magna<strong>&#60;/q&#62;</strong> aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <q>consectetuer adipiscing elit</q>, sed diam <q lang="de" xml:lang="de">nonummy nibh</q> euismod tincidunt ut laoreet <q lang="de-at" xml:lang="de-at" cite="http://www.example.com">dolore magna</q> aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-bq">[BQ] <small>(blockquote)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[bq]</strong>consectetuer adipiscing elit<strong>[/bq]</strong>, sed diam <strong>[bq=de]</strong>nonummy nibh<strong>[/bq]</strong> euismod tincidunt ut laoreet <strong>[bq=de-at|http://www.example.com]</strong>dolore magna<strong>[/bq]</strong> aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;blockquote&#62;</strong>consectetuer adipiscing elit<strong>&#60;/blockquote&#62;</strong>, sed diam <strong>&#60;blockquote lang=&#34;de&#34; XML:lang=&#34;de&#34;&#62;</strong>nonummy nibh<strong>&#60;/blockquote&#62;</strong> euismod tincidunt ut laoreet <strong>&#60;blockquote lang=&#34;de-at&#34; XML:lang=&#34;de-at&#34; cite=&#34;http://www.example.com&#34;&#62;</strong>dolore magna<strong>&#60;/blockquote&#62;</strong> aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet,</samp></p>
+		<blockquote><samp class="output-html">consectetuer adipiscing elit</samp></blockquote>
+		<p><samp class="output-html">, sed diam </samp></p>
+		<blockquote lang="de" xml:lang="de"><samp class="output-html">nonummy nibh</samp></blockquote>
+		<p><samp class="output-html"> euismod tincidunt ut laoreet </samp></p>
+		<blockquote lang="de-at" xml:lang="de-at" cite="http://www.example.com"><samp class="output-html">dolore magna</samp></blockquote>
+		<p><samp class="output-html">aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-ab">[AB] <small>(abbreviated form)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[ab=en-us|consectetuer adipiscing elit]</strong>c. a. e.<strong>[/ab]</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;abbr lang=&#34;en-us&#34; xml:lang=&#34;en-us&#34; title=&#34;consectetuer adipiscing elit&#34;&#62;</strong>c. a. e.<strong>&#60;/abbr&#62;</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <abbr lang="en-us" xml:lang="en-us" title="consectetuer adipiscing elit">c. a. e.</abbr>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-ac">[AC] <small>(acronym)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[ac=en-us|consectetuer adipiscing elit]</strong>CAE<strong>[/ac]</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;acronym lang=&#34;en-us&#34; xml:lang=&#34;en-us&#34; title=&#34;consectetuer adipiscing elit&#34;&#62;</strong>CAE<strong>&#60;/acronym&#62;</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <acronym lang="en-us" xml:lang="en-us" title="consectetuer adipiscing elit">CAE</acronym>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-ad">[AD] <small>(address)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[ad]</strong>consectetuer adipiscing elit<strong>[/ad]</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;address&#62;</strong>consectetuer adipiscing elit<strong>&#60;/address&#62;</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, </samp></p>
+		<address><samp class="output-html">consectetuer adipiscing elit</samp></address>
+		<p><samp class="output-html">, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-sp">[SP] <small>(spoiler)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[sp]</strong>consectetuer adipiscing elit<strong>[/sp]</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;span class=&#34;spoiler&#34; title=&#34;Highlight the text to read the spoiler&#34;&#62;</strong>consectetuer adipiscing elit<strong>&#60;/span&#62;</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <span class="spoiler" title="Highlight the text to read the spoiler">consectetuer adipiscing elit</span>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-ul">[UL] / [OL] <small>(unordered/ordered list)</small></h3>
+		<p><code>
+		<strong>[ul]</strong><br />
+		 <strong>[x]</strong> Lorem<br />
+		 <strong>[x]</strong> ipsum<br />
+		 <strong>[x]</strong> dolor<br />
+		<strong>[/ul]</strong><br />
+		<strong>[ol]</strong><br />
+		 <strong>[x]</strong> Lorem<br />
+		 <strong>[x]</strong> ipsum<br />
+		 <strong>[x]</strong> dolor<br />
+		<strong>[/ol]</strong>
+		</code></p>
+		<p><samp>
+		&#60;ul&#62;<br />
+		 &#60;li&#62;Lorem&#60;/li&#62;<br />
+		 &#60;li&#62;ipsum&#60;/li&#62;<br />
+		 &#60;li&#62;dolor&#60;/li&#62;<br />
+		&#60;/ul&#62;<br />
+		&#60;ol&#62;<br />
+		 &#60;li&#62;Lorem&#60;/li&#62;<br />
+		 &#60;li&#62;ipsum&#60;/li&#62;<br />
+		 &#60;li&#62;dolor&#60;/li&#62;<br />
+		&#60;/ol&#62;
+		</samp></p>
+		<ul>
+		 <li><samp class="output-html">Lorem</samp></li>
+		 <li><samp class="output-html">ipsum</samp></li>
+		 <li><samp class="output-html">dolor</samp></li>
+		</ul>
+		<ol>
+		 <li><samp class="output-html">Lorem</samp></li>
+		 <li><samp class="output-html">ipsum</samp></li>
+		 <li><samp class="output-html">dolor</samp></li>
+		</ol>
+
+		<h3 id="c-del">[DEL] <small>(deleted text)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[del]</strong>consectetuer adipiscing elit<strong>[/del]</strong>, sed diam <strong>[del=2005-01-18T16:05+01:00]</strong>nonummy nibh<strong>[/del]</strong> euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;del&#62;</strong>consectetuer adipiscing elit<strong>&#60;/del&#62;</strong>, sed diam <strong>&#60;del datetime=&#34;2005-01-18T16:05+01:00&#34;&#62;</strong>nonummy nibh<strong>&#60;/del&#62;</strong> euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <del>consectetuer adipiscing elit</del>, sed diam <del datetime="2005-01-18T16:05+01:00">nonummy nibh</del> euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-ins">[INS] <small>(inserted text)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[ins]</strong>consectetuer adipiscing elit<strong>[/ins]</strong>, sed diam <strong>[ins=http://www.example.com]</strong>nonummy nibh<strong>[/ins]</strong> euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;ins&#62;</strong>consectetuer adipiscing elit<strong>&#60;/ins&#62;</strong>, sed diam <strong>&#60;ins cite=&#34;http://www.example.com&#34;&#62;</strong>nonummy nibh<strong>&#60;/ins&#62;</strong> euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <ins>consectetuer adipiscing elit</ins>, sed diam <ins cite="http://www.example.com">nonummy nibh</ins> euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-d">[D] <small>(definition)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[d]</strong>consectetuer adipiscing elit<strong>[/d]</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;dfn&#62;</strong>consectetuer adipiscing elit<strong>&#60;/dfn&#62;</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <dfn>consectetuer adipiscing elit</dfn>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+
+		<h3 id="c-sup">[;] <small>(superscript)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[;]</strong>consectetuer adipiscing elit<strong>[/;]</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;;&#62;</strong>consectetuer adipiscing elit<strong>&#60;/;&#62;</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <sup>consectetuer adipiscing elit</sup>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-sub">[,] <small>(subscript)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[,]</strong>consectetuer adipiscing elit<strong>[/,]</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;,&#62;</strong>consectetuer adipiscing elit<strong>&#60;/,&#62;</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <sub>consectetuer adipiscing elit</sub>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+		<h3 id="c-v">[V] <small>(uppercase)</small></h3>
+		<p><code>Lorem ipsum dolor sit amet, <strong>[v]</strong>consectetuer adipiscing elit<strong>[/v]</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</code></p>
+		<p><samp>Lorem ipsum dolor sit amet, <strong>&#60;span class=&#34;uppercase&#34;&#62;</strong>consectetuer adipiscing elit<strong>&#60;/span&#62;</strong>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+		<p><samp class="output-html">Lorem ipsum dolor sit amet, <span class="uppercase">consectetuer adipiscing elit</span>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</samp></p>
+
+
+		<h2 id="php">PHP code</h2>
+		<p><code>$ubb-&#62;encode($string)</code></p>
+		<p><code>$ubb-&#62;stripUBBcode($string)</code></p>
+	</body>
+</html>

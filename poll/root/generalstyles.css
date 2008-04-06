@@ -1,0 +1,36 @@
+html, body, div, p, h1, h2, h3, h4, h5, h6, ul, ol, span, a, table, td, th,
+form, img, li, label, input, select, button, blockquote, legend, caption,
+fieldset, object, tr, dt, dd, dl, tt, pre, textarea, iframe {
+   margin: 0px;
+   padding: 0px;
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+	font-size: 0.8em;
+}
+
+a {
+	text-decoration: underline;
+}
+
+strong, b, h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+}
+
+img {
+	border: 0px;
+}
+
+.option-placeholder {
+	display: block;
+	float: left;
+	width: 13px;
+	height: 13px;
+	margin-right: 4px;
+}
+
+#offline {
+	font-weight: bold;
+	text-align: center;
+}

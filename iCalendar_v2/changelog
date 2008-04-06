@@ -1,0 +1,2 @@
+added locale constant for Z value
+added possibility to turn on/off encoding since all calendar programms handle this stuff differently

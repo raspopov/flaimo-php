@@ -1,0 +1,253 @@
+<style type="text/css">
+		<!--
+		A:link        {font-family: helvetica, arial, geneva, sans-serif; font-size: x-small; text-decoration: none; color: #0000ff}
+		A:visited     {font-family: helvetica, arial, geneva, sans-serif; font-size: x-small; text-decoration: none; color: #0000ff}
+		A:hover       {font-family: helvetica, arial, geneva, sans-serif; font-size: x-small; text-decoration: underline; color: #FF0000}
+		th            {font-family: helvetica, arial; color : blue; font-size:85%; background : lightgrey; border-right:black solid 1pt; border-bottom:black solid 1pt;}
+		//-->
+		</style><hr><a name="_C_GANTTGRAPH"><div style="background-color:yellow;font-family:courier new;"></a>CLASS <b>GanttGraph</b> EXTENDS <a href="Graph.html#_C_GRAPH" style="font-face:arial;font-weight:bold;">Graph</a></div>
+<i>(Defined in: jpgraph_gantt.php : 61)</i><table border=1><tr><td>&nbsp;<a href="GanttGraph.html" style="font-family:arial;font-weight:bold;color:darkblue;">GanttGraph</a>&nbsp;</td><td>&nbsp;<a href="Graph.html" style="font-family:arial;font-weight:bold;color:darkblue;">Graph</a>&nbsp;</td></tr><tr><td valign=top>&nbsp;<a href="GanttGraph.html#_GANTTGRAPH_ADD">Add()</a>&nbsp;<br>
+&nbsp;<a href="GanttGraph.html#_GANTTGRAPH_GANTTGRAPH">GanttGraph()</a>&nbsp;<br>
+&nbsp;<a href="GanttGraph.html#_GANTTGRAPH_SETDATERANGE">SetDateRange()</a>&nbsp;<br>
+&nbsp;<a href="GanttGraph.html#_GANTTGRAPH_SETLABELVMARGINFACTOR">SetLabelVMarginFactor()</a>&nbsp;<br>
+&nbsp;<a href="GanttGraph.html#_GANTTGRAPH_SHOWHEADERS">ShowHeaders()</a>&nbsp;<br>
+&nbsp;<a href="GanttGraph.html#_GANTTGRAPH_STROKE">Stroke()</a>&nbsp;<br>
+</td><td valign=top><a href="Graph.html#_GRAPH_ADD" style="color:darkgrey;">Add()&nbsp;</a><br>
+&nbsp;<a href="Graph.html#_GRAPH_ADDBAND">AddBand()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_ADDLINE">AddLine()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_ADDTEXT">AddText()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_ADDY2">AddY2()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_ADJBACKGROUNDIMAGE">AdjBackgroundImage()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_ADJIMAGE">AdjImage()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_CHECKCSIMCACHE">CheckCSIMCache()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_GETHTMLIMAGEMAP">GetHTMLImageMap()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_GRAPH">Graph()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_SETANGLE">SetAngle()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_SETAXISSTYLE">SetAxisStyle()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_SETBACKGROUNDIMAGE">SetBackgroundImage()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_SETBOX">SetBox()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_SETCOLOR">SetColor()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_SETFRAME">SetFrame()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_SETGRIDDEPTH">SetGridDepth()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_SETMARGIN">SetMargin()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_SETMARGINCOLOR">SetMarginColor()</a>&nbsp;<br>
+<a href="Graph.html#_GRAPH_SETSCALE" style="color:darkgrey;">SetScale()&nbsp;</a><br>
+&nbsp;<a href="Graph.html#_GRAPH_SETSHADOW">SetShadow()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_SETTICKDENSITY">SetTickDensity()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_SETY2SCALE">SetY2Scale()</a>&nbsp;<br>
+<a href="Graph.html#_GRAPH_STROKE" style="color:darkgrey;">Stroke()&nbsp;</a><br>
+&nbsp;<a href="Graph.html#_GRAPH_STROKECSIM">StrokeCSIM()</a>&nbsp;<br>
+&nbsp;<a href="Graph.html#_GRAPH_STROKEFRAMEBACKGROUND">StrokeFrameBackground()</a>&nbsp;<br>
+</td></tr></table>&nbsp;<p><div style="font-weight:bold;font-family:arial;font-size:100%;">Class usage and Overview</div>Create a Gantt graph. The Gantt graph can then be built up by adding activity bars and milestones. <p> &nbsp;
+<div style="font-weight:bold;font-family:arial;font-size:85%;">See also related classes:</div><a href="GanttBar.html">GanttBar</a>, <a href="GanttVLine.html">GanttVLine</a> and <a href="MileStone.html">MileStone</a> <p> &nbsp;<hr><span style="font-family:arial;font-size:120%;font-weight:bold;">Class Methods</span><hr><p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_GANTTGRAPH_ADD"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">Add</font><font color="#006600">(&amp;</font><font color="#0000CC">$aObject</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Add a new Gantt object</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">&amp;</font><font color="#0000CC">$aObject</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'>&nbsp;</td><td>Gantt object to add</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Add a gantt object to the graph. A gantt object is an instance of either:
+<ul>
+<li> GanttBar
+<li> MileStone
+<li> GanttVLine
+</ul>&nbsp;<br>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC">$vline&nbsp;</font><font color="#006600">=&nbsp;new&nbsp;</font><font color="#0000CC">GanttVLine</font><font color="#006600">(</font><font color="#CC0000">"2002-02-28"</font><font color="#006600">);<br /></font><font color="#0000CC">$vline</font><font color="#006600">-&gt;</font><font color="#0000CC">title</font><font color="#006600">-&gt;</font><font color="#0000CC">Set</font><font color="#006600">(</font><font color="#CC0000">"2002-02-28"</font><font color="#006600">);<br /></font><font color="#0000CC">$vline</font><font color="#006600">-&gt;</font><font color="#0000CC">title</font><font color="#006600">-&gt;</font><font color="#0000CC">SetFont</font><font color="#006600">(</font><font color="#0000CC">FF_FONT1</font><font color="#006600">,</font><font color="#0000CC">FS_BOLD</font><font color="#006600">,</font><font color="#0000CC">10</font><font color="#006600">);<br /></font><font color="#0000CC">$graph</font><font color="#006600">-&gt;</font><font color="#0000CC">Add</font><font color="#006600">(</font><font color="#0000CC">$vline</font><font color="#006600">);<br /></font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_GANTTGRAPH_GANTTGRAPH"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">GanttGraph</font><font color="#006600">(</font><font color="#0000CC">$aWidth</font><font color="#006600">,</font><font color="#0000CC">$aHeight</font><font color="#006600">,</font><font color="#0000CC">$aCachedName</font><font color="#006600">,</font><font color="#0000CC">$aTimeOut</font><font color="#006600">,</font><font color="#0000CC">$aInline</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Create a new GanttGraph</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aWidth</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">0</font>
+</font>
+</code></td><td>Width of graph</td></tr>
+
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aHeight</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">0</font>
+</font>
+</code></td><td>Height of graph</td></tr>
+
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aCachedName</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC"></font><font color="#CC0000">""</font><font color="#0000CC"></font>
+</font>
+</code></td><td>Filename to use if cache is enables</td></tr>
+
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aTimeOut</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">0</font>
+</font>
+</code></td><td>Timeout in minutes</td></tr>
+
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aInline</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">true</font>
+</font>
+</code></td><td>True=Stream back to browser</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Construct a new GanttGraph. This differs slightly from the standard Graph or PlotGraph in that you are not required to specify width and height of the graph. Instead these can be left out and will be automatically be determined.
+<p>
+As a further refinement you can just specify width and have the height be automtically determined.
+&nbsp;<br>
+ &nbsp; <div style="font-weight:bold;font-family:arial;font-size:85%;">See also</div><a href="Graph.html#_GRAPH_GRAPH">Graph::Graph</a>
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC"></font><font color="#FF9900">// Setup Gantt graph<br /></font><font color="#0000CC">$graph&nbsp;</font><font color="#006600">=&nbsp;new&nbsp;</font><font color="#0000CC">GanttGraph</font><font color="#006600">();<br /></font><font color="#0000CC">$graph</font><font color="#006600">-&gt;</font><font color="#0000CC">SetShadow</font><font color="#006600">();<br /></font><font color="#0000CC">$graph</font><font color="#006600">-&gt;</font><font color="#0000CC">SetBox</font><font color="#006600">();<br /><br /></font><font color="#FF9900">// Only show part of the Gantt<br /></font><font color="#0000CC">$graph</font><font color="#006600">-&gt;</font><font color="#0000CC">SetDateRange</font><font color="#006600">(</font><font color="#CC0000">'2001-11-22'</font><font color="#006600">,</font><font color="#CC0000">'2002-1-24'</font><font color="#006600">);<br /></font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_GANTTGRAPH_SETDATERANGE"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">SetDateRange</font><font color="#006600">(</font><font color="#0000CC">$aStart</font><font color="#006600">,</font><font color="#0000CC">$aEnd</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Specify date range for Gantt chart.</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aStart</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'>&nbsp;</td><td>Start date</td></tr>
+
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aEnd</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'>&nbsp;</td><td>End date</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Specify the date range for Gantt graphs. If this is not set it will be automtically determined from the input data.
+<p>
+All gantt chart objects, like bar activities, will be clipped to the spcified date range should they happen to be wider then the specified range.
+<p>
+The date is specified as a normal date string according to the chosen locale.
+&nbsp;<br>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC">$graph</font><font color="#006600">-&gt;</font><font color="#0000CC">SetDateRange</font><font color="#006600">(</font><font color="#CC0000">'2001-11-22'</font><font color="#006600">,</font><font color="#CC0000">'2002-1-24'</font><font color="#006600">);<br /></font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_GANTTGRAPH_SETLABELVMARGINFACTOR"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">SetLabelVMarginFactor</font><font color="#006600">(</font><font color="#0000CC">$aVal</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Set margin vertical factor.</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aVal</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'>&nbsp;</td><td>Margin factor</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Specify the fraction of the font height that should be added as vertical margin between the labels.&nbsp;<br>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC">$ganttgraph</font><font color="#006600">-&gt;</font><font color="#0000CC">SetLabelVMarginFactor</font><font color="#006600">(</font><font color="#0000CC">0.7</font><font color="#006600">);</font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_GANTTGRAPH_SHOWHEADERS"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">ShowHeaders</font><font color="#006600">(</font><font color="#0000CC">$aFlg</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Determine what headers/scales to display.</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aFlg</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'>&nbsp;</td><td>Logic OR of flags to specify what headers should be displayed.</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Specify what headers should be displayed on the Gantt charts. Possible headers are:
+<ul>
+<li>GANTT_HYEAR
+<li>GANTT_HMONTH
+<li>GANTT_HWEEK
+<li>GANTT_HDAY
+<li>
+</ul>
+To specify multiple header you just bitwise OR the wanted number of headers together.
+&nbsp;<br>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC"></font><font color="#FF9900">// Show all headers<br /></font><font color="#0000CC">$graph</font><font color="#006600">-&gt;</font><font color="#0000CC">ShowHeaders</font><font color="#006600">(</font><font color="#0000CC">GANTT_HYEAR&nbsp;</font><font color="#006600">|&nbsp;</font><font color="#0000CC">GANTT_HMONTH&nbsp;</font><font color="#006600">|&nbsp;</font><font color="#0000CC">GANTT_HDAY&nbsp;</font><font color="#006600">|&nbsp;</font><font color="#0000CC">GANTT_HWEEK</font><font color="#006600">);</font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p>
+<p>&nbsp; <p> &nbsp; <span style='font-size:110%;'><a name="_GANTTGRAPH_STROKE"><div style="border-top:solid black 2pt;background-color:lightblue;font-family:courier new;font-size:90%;font-weight:bold;"><b><font color="#000000">
+<font color="#0000CC"></font><font color="#006600">function&nbsp;</font><font color="#0000CC">Stroke</font><font color="#006600">(</font><font color="#0000CC">$aStrokeFileName</font><font color="#006600">)</font><font color="#0000CC"></font>
+</font>
+</b></div></a></span>
+
+<span style='font-family:arial;font-size:90%;'><i>Internal. Stroke the gantt chart.</i></span><p>
+
+<table cellspacing=0 style='border:black solid 1pt;' width=100%>
+<tr><th width=25%>Argument</th><th width=15%>Default</th><th width=60%>Description</th></tr>
+<tr><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC">$aStrokeFileName</font>
+</font>
+</code>
+</td><td style='border-right:black solid 1pt;font-family:courier;font-size:90%;font-weight:bold;'><code><font color="#000000">
+<font color="#0000CC"></font><font color="#CC0000">""</font><font color="#0000CC"></font>
+</font>
+</code></td><td>Filename to stroke image to</td></tr>
+</table>
+
+<div style="font-weight:bold;font-family:arial;font-size:85%;">Description</div>Internal. Stroke the gantt chart. If a filename is specified then the graph will be stroked to that file and will not be sent back to the browser.
+<p>
+This should as usual be the last method called in your script.
+&nbsp;<br>
+ &nbsp; <div style="font-weight:bold;font-family:arial;font-size:85%;">See also</div><a href="Graph.html#_GRAPH_STROKE">Graph::Stroke</a>
+<div style="font-weight:bold;font-family:arial;font-size:85%;"><p>Example</div><span style="font-family:courier;font-size:85%;"><font color="#000000">
+<font color="#0000CC">$ganttgraph</font><font color="#006600">-&gt;</font><font color="#0000CC">Stroke</font><font color="#006600">();<br /></font><font color="#0000CC"></font>
+</font>
+</span><br>
+<p> <hr> <p>

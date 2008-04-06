@@ -1,0 +1,63 @@
+<?php
+require_once 'interface.SSessionDB.inc.php';
+
+class SSessionDBMySQL implements SSessionDB {
+
+  const SSESSION_HOST = 'localhost';
+	const SSESSION_DB = 'ssession';
+	const SSESSION_TABLE = 'ssession';
+
+	protected $conn;
+	protected $db_user;
+	protected $db_pw;
+
+	public function __construct() {
+    // better change the pw so it is saved in an apache SetEnv variable and get it with $_SERVER[]
+		$this->db_user = 'root';
+		$this->db_pw = $_SERVER['FW_PW']; // 'maxmobil';
+	} // end constructor
+
+	public function _open() {
+		if (!isset($this->conn)) {
+      $this->conn = new mysqli(self::SSESSION_HOST, $this->db_user, $this->db_pw, self::SSESSION_DB);
+		} // end if
+	} // end function
+	
+	public function _close() {
+		if (isset($this->conn)) {
+      $this->conn->close();
+			unset($this->conn);
+		} // end if
+	} // end function
+	
+	public function _read($id) {
+		$id = $this->conn->real_escape_string($id);
+  $sql = 'SELECT data FROM ' . self::SSESSION_TABLE . " WHERE id = '" . $id . "'";
+		if ($result = $this->conn->query($sql)) {
+      $row = $result->fetch_row();
+      return $row[0];
+		} // end if
+		return '';
+	} // end function
+	
+	public function _write($id, $data) {
+		$access = time();
+		$id = $this->conn->real_escape_string($id);
+		$data = $this->conn->real_escape_string($data);
+		$sql = 'REPLACE INTO ' . self::SSESSION_TABLE . " (id, access, data) VALUES ('" . $id . "', '" . $access . "', '" . $data . "')";
+		return $this->conn->query($sql);
+	} // end function
+
+	public function _destroy($id) {
+    $id = $this->conn->real_escape_string($id);
+    $sql = 'DELETE FROM ' . self::SSESSION_TABLE . " WHERE id = '" . $id . "'";
+	  return $this->conn->query($sql);
+	} // end function
+
+	public function _clean($max) {
+		$old = time() - $max;
+    $sql = 'DELETE FROM ' . self::SSESSION_TABLE . ' WHERE access < ' . $old;
+		return $this->conn->query($sql);
+	} // end function
+} // end class
+?>

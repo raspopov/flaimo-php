@@ -1,0 +1,72 @@
+[Config]
+Relative path=1
+Compilator.SaveAll=0
+Compilator.Capture=0
+Compilator.HideOutput=0
+DefaultDir=C:\Dokumente und Einstellungen\michael.wimmer\Eigene Dateien\HTML\forms
+DefaultCPIndex=7
+LogtoEnd=1
+DontOpen=0
+FileFormat=0
+[Project tree]
+Form
+	+www_root
+		www_root\test.php
+	+inc
+		inc\class.FormValidatorValueList.inc.php
+		inc\class.FormValidatorValueConfirmation.inc.php
+		inc\class.FormValidatorString.inc.php
+		inc\class.FormValidatorNone.inc.php
+		inc\class.FormValidatorInteger.inc.php
+		inc\class.FormValidatorFile.inc.php
+		inc\class.FormValidatorEMail.inc.php
+		inc\class.FormValidatorDate.inc.php
+		inc\class.FormValidatorBase.inc.php
+		inc\class.FormEntryTextarea.inc.php
+		inc\class.FormEntryText.inc.php
+		inc\class.FormEntrySelect.inc.php
+		inc\class.FormEntryRadio.inc.php
+		inc\class.FormEntryPassword.inc.php
+		inc\class.FormEntryMSelect.inc.php
+		inc\class.FormEntryHidden.inc.php
+		inc\class.FormEntryFile.inc.php
+		inc\class.FormEntryDate.inc.php
+		inc\class.FormEntryCheckbox.inc.php
+		inc\class.FormEntryButton.inc.php
+		inc\class.FormEntryBase.inc.php
+		inc\class.FormBuilderBase.inc.php
+		inc\class.FormBuilder_XHTML1.inc.php
+		inc\class.FormBase.inc.php
+		inc\class.Form.inc.php
+[Open project files]
+0=www_root\test.php
+1=inc\class.FormValidatorDate.inc.php
+2=inc\class.FormValidatorBase.inc.php
+3=inc\class.FormEntryDate.inc.php
+4=inc\class.FormBuilder_XHTML1.inc.php
+5=inc\class.FormBase.inc.php
+6=inc\class.Form.inc.php
+[Selected Project Files]
+Main=
+Selected=www_root\test.php
+[www_root\test.php]
+TopLine=1
+Caret=1,5
+[inc\class.FormValidatorDate.inc.php]
+TopLine=2
+Caret=12,54
+[inc\class.FormValidatorBase.inc.php]
+TopLine=1
+Caret=25,49
+[inc\class.FormEntryDate.inc.php]
+TopLine=41
+Caret=5,55
+[inc\class.FormBuilder_XHTML1.inc.php]
+TopLine=491
+Caret=5,510
+[inc\class.FormBase.inc.php]
+TopLine=32
+Caret=1,81
+[inc\class.Form.inc.php]
+TopLine=65
+Caret=12,62

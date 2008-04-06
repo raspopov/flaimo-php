@@ -1,0 +1,107 @@
+html, body {
+	width: 520px;
+}
+
+body {
+	background: #7A7309 url("background.jpg") left top no-repeat;
+	color: #fff;
+}
+
+h1 {
+	background: transparent url("header.gif") center center no-repeat;
+	overflow: hidden;
+	height: 43px;
+	width: 520px;
+	margin: 10px 0px;
+}
+
+h1 span {
+	display: none;
+}
+
+p {
+	margin-left: 15px;
+}
+
+h2 {
+	font-size: 0.9em;
+}
+
+h2.inactive {
+	color: #E9D180;
+}
+
+h2 small {
+}
+
+h3 {
+	margin: 3px 0px 6px 15px;
+	font-size: 1.75em;
+}
+
+#participants {
+	padding: 15px 0px 0px 30px;
+}
+
+#post-suggestion {
+	background-color: red;
+	border: 1px solid #fff;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	width: 185px;
+	padding: 4px 0px;
+	float: right;
+	margin: 0px 15px;
+}
+
+.portrait {
+	width: 48px;
+	height: 48px;
+	float: left;
+	margin-right: 5px;
+	border: 1px solid #fff;
+
+}
+
+.participant {
+	width: 240px;
+	height: 51px;
+	float: left;
+	margin: 3px 0px;
+	overflow: hidden;
+}
+
+.participant input {
+	margin-top: 5px;
+	font-size: 0.859em;
+	font-weight: bold;
+	background-color: red;
+	border: 1px solid #fff;
+	color: #fff;
+	padding: 2px;
+	text-transform: uppercase;
+	width: 110px;
+}
+
+.block {
+	background: #fff url(pix.gif) left center repeat-x;
+	display: block;
+	height: 24px;
+	margin-top: 4px;
+}
+
+#voteagain,
+#nextvote {
+	clear:both;
+	color: #fff;
+	font-weight: bold;
+	text-align: right;
+	padding: 2px 15px;
+}
+
+#voteagain a {
+	color: #fff;
+}

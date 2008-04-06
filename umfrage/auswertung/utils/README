@@ -1,0 +1,33 @@
+Utility directory with a few _COMPLETELY_ UNSUPPORTED utilities.
+They are only made available due to some requests.
+
+Summary
+=======
+Most of the file in this directory form the basis of the JpGraph
+documentation system soon to be released. 
+
+Directory ./misc
+----------------
+
+adjimg.php
+	Lets you adjust the contrast, brightness and saturation
+	in a image.
+	Usage:adjimg.php?file=name&[b=value][&c=value][&s=scale][&sat=saturation]	
+
+gencolorchart.php
+	Generates a color chart with all colors available in
+	JpGraph
+
+mkgrad.php
+	A tool to easily generate gradient images for use as backgounds
+
+imgdbschema.inc
+	A set of utility classes used to easy generate DB schema reading the
+	data straight from the DB.
+
+
+<EOF>
+
+
+
+

@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>i18n &#8211; Internationalization with PHP: Getting started</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="doc.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<p style="background-color: #6D1B1B; text-align:center;"><img src="logo.png" alt="i18n Logo" width="200" height="79" /></p>
+<p><a href="getting_started_deutsch.htm" lang="de" xml:lang="de">Zur deutschen
+								Version wechseln&#8230;</a></p>
+<h1>Getting started&#8230;</h1>
+<h2><acronym title="Table of Content" lang="en" xml:lang="en">ToC</acronym></h2>
+<ul>
+				<li><a href="#intro">Intro</a></li>
+				<li><a href="#getting">Getting the language</a></li>
+				<li><a href="#translating">Translating strings</a></li>
+				<li><a href="#let">Let the user decide</a></li>
+				<li><a href="#other">Other language based classes</a>
+								<ul>
+												            <li><a href="#dates">Formatting dates</a></li>
+												            <li><a href="#numbers">Formatting numbers</a></li>
+												            <li><a href="#measure">Formatting measure values</a></li>
+												            <li><a href="#strings">Formatting Strings</a></li>
+	             </ul>
+				</li>
+				<li><a href="#notes">Notes</a>
+								<ul>
+												            <li><a href="#otherstuff">Other Stuff</a>
+																                        <ul>
+																				                                                <li><a href="#sm">Shared
+																				                                                								Memory
+																				                                                								Functions</a></li>
+			                                                 </ul>
+		                         </li>
+												            <li><a href="#using">Using a DB other than MySQL</a></li>
+												            <li><a href="#caching">Caching Pages</a></li>
+												            <li><a href="#smarty">Smarty</a></li>
+	             </ul>
+				</li>
+</ul>
+
+<h2><a id="intro">Intro</a></h2>
+
+<p>The <acronym title="Internationalization" lang="en" xml:lang="en">i18n</acronym> package
+				is a punch of classes for internationalization. It gives you the possibility
+				to maintain multilanguage webpages more easily. The translation strings are
+				stored in flat text files, special <a href="http://www.php.net/manual/de/ref.gettext.php">Gettext</a> files
+				which are basically	precompiled translation files or in a <a href="http://www.mysql.com/">MySQL</a> database.
+				And it works independently from PHP&#8217;s setlocale function.</p>
+<p>First, to avoid problems, make sure that for all pages that use the package
+				you	start	and end your scripts with:</p>
+<p><code>ob_start();<br />
+				session_start();</code></p>
+<p>and</p>
+<p><code>ob_end_flush();</code></p>
+<h2><a id="getting">Getting the language</a></h2>
+<p>Let&#8217;s start with one of the base classes, the language class. It&#8217;s
+				propose is to determinate the preferred locale of the user, by looking at
+				the <var>HTTP_ACCEPT_LANGUAGE</var> header an the users IP address.</p>
+<p>First create a new object:</p>
+<p><code>include('class.Language.inc.php');<br />
+				$lg = new Language();</code></p>
+<p>Let&#8217;s say the user has set his browser to &#8220;German &#8211; Austria&#8221; (de-at).
+				Now get your information with those methods:</p>
+<p><code>$lg-&gt;getLocale()</code> outputs <samp>de_at</samp> (the hyphen is
+				replaced with	an underscore)<br />
+				<code>$lg-&gt;getLang()</code> outputs <samp>de</samp><br />
+				<code>$lg-&gt;getCountry()</code> outputs <samp>at</samp></p>
+<p>Of course some users have set more than one locale. To get those informations
+				use:</p>
+<p><code>$lg-&gt;getUserRawArray() </code>to get an array with all locales accepted
+				by the	user<br />
+				<code>$lg-&gt;getUserLangArray()</code> for all Languages<br />
+				<code>$lg-&gt;getUserCountryArray()</code> for all countries</p>
+<p>But what if the user has set no specific country code or no locale information
+				could be found at all? That&#8217;s where the default values kick in. Stuff
+				like this is saved in the <var>i18n_settings.ini</var> file:</p>
+<p><code>[Language]<br />
+				default_locale = &quot;en&quot;<br />
+				default_language = &quot;en&quot;<br />
+				default_country = &quot;us&quot;</code></p>
+<p>To retrieve those settings in your script use</p>
+<p> <code>$lg-&gt;getDefaultLocale()<br />
+				$lg-&gt;getDefaultLanguage()<br />
+				$lg-&gt;getDefaultCountry()</code></p>
+<p>But there are much more settings for the package you can change in the <var>i18n_settings.ini</var> file:</p>
+<ul>
+				<li> The method for getting the translations (normal text files, Gettext
+								files, MySQL),</li>
+				<li>The extensions	for the translation files</li>
+				<li>The	database connection settings</li>
+				<li>If translation errors should be	shown or not</li>
+</ul>
+<p>You can also force a specific locale to overrule all other locale sources
+				when you create a language object:</p>
+<p><code>$lg_gb = new Language(<strong>'en_gb'</strong>);</code></p>
+<h2><a id="translating">Translating strings</a></h2>
+<p>Now that was the language class. Now we want to use the information from it
+				for translations. For this use the Translation class which extends the language
+				class.</p>
+<p><code>include('class.Translator.inc.php');<br />
+				$translation = new Translator(<strong>''</strong>,<strong>'frontpage, everypage'</strong>);</code></p>
+<p>Now this class takes two arguments. The first on is the same like in the language
+				class to overrule the locale settings and force a specific locale. The second
+				argument is needed if you work with flat translation files or	Gettext files.<br />
+				The second argument is a comma-separated list of one ore more
+				filenames without the extension (you set this in the <var>i18n_settings.ini</var> file).
+				This files have to be placed in the language subdirectory under	the &#8220;locale&#8221; directory
+				if you use flat text files or in the &#8220;LC_MESSAGES&#8220; subdirectory
+				of the language subdirectory if you work with Gettext files.<br />
+				The language directory itself has to be named properly like a
+				locale or language according to the ISO standard. (examples: &#8220;it&#8221;, &#8220;de_at&#8221;, &#8220;en_gb&#8221;,&#8230;).<br />
+				If you use MySQL then the second argument is the namespace column
+				in the translation table. Whenever you create a new translation object it
+				preselects all translations with that namespace into an array to prevent
+				firing a SELECT	statement at the database for every translation.<br />
+				You can also create some alias languages. If you have a folder &#8220;en&#8221; with
+				all your translations and you want to add a new folder &#8220;en_gb&#8221; which
+				uses the same translations, just place a file called &#8220;redirect&#8221; (without
+				an extension) there which contains the actual language where the translations
+				can be found (in this case &#8220;en&#8221;). Remember, alias languages don't
+				work in MySQL modus!</p>
+<p>There are already a couple of example files in the package, so take a look
+				at them to see how your translation files have to look like. If you want
+				to use Gettext files, search the web for tutorials on how to create them.
+				I&#8217;m not going into this here&#8230;</p>
+<p>When creating a new translator object the list of preferred user locales from
+				the language class and available translations in the locale folder are compared
+				and the most likely translation is chosen. Also the <code>getLocale()</code>, <code>getLang()</code> and <code>getCountry()</code> methods
+				are not returning the preferred user values anymore, but those of the most
+				likely translation available.</p>
+<p>Now that you have created a MySQL table or translation file (and placed it
+				in the correct directory) you can start translating in your scripts using
+				the <code>translate()</code> method.</p>
+<p><code>echo $translation-&gt;translate(<strong>'no_records_found'</strong>);</code></p>
+<p>&#8220;no_records_found&#8221; is the translation string to look for in the
+	MySQL table or translation file. If you not only want to translate the string,
+but also html encode it at the same time use:</p>
+<p><code>echo $translation-&gt;translateEncode(<strong>'no_records_found'</strong>);</code></p>
+<p>To encode even more special characters, like &#8220;&times;&#8221;, &#8220;&#8222;&#8221;, &#8220;&#8225;&#8221;&#8230; you
+can use the translateEncodePlus method:</p>
+<p><code>echo $translation-&gt;translateEncodePlus(<strong>'no_records_found'</strong>);</code></p>
+<p>There are also some shortcuts so you don&#8217;t have to write the long method
+				name all the time:</p>
+<p><code>echo $translation-&gt;_('no_records_found');</code> = translate<br />
+				<code>echo $translation-&gt;__('no_records_found');</code> =	translateEncode<br />
+<code>echo $translation-&gt;___('no_records_found');</code> =	translateEncodePlus</p>
+<p>If no translation string was found you will see an error message in your script:</p>
+<p><samp>ERROR TRANSLATING: &raquo;&raquo; no_records_foun &laquo;&laquo;</samp></p>
+<p>You can turn off error reporting in the <var>i18n_settings.ini</var> file.
+				In this case only the untranslated string will be returned.</p>
+<p>If you use Gettext files, using the translate methods can be a bit more complicated
+				if you use more that one translation file in one script. you have to pass
+				the name of the translation file as a second value if the string is not located
+				in the first language file from the file list you have used when creating
+				the object:</p>
+<p><code>echo $translation-&gt;translate('another_string', <strong>'translationfile2'</strong>);<br />
+				echo $translation-&gt;translateEncode('another_string', <strong>'translationfile2'</strong>);<br />
+				echo $translation-&gt;_('another_string', <strong>'translationfile2'</strong>);<br />
+				echo $translation-&gt;__('another_string', <strong>'translationfile2'</strong>);</code></p>
+<p>You can also change the language of the translator object during use if you
+				like:</p>
+<p><code>$translation2 = new Translator('de','frontpage, everypage');<br />
+				echo $translation2-&gt;_('good_morning');<br />
+				<strong>$translation2-&gt;changeLocale('en');</strong><br />
+				echo $translation2-&gt;_('good_morning');</code></p>
+<p>first it would output <samp lang="de" xml:lang="de">Guten Morgen</samp>, the
+				second time <samp>Good	Morning</samp>.</p>
+<p>Other methods in this class:</p>
+<p><code>$translation-&gt;getLanguageFilesArray()</code> returns an array with
+				all available	valid languages found under the &#8220;locale&#8221; folder.<br />
+				<code>$translation-&gt;getModus()</code> returns &#8220;gettext&#8221;, &#8220;inc&#8221; or &#8220;mysql&#8221; (whatever
+				you use)<br />
+				<code>$translation-&gt;getRealLocale()</code> returns the real locale if
+				the chosen one	is just an alias.</p>
+<h2><a id="let">Let the user decide</a></h2>
+<p>Now we know how to make our scripts multilingual, but how can the user choose
+				a different language?<br />
+				For this you need the ChooseLanguage class which extends the
+				Translator class by a couple of methods:</p>
+<p><code><strong>include('class.ChooseLanguage.inc.php');</strong><br />
+				$translation3 = new ChooseLanguage('','frontpage, everypage');<br />
+				<strong>echo	$translation3-&gt;returnDropdownLang();</strong></code></p>
+<p>This outputs a <code>&lt;select&gt;</code> form element with all available
+				languages. You have to add the other form elements in the scripts yourself.
+				Just make sure that the form URL is points to a script which calls the ChooseLanguage
+				class	again. If you don&#8217;t want to use a dropdown menu you can make
+				the form	elements yourself. Just be sure that they are named &#8220;locale&#8221; and
+				have the locale as the value. Example:</p>
+<p><samp>&lt;input type=&quot;hidden&quot;<strong> name=&quot;locale&quot; value=&quot;en&quot;</strong>&gt;</samp></p>
+<p>Other functions in the ChooseLanguage class:</p>
+<p><code>$translation3-&gt;countStrings();</code> returns the number of strings
+				found in the	selected translations files or MySQL table<br />
+				<code>$translation3-&gt;countLanguages();</code> returns the number of languages
+				available</p>
+<h2><a id="other">Other language based classes</a></h2>
+<p>Based on these language and translation classes there are a couple of other
+				classes to format numbers, dates, values&#8230; depending on the chosen	locale:</p>
+<h3><a id="dates">Formatting dates</a></h3>
+<p><code>include('class.FormatDate.inc.php');<br />
+				$fd = new FormatDate();<br />
+				<strong>$timestamp = $fd-&gt;ISOdatetimeToUnixtimestamp('2003-12-24 13:45:00');<br />
+				echo $fd-&gt;longDateTime($timestamp);</strong></code></p>
+<p>This would format the date '2003-12-24 13:45:00'. If you have chosen the locale &#8220;de&#8221; it
+				would output:</p>
+<p><samp>Mittwoch, 24. Dezember 2003 &#8211; 13.45 Uhr</samp></p>
+<p>if the locale is &#8220;it&#8221; it would output</p>
+<p><samp>Mercoled&igrave;, 24 dicembre 2003 &#8211; 13.45 </samp></p>
+<p>The methods <code>shortDate()</code>, <code>shortTime()</code>, <code>shortDateTime()</code>, <code>middleDate()</code>, <code>middleTime()</code>, <code>middleDateTime()</code>, <code>longDate()</code>, <code>longTime()</code>, <code>longDateTime()</code> all
+	take a timestamp as a value and output the according	strings.</p>
+<p>To give the user more options on how dates/times should be displayed you can
+				use the ChooseFormatDate class to output a dropdown <code>&lt;select&gt;</code> box
+				just like the ChooseLanguage class does to give the user the possibility
+to select	normal date format, ISO date format or swatch date format.</p>
+<h3><a id="numbers">Formatting numbers</a></h3>
+<p>Numbers are also written differently depending on the language. In German
+				the English written number <samp>123456.789</samp> would be written as <samp>123
+				456,789</samp></p>
+<p><code>include('class.FormatNumber.inc.php');<br />
+				$fn = new FormatNumber();<br />
+				<strong>echo $fn-&gt;number(123456.789, 2);</strong></code></p>
+<p>This method formats a number. The second argument is the number of digits
+				that should	be displayed. The <code>percent()</code> methods works the same
+				way.<br />
+				When formatting currencies you have more arguments to pass to
+				the method:</p>
+<p><code>$fn-&gt;currency(99.90, 'full', 'gb', FALSE);</code></p>
+<p>This would output <samp lang="de" xml:lang="de">99,90 Pfund</samp> in German
+				and <samp>99.90 Pound</samp> in English. The first argument is the number,
+				the second tell how	the currency	should be marked: <var>full</var> means
+				that the full currency	name is	displayed (in this example &#8220;Pound&#8221;), <var>short</var> would
+				output the short currency name (here &#8220;GBP&#8221;) and <var>symbol</var> would
+				output the currency symbol (here &#8220;&pound;&#8221;).<br />
+				The thirds argument is the country of the currency (here &#8220;Great Britain&#8221;)
+				and the last argument tells whether the major currency should be forced to
+				display or not. Example:</p>
+<p><code>$fn-&gt;currency(0.99, 'full', 'de', <strong>FALSE</strong>);</code> outputs <samp>99
+								Cent</samp><br />
+				<code>$fn-&gt;currency(0.99, 'full', 'de', <strong>TRUE</strong>);</code> outputs <samp>0.99
+				Euro</samp></p>
+<p>Settings for this class can be changed in the<var>l10n.ini</var> file.</p>
+<h3><a id="measure">Formatting measure values</a></h3>
+<p>This class contains only the US measure system and the metric system.</p>
+<p><code>include('class.FormatMeasure.inc.php');<br />
+				$fn = new FormatMeasure ('si','uscs');</code></p>
+<p>This created a new object where the input values are in the metric system
+				and the output values are US measure system. If no second argument for the
+				output is given, the class chooses it by looking at the locale set by the
+				translator class.</p>
+<p>There available Methods are <code>linear()</code>, <code>surface()</code>, <code>capacity()</code>, <code>cooking()</code>, <code>liquid()</code> and <code>temperature()</code>.
+				Most of them in this class take three arguments. The first one is the number,
+				the second and third are the input and output	format. For	example for the <code>linear()</code> method
+				these formats would	be:</p>
+<p><samp>0: mm|in,<br />
+				1: cm|ft,<br />
+				2: dm|yd,<br />
+				3: m|fur,<br />
+				4: km|mi,</samp></p>
+<p>Please see the class documentation for all the formats for the different methods.
+				Settings	for this class can be changed in the<var>l10n.ini</var> file.</p>
+<h3><a id="strings">Formatting Strings</a></h3>
+<p>Two language based methods are available.	The <code>wordFilter()</code> method
+				replaces &#8220;bad&#8221; words, like curses for example, with &#8220;*&#8221; signs.
+				A commaseperated list can be defined in the <var>l10n.ini</var> file.</p>
+<p>The method <code>filterSpecialWords() </code>searches for special words in
+				a string and formats them with the HTML tags <var>abbr</var>, <var>acronym</var> or<var> dfn</var>.
+				The words and related description strings can be changed in the <var>words.ini</var> file,
+				which is placed in every language subdirectory.</p>
+<h2><a id="notes">Notes</a></h2>
+<h3><a id="otherstuff">Other Stuff</a></h3>
+<h4><a id="sm">Shared Memory Functions</a></h4>
+<p>With the shared memory functions enabled, <var>ini</var> files are only read
+				once on first access an are written to the servers memory. This way the files
+				don&#8217;t have to be read with every page access. By default this is disabled.
+				To enable it, you have to set the <code>$use_shared_mem</code> variable in
+				the I18N class to TRUE.<br />
+				Once in the shared memory, changes	to one of the ini file won&#8217;t have
+				any effect until you reset the shared memory blocks. You can do this by setting
+				the <code>$flush_sm</code> variable	to TRUE (also in the I18N class).</p>
+<h3><a>Using a DB other than MySQL</a></h3>
+<p>If you would like to use another database instead of MySQL you have to rewrite
+				the code manually. I don&#8217;t plan to use some sort of DB abstract layer
+				to	keep the classes independent from any framework.<br />
+				I also haven&#8217;t worked with <a href="http://pear.php.net/">PEAR</a> yet,
+				so I don&#8217;t know how hard it would be to implement they DB class. But
+				you could try and	let me know :-)</p>
+<p>All the database code can be found in the Translator and ChooseLanguage class.
+				The connection is	created in the <code>setConnection()</code> method. SQL
+				Queries	are made in the methods <code>checkLocale()</code>, <code>languagesFilesList()</code>, <code>readLanguageFile()</code>, <code>translate()</code>, <code>getLastUpdateDate()</code> and <code>countStrings()</code>.</p>
+<h3><a id="caching">Caching pages</a></h3>
+<p>If you use some sort of caching mechanism then you can use the <code>getLastUpdateDate()</code> method
+				from the Translator class (available since version 1.54). It returns the
+				most current modification date of the selected translation files. If you
+				use MySQL then it returns the most current modification date of all the strings
+				of the selected namespaces. You can compare the returned UNIX timestamp with
+				the dates of your cached	files	to	see if	they need to be updated.</p>
+<h3><a id="smarty">Smarty</a></h3>
+<p>The classes haven&#8217;t been tested with <a href="http://smarty.php.net/">smarty</a> yet,
+				but if you do it this way smarty should cache each language version	separately.</p>
+<p><strong>php file:</strong></p>
+<p><code>$smarty-&gt;assign('LANG_fist_name', $translator-&gt;__('first_name'));<br />
+				$smarty-&gt;assign('LANG_last_name', $translator-&gt;__('last_name'));<br />
+&#8230;<br />
+				$smarty-&gt;display('template_filename.tpl', <strong>$translator-&gt;getLocale()</strong>);</code></p>
+<p><strong>template_filename.tpl:</strong></p>
+<p><samp>&lt;html&gt;&lt;body&gt;&lt;p&gt;<strong>{$LANG_first_name} {$LANG_last_name}</strong>&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</samp></p>
+<hr />
+<p> <strong>Author:</strong> <a href="mailto:flaimo 'at' gmx 'dot' net">Flaimo</a><br />
+				<strong>Date:</strong> 2003-06-13<br />
+				<strong>URLs:</strong><br />
+				<a href="http://sourceforge.net/projects/php-flp/">Project homepage</a><br />
+				<a href="http://www.flaimo.com/">Example script </a> </p>
+<hr />
+<form action="http://www.hotscripts.com/cgi-bin/rate.cgi" method="post"><p>
+				<input type="hidden" name="ID" value="19003" />
+				<strong>Rate Our Script @ <a href="http://www.hotscripts.com">HotScripts.com</a></strong>
+				<select name="ex_rate" size="1">
+								<option selected="selected">Select</option>
+								<option value="5">Excellent!</option>
+								<option value="4">Very Good</option>
+								<option value="3">Good</option>
+								<option value="2">Fair</option>
+								<option value="1">Poor</option>
+				</select>
+				<input type="submit" value="Go!" /></p>
+</form>
+
+<form action="http://www.php-resource.de/vote4.php" method="post" target="new">
+<p>
+				<input type="hidden" name="LKID" value="4122" />
+				<input type="hidden" name="act" value="update" />
+				<strong>Rate Our Script @ <a href="http://www.php-resource.de">PHP-Resource.de</a></strong>
+				<select size="1" name="Votenr">
+								<option value="5">5 Stars</option>
+								<option value="4">4 Stars</option>
+								<option value="3">3 Stars</option>
+								<option value="2">2 Stars</option>
+								<option value="1">1 Stars</option>
+								<option value="0" selected="selected">Vote</option>
+				</select>
+				<input type="submit" value="Vote" /></p>
+</form>
+
+<form method="post" action="http://www.phparchiv.de/cgi-bin/links/ratehome.cgi" target="new">
+<p>
+				<strong>Rate Our Script @ phparchiv.de</strong> (10 is best)
+				<input type="hidden" name="ID" value="3961" />
+				<select name="R" size="1">
+								<option>1 </option>
+								<option>2 </option>
+								<option>3 </option>
+								<option>4 </option>
+								<option>5 </option>
+								<option>6 </option>
+								<option>7 </option>
+								<option>8 </option>
+								<option>9 </option>
+								<option selected="selected">10 </option>
+				</select>
+				<input type="submit" value="Vote" /></p>
+</form>
+<hr />
+<p>
+      <a href="http://validator.w3.org/check/referer"><img
+          src="http://www.w3.org/Icons/valid-xhtml10"
+          alt="Valid XHTML 1.0!" style="border:0;width:88px;height:31px" /></a>
+ <a href="http://jigsaw.w3.org/css-validator/">
+  <img style="border:0;width:88px;height:31px"
+       src="http://jigsaw.w3.org/css-validator/images/vcss"
+       alt="Valid CSS!" />
+ </a>
+
+</p>
+</body>
+</html>

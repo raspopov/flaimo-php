@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>SMS/E-Mail Ticker &#8211; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="doc.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<p><a href="ticker_manual_deutsch.htm" lang="de" xml:lang="de">Zur deutschen Version wechseln&#8230;</a></p>
+<h1><acronym title="Short Message Service" lang="en" xml:lang="en">SMS</acronym>/E-Mail Ticker &#8211; Manual</h1>
+<h2><acronym title="Table of Content" lang="en" xml:lang="en">ToC</acronym></h2>
+<ul>
+				<li><a href="#intro">Intro</a></li>
+                <li><a href="#preparation">Preparation</a></li>
+                <li><a href="#user">The users job</a></li>
+                <li><a href="#scripts">Including the scripts</a></li>
+                <li><a href="#otheroptions">Other Options</a></li>
+                <li><a href="#notes">Notes</a></li>
+</ul>
+<h2><a id="#intro">Intro</a></h2>
+<p>With this classes it is possible to include a little ticker on your homepage
+				which is based on an e-mail account. It&#8217;s original propose is
+				to function as a SMS-ticker for those who can&#8217;t affort to pay
+				a SMS-carrier. If the users GSM cell phone is able to send/receive
+				SMS (Short Message Service) it should be no problem to send
+				a SMS to a mail address, which then is displayed on the webpage.
+	Of
+				course you can also use a normal Mail-Client for that.<br />
+				The Idea for this is based on the <a href="http://www.fraikin.net/sms2email-liveticker/index.php?l=en">scripts
+				from Markus Fraikin</a>.
+				But here everything is written in OO.</p>
+<h2><a id="preperation">Preparation</a></h2>
+<p>First, the installed PHP-Version needs to have the <a href="http://www.php.net/imap">IMAP/POP
+		functions</a> enabled.
+	Then you	create	a	new	e-mail	account,	for
+		example	ticker@mydomain.com and	edit	the	e-mail	settings
+		in the <var>ticker_settings.ini</var> file.</p>
+<h2><a id="user">The users job</a></h2>
+<p>He/Her must have a GSM cell phone which is able to <a href="sms2mail.htm">send/receive
+SMS</a>, but a normal mail-client will also do the job. To prevent displaying spam-mail
+				the	user	has	to	write a special string in front of the actual
+				text which	can be defined in the <var>ticker_settings.ini</var> file.<br />
+				Since most telecom-companies add a short ad after the original
+				text, the user should also write a certain string at the end
+				of his message so the script knows where to cut the real message.
+				This string can also be defined in the <var>ticker_settings.ini</var> file.
+				The maximum amount of characters to be displayed can be changed
+there too.</p>
+<h2><a id="scripts">Including the scripts</a></h2>
+<p>Including the scripts into the page is easy:</p>
+								<p><code>ob_start();<br />
+								include_once('class.Ticker.inc.php');<br />
+								$ticker
+																= new Ticker(6);<br />
+																<br />
+								foreach
+								($ticker->getMessageList()  as $id) {<br />
+								&nbsp;&nbsp;$message = $ticker->getMessage($id);<br />
+								&nbsp;&nbsp;echo '&lt;p&gt;ID: ' . $message->getID()
+								. '&lt;br /&gt;';<br />
+								&nbsp;&nbsp;echo 'Datum: ' . $message->getTimestamp() . '&lt;br
+								/&gt;';<br />
+								&nbsp;&nbsp;echo 'Text: ' . $message->getText() . '&lt;/p&gt;';<br />
+								} // end foreach<br />
+								<br />
+								ob_end_flush();</code>
+</p>
+								<p>First you create a new Ticker object. Then you go through every message
+												in a loop. The design is up to
+								the webmaster.</p>
+								<h2><a id="otheroptions">Other Options</a></h2>
+								<p>&#8230;which can be set in the <var>ticker_settings.ini</var> file:</p>
+								<ul>
+									<li>Delete old messages</li>
+									<li>Delete invalid messages</li>
+									<li>Backup old messages to a MySQL database</li>
+									<li>Define a list with mailaddresses which are allowed to post</li>
+								</ul>
+								<h2><a id="notes">Notes</a></h2>
+								<ul>
+												<li>To prevent too much server load when checking the mailbox all
+																the time, you
+																should use some
+																sort of caching.
+																There are enough
+																scripts on the
+									web for that</li>
+								                <li>Like for the i18n classes, there is no database abstract
+								                	layer. So if you want to
+								                	use a DB other then MySQL
+								                	you will have to change the
+								                	code yourself</li>
+								</ul>
+								<hr />
+<p> <strong>Author:</strong> <a href="mailto:flaimo 'at' gmx 'dot' net">Flaimo</a><br />
+				<strong>Date:</strong> 2003-05-27<br />
+				<strong>URLs:</strong><br />
+				<a href="http://sourceforge.net/projects/php-flp/">Projectpage</a><br />
+				<a href="http://www.flaimo.com/">Sample-Script</a></p>
+<hr />
+<form action="http://www.hotscripts.com/cgi-bin/rate.cgi" method="post"><p>
+				<input type="hidden" name="ID" value="22420" />
+				<strong>Rate Our Script @ <a href="http://www.hotscripts.com">HotScripts.com</a></strong>
+				<select name="ex_rate" size="1">
+								<option selected="selected">Select</option>
+								<option value="5">Excellent!</option>
+								<option value="4">Very Good</option>
+								<option value="3">Good</option>
+								<option value="2">Fair</option>
+								<option value="1">Poor</option>
+				</select>
+				<input type="submit" value="Go!" /></p>
+</form>
+<form action="http://www.php-resource.de/vote4.php" method="post" target="new"><p>
+		<input type="hidden" name="LKID" value="4197" />
+<input type="hidden" name="act" value="update" />
+				<strong>Rate Our Script @ <a href="http://www.php-resource.de">PHP-Resource.de</a></strong>
+				<select size="1" name="Votenr">
+								<option value="5">5 Stars</option>
+								<option value="4">4 Stars</option>
+								<option value="3">3 Stars</option>
+								<option value="2">2 Stars</option>
+								<option value="1">1 Stars</option>
+								<option value="0" selected="selected">Vote</option>
+				</select>
+				<input type="submit" value="Vote" /></p>
+</form>
+
+<form method="post" action="http://www.phparchiv.de/cgi-bin/links/ratehome.cgi" target="new"><p>
+				<strong>Rate Our Script @ phparchiv.de</strong> (10 is best)
+				<input type="hidden" name="ID" value="3962" />
+				<select name="R" size="1">
+								<option>1 </option>
+								<option>2 </option>
+								<option>3 </option>
+								<option>4 </option>
+								<option>5 </option>
+								<option>6 </option>
+								<option>7 </option>
+								<option>8 </option>
+								<option>9 </option>
+								<option selected="selected">10 </option>
+				</select>
+				<input type="submit" value="Vote" /></p>
+</form>
+</body>
+</html>

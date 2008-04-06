@@ -1,0 +1,88 @@
+html, body {
+	width: 400px;
+}
+
+body {
+	background-color: #CC3389;
+	color: #000;
+}
+
+
+h6 {
+	background: #fff url("networld_umfrage.gif") center center no-repeat;
+	height: 20px;
+}
+
+h6 span {
+	display: none;
+}
+
+h2 {
+	background: transparent url("header.jpg") center center no-repeat;
+	height: 108px;
+	border-top: 1px solid #CC3389;
+	border-bottom: 1px solid #CC3389;
+}
+
+h2 span {
+	display: none;
+}
+
+
+#pollcontent {
+	background-color: #F0C1DB;
+	border-bottom: 1px solid #fff;
+	padding: 10px 5px 10px 14px;
+}
+
+h1 {
+	font-size: 1.1em;
+}
+
+#participants table {
+	margin-top: 10px;
+}
+
+.participant {
+	height: 50px;
+	width: 190px;
+}
+
+.portrait {
+	width: 40px;
+	height: 40px;
+	float: left;
+	margin-right: 4px;
+	border: 1px solid #fff;
+
+}
+
+h3 {
+	font-size: 0.95em;
+}
+
+.participant p {
+	font-size: 0.85em;
+	line-height: 1em;
+}
+
+#submit {
+	text-align: center;
+	margin-top: 8px;
+}
+
+.line,
+.line-inactive {
+	display: block;
+	background-color: #CC3389;
+	height: 20px;
+}
+
+#nextvote {
+	font-weight: bold;
+	color: #F0C1DB;
+}
+
+#nextvote span {
+	color: #fff;
+}

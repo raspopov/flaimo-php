@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<title>i18n &#8211; Internationalisierung mit PHP: Erste Schritte</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="doc.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<p style="background-color: #6D1B1B; text-align:center;"><img src="logo.png" alt="i18n Logo" width="200" height="79" /></p>
+<p><a href="getting_started_english.htm" lang="en" xml:lang="en">Switch to english version&#8230;</a></p>
+<h1>Erste Schritte&#8230;</h1>
+<h2>Inhalt</h2>
+<ul>
+				<li><a href="#intro">Intro</a></li>
+				<li><a href="#language">Die Sprache raus&#173;bekommen</a></li>
+				<li><a href="#translate">Texte &uuml;ber&#173;setzen</a></li>
+				<li><a href="#user">Der Benutzer soll entscheiden</a></li>
+				<li><a href="#other">Andere sprach&#173;basierende
+												Klassen</a>
+								<ul>
+												            <li><a href="#dates">Formatieren von Datum&#173;sangaben</a></li>
+												            <li><a href="#numbers">Formatieren von Zahlen</a></li>
+												            <li><a href="#measure">Formatieren von Ma&szlig;&#173;einheiten</a></li>
+												            <li><a href="#strings">Formatieren von Texten</a></li>
+		            </ul>
+				</li>
+				<li><a href="#notes">An&#173;merkungen</a>
+								<ul>
+									 <li><a href="#verschiedenes">Verschiedenes</a>
+									 				<ul>
+									 								<li><a href="#sm"><span lang="en" xml:lang="en">Shared Memory</span> Funktionen</a></li>
+					 								</ul>
+									 </li>
+												            <li><a href="#otherdb">Ver&#173;wenden
+												            								einer anderen Daten&#173;bank</a></li>
+												            <li><a href="#caching">Seiten cachen</a></li>
+															<li><a href="#admin">F&uuml;r den Admin</a></li>
+												            <li><a href="#templates">Templates</a>
+												            	<ul>
+												            		<li><a href="#smarty">Smarty</a></li>
+												            		<li><a href="#phptal">PHPTAL</a></li>
+											            		</ul>
+												            </li>
+					</ul>
+				</li>
+</ul>
+<h2><a id="intro">Intro</a></h2>
+<p>Das <acronym title="Internationalization" lang="en" xml:lang="en">i18n</acronym> <span lang="en" xml:lang="en">Package</span>
+				ist eine kleine Sammlung von Klassen zur International&#173;isierung von
+				PHP Web-Projekten. Mit deren Hilfe ist es m&ouml;glich mehr&#173;sprachige
+				Seiten ein&#173;facher zu ver&#173;walten als mit den Standard PHP-Funktionen.
+				Die &Uuml;bersetzungs&#173;texte k&ouml;nnen ent&#173;weder in normalen Text&#173;dateien,
+				speziellen vor&#173;kompilierten <a href="http://www.php.net/manual/de/ref.gettext.php">Gettext</a> Dateien
+				oder in einer <a href="http://www.mysql.com/" lang="en" xml:lang="en">MySQL</a> Tabelle
+				gespeichert	werden. Alles funktioniert un&#173;abh&auml;ngig von den <span lang="en" xml:lang="en">setlocale</span>	Ein&#173;stellungen
+				in PHP und die Klassen k&ouml;nnen mit eigenen &Uuml;ber&#173;setzungs&#173;methoden
+				er&#173;weitert werden.</p>
+<p>Um Probleme mit erzeugten <span lang="en" xml:lang="en">Cookies</span> und <span lang="en" xml:lang="en">Sessions</span> zu ver&#173;meiden sollte man
+				zuerst	die Aus&#173;gabe&#173;pufferung bei jeden Script aktivieren indem
+				man folgende	Zeilen am Beginn einf&uuml;gt:</p>
+<p lang="en" xml:lang="en"><code>ob_start();<br />
+				session_start();</code></p>
+<p>und am Ende:</p>
+<p lang="en" xml:lang="en"><code>ob_end_flush();</code></p>
+<h2><a id="language">Die Sprache raus&#173;bekommen</a></h2>
+<p>Fangen wir mit einer der Basis&#173;klassen, der <span lang="en" xml:lang="en">Language</span> Klasse, an.	Auf&#173;gabe
+				dieser ist es die vom Benutzer be&#173;vorzugten Ein&#173;stellungen	bez&uuml;glich
+				<span lang="en" xml:lang="en">Locale</span>, Sprache und Land aus dem <var lang="en" xml:lang="en">HTTP_ACCEPT_LANGUAGE</var> <span lang="en" xml:lang="en">Header</span> zu
+				ermitteln. Sollten hier keine brauch&#173;baren Informationen gefunden werden,
+				so wird versucht die IP Adresse des Benutzers auf&#173;zul&ouml;sen und so
+				zu&#173;mindest ein Land und eventuell eine Sprache zu er&#173;mitteln.</p>
+<p>Zuerst erzeugen wir ein neues Objekt:</p>
+<p lang="en" xml:lang="en"><code>include('class.Language.inc.php');<br />
+				$lg = new Language();</code></p>
+<p>Nehmen wir an der Be&#173;nutzer ist aus &Ouml;sterreich und hat Deutsch als
+				seine be&#173;vorzugte	Sprache im <span lang="en" xml:lang="en">Browser</span> ein&#173;gestellt (de-at). Um an
+				diese Informationen	zu kommen k&ouml;nnen folgende Methoden ver&#173;wendet
+				werden:</p>
+<p><code lang="en" xml:lang="en">$lg-&gt;getLocale()</code> gibt <samp>de_at</samp> aus (Binde&#173;striche
+				werden durch Unter&#173;striche ersetzt)<br />
+				<code lang="en" xml:lang="en">$lg-&gt;getLang()</code> gibt <samp>de</samp> aus<br />
+				<code lang="en" xml:lang="en">$lg-&gt;getCountry()</code> gibt <samp>at</samp> aus</p>
+<p>Da der Benutzer ja auch mehrere bevorzugte <span lang="en" xml:lang="en">Locales</span> haben kann, k&ouml;nnen
+				diese	Informationen	nat&uuml;rlich auch abgerufen werden:</p>
+<p><code lang="en" xml:lang="en">$lg-&gt;getUserRawArray() </code>gibt einen <span lang="en" xml:lang="en">Array</span> mit allen bevorzugten
+				<span lang="en" xml:lang="en">Locales</span>	aus<br />
+				<code lang="en" xml:lang="en">$lg-&gt;getUserLangArray()</code> gibt einen <span lang="en" xml:lang="en">Array</span> mit allen bevorzugten
+				Sprachen aus<br />
+				<code lang="en" xml:lang="en">$lg-&gt;getUserCountryArray()</code> gibt einen <span lang="en" xml:lang="en">Array</span> mit allen bevorzugten
+				L&auml;ndern aus</p>
+<p>Was passiert aber falls der Benutzer hier keine Informationen ein&#173;gestellt
+				hat oder preis&#173;geben will? In diesem Fall wird auf die Standard&#173;ein&#173;stellungen
+				der Klasse zur&uuml;ck&#173;gegriffen. Diese befinden sich alle in der Datei <var lang="en" xml:lang="en">i18n_settings.ini</var>:</p>
+<p lang="en" xml:lang="en"><code>[Language]<br />
+				default_locale = &quot;en&quot;<br />
+				default_language = &quot;en&quot;<br />
+				default_country = &quot;us&quot;</code></p>
+<p>Um diese Standard&#173;ein&#173;stellungen un&#173;abh&auml;ngig von den Benutzer&#173;ein&#173;stellungen
+				auslesen	zu k&ouml;nnen kann man folgende Methoden ver&#173;wenden:</p>
+<p lang="en" xml:lang="en"> <code>$lg-&gt;getDefaultLocale()<br />
+				$lg-&gt;getDefaultLanguage()<br />
+				$lg-&gt;getDefaultCountry()</code></p>
+<p>In der <var lang="en" xml:lang="en">i18n_settings.ini</var> Datei kann aber noch mehr ein&#173;gestellt
+				werden:</p>
+<ul>
+				<li> Der Modus f&uuml;r &Uuml;ber&#173;setzungen (Text, Gettext, MySQL, SQLite)</li>
+				<li>Ein- und Aus&#173;schalten der An&#173;zeige von Fehler&#173;meldungen
+				bei	nicht erfolg&#173;reichen &Uuml;ber&#173;setzungen</li>
+</ul>
+<p>Bei der Erzeugung von <span lang="en" xml:lang="en">Language</span> Objekten k&ouml;nnen aber auch alle ermittelten
+				Daten ganz einfach &uuml;ber&#173;gangen werden und ein bestimmter <span lang="en" xml:lang="en">Locale</span>
+				erzwungen werden indem man ihn einfach als Argument &uuml;bergibt:</p>
+<p lang="en" xml:lang="en"><code>$lg_gb = new Language(<strong>'en_gb'</strong>);</code></p>
+<p lang="en" xml:lang="en"><code lang="en" xml:lang="en">$lg-&gt;getLocale()</code> gibt <samp>en_gb</samp> aus<br />
+                <code lang="en" xml:lang="en">$lg-&gt;getLang()</code> gibt <samp>en</samp> aus<br />
+                <code lang="en" xml:lang="en">$lg-&gt;getCountry()</code> gibt <samp>gb</samp> aus</p>
+<h2><a id="translate">Texte &uuml;ber&#173;setzen</a></h2>
+<p>Das war die <span lang="en" xml:lang="en">Language</span> Klasse. Jetzt verwenden wir die daraus gewonnen Informationen
+				zum &Uuml;ber&#173;setzen von Texten.	Daf&uuml;r nehmen wir die <span lang="en" xml:lang="en">Translator</span>
+				Klasse her die die <span lang="en" xml:lang="en">Language</span> Klasse	erweitert.</p>
+<p lang="en" xml:lang="en"><code>include('class.Translator.inc.php');<br />
+				$translation = new Translator(<strong>''</strong>,<strong>'frontpage, everypage'</strong>);</code></p>
+<p>Diese Klasse nimmt nun bereits zwei Argumente an. Das erste kann wieder zum
+	Erzwingen eines bestimmten <span lang="en" xml:lang="en">Locales</span> ver&#173;wendet
+				werden. Das zweite ist eine komma&#173;unterteilte Liste mit Datei&#173;namen <strong>ohne</strong> die
+Datei&#173;namen&#173;erweiterung  bzw. Namespaces.	</p>
+<p>Falls man mit Dateien arbeitet m&uuml;ssen
+				sich	diese im	jeweiligen	Sprach-Unter&#173;verzeichnis
+				des &#8222;<span lang="en" xml:lang="en">locale</span>&#8220; Ver&#173;zeichnisses
+				befinden falls man reine Text&#173;dateien
+				ver&#173;wendet oder dann noch einmal ein Unter&#173;verzeichnis &#8222;<span lang="en" xml:lang="en">LC_MESSAGES</span>&#8220; tiefer
+				falls man Gettext Dateien ver&#173;wendet.<br />
+				Die Sprach-Unter&#173;verzeichnisse m&uuml;ssen der ISO Norm f&uuml;r <span lang="en" xml:lang="en">Locales</span> ent&#173;sprechen mit der Aus&#173;nahme dass halt ein Unter- statt einem
+				Binde&#173;strich ver&#173;wendet wird.	(Zum	Bei&#173;spiel: &#8222;it&#8220;, &#8222;de_at&#8220;, &#8222;en_gb&#8220;,&#8230;).<br />
+				Falls man den <span lang="en" xml:lang="en">MySQL oder SQLite</span> Modus
+				ver&#173;wendet
+				ist das zweite Argument eine Liste	von <span lang="en" xml:lang="en">Name&#173;spaces</span>.
+				Alle &Uuml;ber&#173;setzungs&#173;texte die diesem
+				Name&#173;space	ange&#173;h&ouml;ren werden dann auto&#173;matisch geladen
+				um nicht f&uuml;r jeden	Text einzeln einen Daten&#173;bank&#173;zugriff machen
+				zu m&uuml;ssen.<br />
+				Au&szlig;er im <span lang="en" xml:lang="en">MySQL/SQLite</span> Modus ist
+				es	m&ouml;glich
+				auch Alias Sprachen anzu&#173;legen.
+				Falls man bereit ein Ver&#173;zeichnis &#8222;en&#8220; mit allen &Uuml;ber&#173;setzungen
+				hat und man nicht alles noch mal f&uuml;r &#8222;en_gb&#8220; zum Bei&#173;spiel &uuml;ber&#173;setzen
+				und Warten will, so legt man in dieses weitere Ver&#173;zeichnis einfach
+				eine Datei namens &#8222;<span lang="en" xml:lang="en">redirect</span>&#8220; (ohne
+				Datei&#173;namen-Erweiterung)
+				die als Text die eigentliche Sprache (in diesem Fall &#8222;en&#8220;) ent&#173;h&auml;lt.
+Alias Sprachen funktionieren im <span lang="en" xml:lang="en">MySQL</span> Modus
+nicht!</p>
+<p>Im <span lang="en" xml:lang="en">Package</span> sind bereits ein paar Bei&#173;spiel&#173;sprachen ent&#173;halten
+				um so den Ein&#173;stieg ein bisschen zu erleichtern und um zu zeigen wie
+				die &Uuml;ber&#173;setzungs&#173;dateien	aus&#173;zu&#173;sehen haben. Auf
+				die Er&#173;zeugung von Gettext Dateien wird	hier aber nicht einge&#173;gangen.
+				Dazu gibt es genug <span lang="en" xml:lang="en">Tutorials</span> im	Web&#8230;</p>
+<p>Wenn ein neues <span lang="en" xml:lang="en">Translator</span> Objekt erzeugt wird, dann wird die Liste der bevorzugten
+				<span lang="en" xml:lang="en">Locales</span> des Benutzers aus der <span lang="en" xml:lang="en">Language</span> Klasse mit den vor&#173;handenen Sprach-<span lang="en" xml:lang="en">Locales</span>
+				aus der <span lang="en" xml:lang="en">Translator</span> Klasse ver&#173;glichen und der bestm&ouml;gliche <span lang="en" xml:lang="en">Locale</span>
+				gew&auml;hlt. Auch geben die Methoden <code lang="en" xml:lang="en">getLocale()</code>, <code lang="en" xml:lang="en">getLang()</code> und <code lang="en" xml:lang="en">getCountry()</code> nicht
+				mehr die bevorzugten Benutzer&#173;ein&#173;stellungen wieder sondern die
+				Informationen	aus dem	auto&#173;matisch	ausge&#173;w&auml;hlten &Uuml;ber&#173;setzungs-<span lang="en" xml:lang="en">Locale</span>.</p>
+<p>Wenn man dann also mal die <span lang="en" xml:lang="en">Datenbank-T</span>abelle
+	oder die &Uuml;ber&#173;setzungs&#173;dateien
+				an&#173;gelegt	hat kann man mit dem &Uuml;ber&#173;setzen von Texten beginnen
+				indem man	die <code lang="en" xml:lang="en">translate()</code> Methode verwendet.</p>
+<p lang="en" xml:lang="en"><code>echo $translation-&gt;translate('no_records_found');</code></p>
+<p>&#8222;<span lang="en" xml:lang="en">no_records_found</span>&#8220; ist der String nach dem in den Dateien oder
+				der Tabelle gesucht und aus&#173;gegeben wird. Falls man Um&#173;laute und
+				sonstige Sonder&#173;zeichen auch gleich codiert ausgeben will kann man folgende
+				Methode verwenden:</p>
+<p lang="en" xml:lang="en"><code>echo $translation-&gt;translateEncode('no_records_found');</code></p>
+<p>Um da&#173;r&uuml;ber hin&#173;aus noch weitere Zei&#173;chen, wie zum Bei&#173;spiel &#8222;&times;&#8220;, &#8222;&#8217;&#8220;, &#8222;&#8225;&#8220;&#8230; zu
+	codieren kann man die <span lang="en" xml:lang="en">translateEncodePlus</span> Methode ver&#173;wenden:</p>
+<p lang="en" xml:lang="en"><code>echo $translation-&gt;translateEncodePlus(<strong>'no_records_found'</strong>);</code></p>
+<p>Um sich Schreib&#173;arbeit zu ersparen kann man auch folgende Kurz&#173;versionen
+				ver&#173;wenden:</p>
+<p lang="en" xml:lang="en"><code>echo $translation-&gt;_('no_records_found');</code> = translate<br />
+				<code>echo $translation-&gt;__('no_records_found');</code> =	translateEncode<br />
+<code>echo $translation-&gt;___('no_records_found');</code> =	translateEncodePlus</p>
+<p>Falls f&uuml;r den String keine &Uuml;ber&#173;setzung gefunden wurde wird
+				folgende Fehler&#173;meldung	am Ende einer Seite auftauchen:</p>
+<div style="background:blue;color:white;padding:5px"  lang="en" xml:lang="en">
+<strong>Errors in class &raquo; translatortext &laquo;:</strong>
+<ul>
+<li>String &raquo; no_records_foun &laquo; not found</li>
+</ul>
+</div>
+<p>Diese Meldung kann in der <var lang="en" xml:lang="en">i18n_settings.ini</var> Datei de&#173;aktiviert
+				werden.	Dann wird nur der nicht &uuml;ber&#173;setze String aus&#173;gegeben.</p>
+<p>Wenn man mit Gettext Dateien arbeitet ist die Situation ein bisschen	kompli&#173;zierter
+				falls man mehr als nur eine &Uuml;ber&#173;setzungs&#173;datei bei der	Objekt&#173;erzeugung
+				an&#173;gegeben hat. In diesem Fall muss der ent&#173;sprechende	Datei&#173;name
+				f&uuml;r jeden zu &uuml;ber&#173;setzenden String (au&szlig;er der Erste
+				in der	Liste)	als zweites Argument an die <code lang="en" xml:lang="en">Translate()</code> Methode &uuml;ber&#173;geben
+				werden:</p>
+<p lang="en" xml:lang="en"><code>echo $translation-&gt;Translate('another_string', <strong>'translationfile2'</strong>);<br />
+				echo $translation-&gt;TranslateEncode('another_string', <strong>'translationfile2'</strong>);<br />
+				echo $translation-&gt;_('another_string', <strong>'translationfile2'</strong>);<br />
+				echo $translation-&gt;__('another_string', <strong>'translationfile2'</strong>);</code></p>
+<p>Falls ben&ouml;tigt, kann die Sprache f&uuml;r ein Objekt auch dynamisch ge&auml;ndert
+				werden:</p>
+<p lang="en" xml:lang="en"><code>$translation2 = new Translator('de','frontpage, everypage');<br />
+				echo $translation2-&gt;_('good_morning');<br />
+				<strong>$translation2-&gt;changeLocale('en');</strong><br />
+				echo $translation2-&gt;_('good_morning');</code></p>
+<p>Zuerst w&uuml;rde hier <samp lang="de" xml:lang="de">Guten	Morgen</samp> aus&#173;gegeben
+				werden, bei der zweiten Ausgabe <samp lang="en" xml:lang="en">Good	Morning</samp>.</p>
+<p>Andere Methoden in der Klasse:</p>
+<p><code lang="en" xml:lang="en">$translation-&gt;</code><code>getLocales</code><code lang="en" xml:lang="en">()</code> gibt einen Array mit
+				allen gefundenen &Uuml;ber&#173;setzungs-<span lang="en" xml:lang="en">Locales</span> aus.<br />
+				<code lang="en" xml:lang="en">$translation-&gt;getModus()</code> gibt den Modus aus (&#8222;gettext&#8220;, &#8222;inc&#8220; or &#8222;mysql&#8220;)<br />
+				<code lang="en" xml:lang="en">$translation-&gt;getRealLocale()</code> gibt
+				das tat&#173;s&auml;chlich
+				ver&#173;wendete <span lang="en" xml:lang="en">Locale</span> zur&uuml;ck
+				falls ein Alias verwendet wird.<br />
+                <code>$translation-&gt;getEncoding()</code> gibt die Codierung
+                der Sprach&#173;dateien aus, zB &#8222;UTF-8&#8220;. Kann in der <var>l10n.ini</var> Datei
+                ein&#173;gestellt werden.<br />
+                <code>$translation-&gt;getLastUpdateDate()</code> gibt einen
+                Time&#173;stamp zur&uuml;ck wann eine der ver&#173;wendeten Name&#173;spaces / Sprach&#173;dateien
+                zuletzt ge&auml;ndert wurde.<br />
+<code>$translation-&gt;getCountStrings()</code> gibt die An&#173;zahl der ver&#173;wendeten
+&Uuml;ber&#173;setzungen in den ver&#173;wendeten Name&#173;spaces / Sprach&#173;dateien zur&uuml;ck.<br />
+<code>$translation-&gt;getCountLanguages()</code> gibt die An&#173;zahl an vor&#173;handenen
+Sprachen zur&uuml;ck.</p>
+<h2><a id="user">Der Benutzer soll entscheiden</a></h2>
+<p>Jetzt wissen wir wie wir multi&#173;linguale Scripts machen k&ouml;nnen. Aber
+				wie kann	der Benutzer eine andere Sprache aus&#173;w&auml;hlen?<br />
+				Daf&uuml;r brauchen wir die <span lang="en" xml:lang="en">ChooseLanguage</span> Klasse die die <span lang="en" xml:lang="en">Translator</span> Klasse
+				erweitert:</p>
+<p lang="en" xml:lang="en"><code><strong>include('class.ChooseLanguage.inc.php');</strong><br />
+				$translation3 = new ChooseLanguage('','frontpage, everypage');<br />
+				<strong>echo	$translation3-&gt;returnDropdownLang();</strong></code></p>
+<p>Damit wird ein <code>&lt;select&gt;</code> Formular&#173;element mit allen
+				m&ouml;glichen	Sprachen in der jeweiligen Sprache aus&#173;gegeben. Die anderen
+				Formular&#173;elemente	wie Senden Kn&ouml;pfe usw. m&uuml;ssen dann im Script
+				manuell hinzu&#173;gef&uuml;gt werden. Auf jeden Fall muss das Ziel des Formulars
+				eine Seite sein die die <span lang="en" xml:lang="en">ChooseLanguage</span> Klasse wieder aufruft. Falls einem
+				ein <span lang="en" xml:lang="en">Dropdown</span>-Men&uuml; nicht	liegt kann man die Formular&#173;elemente auch
+				manuell erstellen. Der	Name dieser muss aber &#8220;<span lang="en" xml:lang="en">locale</span>&#8221; lauten
+				und muss als Wert dann	ein, der ISO Norm ent&#173;sprechendes, <span lang="en" xml:lang="en">Locale</span> besitzen.
+				Bei&#173;spiel:</p>
+<p lang="en" xml:lang="en"><samp>&lt;input type=&quot;hidden&quot; <strong>name=&quot;locale&quot; value=&quot;en&quot;</strong>&gt;</samp></p>
+<h2><a id="other">Andere sprach&#173;basierende Klassen</a></h2>
+<p>Basierend auf diesen Klassen gibt es noch ein paar andere Klassen um Datums&#173;angaben,
+				Zahlen, W&auml;hrungen usw. zu im Kontext der Sprache zu formatieren:</p>
+<h3> <a id="dates">Formatieren von Datums&#173;angaben</a> </h3>
+<p lang="en" xml:lang="en"><code>include('class.FormatDate.inc.php');<br />
+				$fd = new FormatDate();<br />
+				<strong>$timestamp = $fd-&gt;ISOdatetimeToUnixtimestamp('2003-12-24 13:45:00');<br />
+				echo $fd-&gt;longDateTime($timestamp);</strong></code></p>
+<p>Dies w&uuml;rde das ISO Datum '2003-12-24 13:45:00' formatieren. Falls das
+				ein&#173;gestellte <span lang="en" xml:lang="en">Locale</span> &#8222;de&#8220; ist,	w&uuml;rde	die Ausgabe folgender&#173;ma&szlig;en
+				aus&#173;sehen:</p>
+<p><samp>Mittwoch, 24. Dezember 2003 &#8211; 13.45 Uhr</samp></p>
+<p>Beim <span lang="en" xml:lang="en">Locale</span> &#8222;it&#8220; w&uuml;rde es folgenderma&szlig;en aussehen.</p>
+<p lang="it" xml:lang="it"><samp>Mercoled&igrave;, 24 dicembre 2003 &#8211; 13.45 </samp></p>
+<p>Es stehen folgende Methoden f&uuml;r die Formatierung zur Ver&#173;f&uuml;gung: <code lang="en" xml:lang="en">shortDate()</code>, <code lang="en" xml:lang="en">shortTime()</code>,
+	<code lang="en" xml:lang="en">shortDateTime()</code>, <code lang="en" xml:lang="en">middleDate()</code>, <code lang="en" xml:lang="en">middleTime()</code>, <code lang="en" xml:lang="en">middleDateTime()</code>, <code lang="en" xml:lang="en">longDate()</code>, <code lang="en" xml:lang="en">longTime()</code>, <code lang="en" xml:lang="en">longDateTime()</code>.
+Diese brauchen als Argument alle einen	UNIX <span lang="en" xml:lang="en">Timestamp</span>&#8230;</p>
+<p>Um dem Benutzer mehr Auswahl bieten zu k&ouml;nnen ist es m&ouml;glich mit
+				Hilfe der	<span lang="en" xml:lang="en">ChooseFormatDate</span>	Klasse ein <code>&lt;select&gt;</code> <span lang="en" xml:lang="en">Dropdown</span>&#173;men&uuml;, &auml;hnlich
+				dem der<span lang="en" xml:lang="en">	ChooseLanguage</span> Klasse, auszugeben.
+				Zur Aus&#173;wahl stehen dann
+				das	klassische Datums&#173;formatierung in der jeweiligen Sprache, das ISO
+Format (<samp>2003-12-24	13:45:00</samp>) und das swatch Format (<samp>@d24.12.03 &#8211; @531://25</samp>).</p>
+<p>Angaben zur Formatierung k&ouml;nnen in der <var>l10n.ini</var> Datei gemacht
+				werden.</p>
+<h3><a id="numbers">Formatieren von Zahlen</a></h3>
+<p>Zahlen werden auch sprach&#173;abh&auml;ngig unter&#173;schiedlich formatiert.
+				Die	englisch geschriebene Zahl <samp>123456.789</samp> w&uuml;rde in der
+				deutschen	Schreib&#173;weise <samp>123	456,789</samp> lauten.</p>
+<p lang="en" xml:lang="en"><code>include('class.FormatNumber.inc.php');<br />
+				$fn = new FormatNumber();<br />
+				echo $fn-&gt;number(123456.789, 2);</code></p>
+<p>Mit dieser Methode werden Zahlen formatiert. Das zweite Argument gibt die
+				Anzahl an Nach&#173;komma&#173;stellen an die ange&#173;zeigt werden sollen.
+				Die <code lang="en" xml:lang="en">percent()</code> Methode	arbeitet auf die gleiche Weise.<br />
+				Bei der Formatierung von W&auml;hrungs&#173;ein&#173;heiten gibt es mehr
+				Argumente:</p>
+<p lang="en" xml:lang="en"><code>$fn-&gt;currency(99.90, 'full', 'gb', FALSE);</code></p>
+<p>Dies w&uuml;rde in der deutschen Schreib&#173;weise <samp lang="de" xml:lang="de">99,90
+								Pfund</samp> aus&#173;geben und in der Englischen <samp lang="en" xml:lang="en">99.90 Pound</samp>.
+								Das erste Argument ist die zu formatierende Zahl, das Zweite definiert
+								die Schreib&#173;weise der W&auml;hrungs&#173;einheit: <var lang="en" xml:lang="en">full</var> bedeutet
+								das der aus&#173;geschriebene Name der W&auml;hrung ver&#173;wendet wird
+								(zum Bei&#173;spiel &#8222;<span lang="en" xml:lang="en">Pound</span>&#8220;), <var lang="en" xml:lang="en">short</var> w&uuml;rde
+								das K&uuml;rzel	aus&#173;geben	(hier &#8222;GBP&#8220;) und <var lang="en" xml:lang="en">symbol</var> w&uuml;rde
+								das W&auml;hrungs&#173;symbol	aus&#173;geben (hier &#8222;&pound;&#8220;).<br />
+				Das dritte Argument gibt das Land der W&auml;hrung an	(hier &#8222;England&#8220;)
+				und das letzte Argument gibt an ob nur die &#8222;gro&szlig;e&#8220; W&auml;hrungs&#173;angabe
+				ver&#173;wendet werden soll oder nicht. Bei&#173;spiel:</p>
+<p><code lang="en" xml:lang="en">$fn-&gt;currency(0.99, 'full', 'de', <strong>FALSE</strong>);</code> gibt <samp>99
+								Cent</samp> aus<br />
+				<code lang="en" xml:lang="en">$fn-&gt;currency(0.99, 'full', 'de', <strong>TRUE</strong>);</code> gibt<samp> 0.99
+				Euro</samp> aus</p>
+<p>Angaben zur Formatierung k&ouml;nnen in der <var>l10n.ini</var> Datei gemacht
+				werden.</p>
+<h3><a id="measure">Formatieren von Ma&szlig;&#173;einheiten</a></h3>
+<p>Diese Klasse beinhaltet nur die US Ma&szlig;&#173;einheit und das metrische
+				System.</p>
+<p lang="en" xml:lang="en"><code>include('class.FormatMeasure.inc.php');<br />
+				$fn = new FormatMeasure ('si','uscs');</code></p>
+<p>Hier wurde ein neues Objekt erzeugt welches als Eingabe Werte in metrischen
+				Angaben her&#173;nimmt und Diese umge&#173;rechnet dann in US Ein&#173;heiten
+				ausgibt. Falls das zweite Argument nicht &uuml;ber&#173;geben wurde, wird
+				versucht wiederum an&#173;hand der Sprache das richtige System zu w&auml;hlen.</p>
+<p>Die Methoden die zur Ver&#173;f&uuml;gung stehen sind <code lang="en" xml:lang="en">linear()</code>, <code lang="en" xml:lang="en">surface()</code>, <code lang="en" xml:lang="en">capacity()</code>, <code lang="en" xml:lang="en">cooking()</code>, <code lang="en" xml:lang="en">liquid()</code> und <code lang="en" xml:lang="en">temperature()</code>.
+				Die meisten davon ben&ouml;tigen drei Argumente. Das Erste ist die Zahl,
+				das Zweite und Dritte sind die Ein- und Ausgabe&#173;einheit.	Zum Bei&#173;spiel
+				w&uuml;rde dies bei der Methode <code lang="en" xml:lang="en">linear()</code> so aussehen:</p>
+<p lang="en" xml:lang="en"><samp>0: mm|in,<br />
+				1: cm|ft,<br />
+				2: dm|yd,<br />
+				3: m|fur,<br />
+				4: km|mi,</samp></p>
+<p>Alle Ma&szlig;&#173;einheiten sind in der Klassen&#173;dokumentation zu finden.</p>
+<p>Bei&#173;spiel (Konvertieren von 30000&nbsp;cm nach Yards):</p>
+<p><code>$fn-&gt;linear(30000, 1, 2);</code></p>
+<p>w&uuml;rde<samp> 328,08 </samp> zur&uuml;ck geben.</p>
+<h3><a id="strings">Formatieren von Texten</a></h3>
+<p>Im Kontext der Sprache k&ouml;nnen zwei Filter-Methoden auf Texte an&#173;gewendet
+				werden.	Die Methode <code lang="en" xml:lang="en">wordFilter()</code> ersetzt &#8222;b&ouml;se&#8220; W&ouml;rter,
+				wie zum Bei&#173;spiel	Schimpf&#173;w&ouml;rter, mit &#8222;*&#8220; Sternchen.
+				Eine	komma&#173;getrennte Liste	kann f&uuml;r jede Sprache separat in der <var>l10n.ini</var> Datei
+				an&#173;gegeben	werden.</p>
+<p>Die Methode <code lang="en" xml:lang="en">filterSpecialWords()</code> sucht nach Schl&uuml;ssel&#173;w&ouml;rtern
+				und formatiert	diese mit <var>abbr</var>, <var>acronym</var> oder <var>dfn</var> HTML
+				Tags. Die W&ouml;rter und dazu&#173;geh&ouml;rigen Texte k&ouml;nnen in der <var>words.ini</var> Datei
+				ge&#173;&auml;ndert werden, die in jedem Sprach&#173;verzeichnis liegt.</p>
+<h2><a id="notes">An&#173;merkungen</a></h2>
+<h3><a id="verschiedenes">Ver&#173;schiedenes</a></h3>
+<h4><a id="sm"><span lang="en" xml:lang="en">Shared Memory</span> Funktionen</a></h4>
+<p>Mit der <span lang="en" xml:lang="en">Shared Memory</span> Funktion&#173;alit&auml;t
+	k&ouml;nnen alle <var>ini</var> Dateien
+				bei erst&#173;maligen	Lesen auch in den ge&#173;meinsamen Speicher des Servers
+				ge&#173;schrieben	werden. Auf diese Weise er&#173;spart man sich ein einlesen
+				der Dateien	mit jedem Seiten&#173;zugriff. Standard&#173;m&auml;&szlig;ig
+				ist dies jedoch	de&#173;aktivert.	Zur Aktivierung muss die Klassen&#173;konstante <code lang="en" xml:lang="en">USE_SHARED_MEM</code>	in
+				der I18N Klasse	auf <span lang="en" xml:lang="en">TRUE</span> gesetzt werden.<br />
+	Aller&#173;dings	werden	&Auml;nderungen	an	einer
+				der	Dateien	nicht	auto&#173;matisch	&uuml;ber&#173;nommen.	Dazu kann der
+				Speicher	aber manuell ge&#173;l&ouml;scht werden indem man die <code lang="en" xml:lang="en">FLUSH_SM</code> Konstante
+	(eben&#173;falls	in der	I18N Klasse) auf <span lang="en" xml:lang="en">TRUE</span> setzt.</p>
+<h3><a id="otherdb">Ver&#173;wenden einer anderen Daten&#173;bank</a></h3>
+<p>Wer eine andere Daten&#173;bank als <span lang="en" xml:lang="en">MySQL</span> ver&#173;wenden
+	will muss wohl oder &uuml;bel
+				die	betreffenden Methoden manuell um&#173;schreiben. Es ist nicht geplant
+				irgendeine Art von DB Abstract	Layer zu ver&#173;wenden um die Klassen	un&#173;abh&auml;ngig
+				von irgendeinem <span lang="en" xml:lang="en">Frame&#173;work</span> halten
+				und pro&#173;priet&auml;re Funktionen von Daten&#173;banken ver&#173;wenden zu k&ouml;nnen.<br />
+				Da ich noch nie <a href="http://pear.php.net/">PEAR</a> verwendet habe, kann
+				ich auch nicht sagen	wie schwer es w&auml;re die Klassen dort mit der DB
+				Klasse zu implementieren, aber wer will kann es ja mal probieren und es mir
+				dann sagen	:-)</p>
+<p>Da seit Version 2.000 f&uuml;r PHP&nbsp;5 eigene Backend Translator Klassen
+	ver&#173;wendet werden k&ouml;nnen, sollte es kein Problem sein diese mit dem
+	zur	Ver&#173;f&uuml;gung
+	stehenden Interface zu	entwickeln. Dazu mehr beim n&auml;ch&#173;sten Punkt:</p>
+<h3><a id="otherdb">Ver&#173;wenden eigener &Uuml;bersetzungsklassen</a></h3>
+<p>Nehmen wir an wir wollen den Modus &#8222;<samp>XML</samp>&#8220; hinzuf&uuml;gen.
+	Dazu erstellen wir zuerst	eine Datei names &#8222;class.Translator<samp>XML</samp>.inc.php&#8220; welche
+	bei den anderen Klassen ge&#173;speichert wird. In dieser Datei erstellen wir
+	eine	neue Klasse &#8222;Translator<samp>XML</samp>&#8220; die die TranslatorBase
+	Klasse erweitert	und die Methoden der Schnitt&#173;stellen <code>TranslatorInterface</code> und
+	<code>LanguageInterface</code> implementiert.	Wie	Namespaces	und Locales gehand&#173;habt
+	werden	bleibt	dem	Autor &uuml;ber&#173;lassen,
+	solange	die	ver&#173;langten	Methoden implementiert werden die von den anderen
+	Klassen	ben&ouml;tigt
+	werden.</p>
+<h3><a id="caching">Seiten cachen</a></h3>
+<p>Falls man irgendeine Art von Cache-Mechanis&#173;mus verwendet so ist seit
+				Version	1.054 in der Klasse <span lang="en" xml:lang="en">Translator</span> eine Methode namens <code lang="en" xml:lang="en">getLastUpdateDate()</code> zu
+				finden. Diese gibt das aktuellste &Auml;nderungs&#173;datum (als UNIX <span lang="en" xml:lang="en">Timestamp</span>)
+				der aus&#173;gew&auml;hlten &Uuml;ber&#173;setzungs&#173;dateien bzw. <span lang="en" xml:lang="en">Name&#173;spaces</span>
+				zur&uuml;ck.	So kann man &uuml;ber&#173;pr&uuml;fen ob irgendwelche &Uuml;ber&#173;setzungen
+				neuer sind als die gecachte Seite und gegebenen&#173;falls Diese neu erzeugen
+				lassen.</p>
+<h3><a id="admin">F&uuml;r den Admin</a></h3>
+<p>F&uuml;r administrative Zwecke stehen in der Translator Klasse die Methoden <code>addTranslation()</code>, <code>updateTranslation()</code>, <code>deleteTranslation()</code> und<code> deleteTranslationString()</code> zur
+	Ver<span lang="en" xml:lang="en">&#173;</span>f&uuml;gung.</p>
+<h3><a id="templates">Templates</a></h3>
+<h4><a id="smarty">Smarty</a></h4>
+<p>Die Klassen wurden noch nicht mit <a href="http://smarty.php.net/">smarty</a> ge&#173;testet,
+				sollten aber ohne Probleme	funktionieren wenn man die Design&#173;vorlage
+				folgender&#173;ma&szlig;en aufruft:</p>
+<p><strong>php file:</strong></p>
+<p lang="en" xml:lang="en"><code>$smarty-&gt;assign('LANG_fist_name', $translator-&gt;__('first_name'));<br />
+				$smarty-&gt;assign('LANG_last_name', $translator-&gt;__('last_name'));<br />
+&#8230;<br />
+				$smarty-&gt;display('template_filename.tpl', <strong>$translator-&gt;getLocale()</strong>);</code></p>
+<p><strong>template_filename.tpl:</strong></p>
+<p lang="en" xml:lang="en"><samp>&lt;html&gt;&lt;body&gt;&lt;p&gt;<strong>{$LANG_first_name} {$LANG_last_name}</strong>&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</samp></p>
+<p>Auf diese Weise sollte bei ein&#173;geschaltetem <span lang="en" xml:lang="en">Caching</span> f&uuml;r jede Sprache
+				eine eigene	kompilierte Seite ge&#173;speichert werden.</p>
+<h4><a id="phptal">PHPTAL</a></h4>
+<p>Mit <a href="http://phptal.sourceforge.net/">PHPTAL</a> ist das ganze ein
+	bi&szlig;chen eleganter gel&ouml;st, denn dieses Frame&#173;work bietet eine
+	Schnitt&#173;stelle wo sich i18n Klassen ein&#173;klinken k&ouml;nnen. In der Praxis
+	sieht	das	ganze	so
+	aus	(PHP
+	Datei):</p>
+<p><code>require_once 'PHPTAL.php';<br />
+	require_once 'class.Translator.inc.php';<br />
+	$lg =&amp; new Translator('en','');<br />
+	$template =&amp; new PHPTAL('example.htm');<br />
+	<strong>$template-&gt;setTranslator($lg);</strong></code></p>
+<p>Im Template selber wird der &Uuml;ber&#173;setzungs&#173;string folgender&#173;ma&szlig;en imple&#173;mentiert:</p>
+<p><samp>&lt;p <strong>i18n:translate=&quot;&quot;</strong>&gt;<strong>no_records_found</strong>&lt;/p&gt;</samp></p>
+<p>Will man Attribute von HTML Tags inter&#173;national&#173;isieren muss man leider wieder
+	auf die alte Methode zur&uuml;ck&#173;greifen indem man den &uuml;ber&#173;setzten String einer
+	Variable zu&#173;weist und diesen dann an das Template &uuml;ber&#173;gibt. Beispiel:</p>
+<p><code>$template-&gt;set(<strong>'description'</strong>, <strong>$lg-&gt;_('no_records_found')</strong>);</code></p>
+<p>Template:</p>
+<p><samp>&lt;img src=&quot;logo.png&quot; <strong>tal:attributes=&quot;alt description&quot;</strong> width=&quot;200&quot; height=&quot;79&quot; /&gt;</samp></p>
+<hr />
+<p> <strong>Autor:</strong> <a href="mailto:flaimo 'at' gmx 'dot' net">Flaimo</a><br />
+				<strong>Datum:</strong> 2003-08-19<br />
+				<strong>URLs:</strong><br />
+				<a href="http://sourceforge.net/projects/php-flp/">Projekt&#173;seite</a><br />
+				<a href="http://www.flaimo.com/">Beispiel&#173;script</a></p>
+<hr />
+<form action="http://www.hotscripts.com/cgi-bin/rate.cgi" method="post"><p>
+				<input type="hidden" name="ID" value="19003" />
+				<strong lang="en" xml:lang="en">Rate Our Script @ <a href="http://www.hotscripts.com">HotScripts.com</a></strong>
+				<select name="ex_rate" size="1">
+								<option selected="selected">Select</option>
+								<option value="5">Excellent!</option>
+								<option value="4">Very Good</option>
+								<option value="3">Good</option>
+								<option value="2">Fair</option>
+								<option value="1">Poor</option>
+				</select>
+				<input type="submit" value="Go!" /></p>
+</form>
+<form action="http://www.php-resource.de/vote4.php" method="post" target="new"><p>
+				<input type="hidden" name="LKID" value="4122" />
+				<input type="hidden" name="act" value="update" />
+				<strong lang="en" xml:lang="en">Rate Our Script @ <a href="http://www.php-resource.de">PHP-Resource.de</a></strong>
+				<select size="1" name="Votenr">
+								<option value="5">5 Stars</option>
+								<option value="4">4 Stars</option>
+								<option value="3">3 Stars</option>
+								<option value="2">2 Stars</option>
+								<option value="1">1 Stars</option>
+								<option value="0" selected="selected">Vote</option>
+				</select>
+				<input type="submit" value="Vote" /></p>
+</form>
+<form method="post" action="http://www.phparchiv.de/cgi-bin/links/ratehome.cgi" target="new"><p>
+				<strong lang="en" xml:lang="en">Rate Our Script @ phparchiv.de</strong> (10 is best)
+				<input type="hidden" name="ID" value="3961" />
+				<select name="R" size="1">
+								<option>1 </option>
+								<option>2 </option>
+								<option>3 </option>
+								<option>4 </option>
+								<option>5 </option>
+								<option>6 </option>
+								<option>7 </option>
+								<option>8 </option>
+								<option>9 </option>
+								<option selected="selected">10 </option>
+				</select>
+				<input type="submit" value="Vote" /></p>
+</form>
+<hr />
+<p>
+      <a href="http://validator.w3.org/check/referer"><img
+          src="http://www.w3.org/Icons/valid-xhtml10"
+          alt="Valid XHTML 1.0!" style="border:0;width:88px;height:31px" /></a>
+ <a href="http://jigsaw.w3.org/css-validator/">
+  <img style="border:0;width:88px;height:31px"
+       src="http://jigsaw.w3.org/css-validator/images/vcss"
+       alt="Valid CSS!" />
+ </a>
+
+</p>
+
+</body>
+</html>

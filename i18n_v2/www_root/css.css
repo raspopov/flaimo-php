@@ -1,0 +1,111 @@
+body {
+	background-color:#fff;
+	font: 0.9em Verdana, Arial, Helvetica, sans-serif;
+	padding: 10px;
+}
+
+h1, h2 {
+	background-color: #339;
+	color: #fff;
+	margin: 0px;
+	text-indent: 7px;
+}
+
+h1 {
+
+	border: 3px solid #006;
+	font-size: 1.6em;
+	padding: 4px;
+	letter-spacing: 0.2em;
+	margin-bottom: 2px;
+}
+
+h2 {
+
+	border: 2px solid #006;
+	font-size: 1.1em;
+	padding: 3px;
+	letter-spacing: 0.1em;
+	font-variant: small-caps;
+	margin-top: 30px;
+}
+
+h3 {
+	margin: 3px 0px 10px 10px;
+	font-size: 1.05em;
+
+}
+
+h1 a {
+	color: #fff;
+}
+
+
+.sample {
+	background-color: orange;
+	margin: 5px 40px;
+	padding: 5px;
+}
+
+samp {
+	font: 0.9em Verdana, Arial, Helvetica, sans-serif;
+	font-style: italic;
+	background-color: #fc6;
+	padding: 1px 4px;
+	border-bottom: 1px solid #fc9;
+	border-right: 1px solid #fc9;
+	border-top: 1px solid #c60;
+	border-left: 1px solid #c60;
+}
+
+.timer, #sum {
+	text-align: right;
+	background-color: #eee;
+	font-size: 0.9em;
+	padding: 2px;
+	color: #999;
+	margin: 0px;
+}
+
+.timer {
+	margin-top: 20px;
+}
+
+form, #sum, .timer {
+	margin-left: 10px;
+}
+
+#sum {
+	font-weight: bold;
+	border-top: 1px solid #ccc;
+}
+
+dfn {
+	color: red;
+}
+acronym {
+	color: lightgreen;
+}
+
+#menu {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+	text-align: right;
+}
+
+#menu li {
+	background-color: #006;
+	display: inline;
+	margin: 0px;
+	padding: 5px;
+	list-style-type: none;
+	font-size: 0.6em;
+}
+
+#menu li a {
+	color: #fff;
+	margin: 0px;
+	padding: 0px;
+}

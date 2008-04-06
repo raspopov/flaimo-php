@@ -1,0 +1,409 @@
+html, body, div, p, h1, h2, h3, h4, h5, h6, ul, ol, span, a, table, td, th,
+form, img, li, label, input, select, button, blockquote, legend, caption,
+fieldset, object , tr, dt, dd, dl, tt, pre, textarea, iframe, #header, #content, #navigation {
+   margin: 0px;
+   padding: 0px;
+   font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+/* Allgemeine CSS-Angaben */
+
+body {
+   background: #fff ;
+   font-size: 0.8em;
+}
+
+th, td, textarea, input, select {
+   font-size: 1em;
+}
+
+table, td, th, td {
+	border: 1px solid #000;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+td, th {
+	padding: 1px;
+}
+
+fieldset {
+	background: #eee;
+	padding: 5px;
+	margin: 4px;
+}
+
+fieldset fieldset {
+	background: #fff;
+}
+
+legend {
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+fieldset fieldset legend {
+	text-transform: none;
+	letter-spacing: 0em;
+}
+
+#header {
+	background: #eee;
+}
+
+#navigation {
+	background: #ccc;
+	width: 174px;
+	float: left;
+	padding: 6px;
+}
+
+#content {
+	background: #ddd;
+	margin-left: 190px;
+	padding: 10px;
+}
+
+.level-1 {
+	background: #bbb;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.level-2 {
+	background: #ccc;
+	font-weight: bold;
+}
+
+.level-3 {
+	background: #ddd;
+}
+
+.level-4 {
+	background: #eee;
+}
+
+.level-5 {
+	background: #fff;
+}
+
+.errors,
+.notices {
+	font-weight: bold;
+	padding: 20px 20px 20px 100px;
+}
+
+.errors {
+	background: #F6D6D6 url(icon_error.png) 10px center no-repeat;
+	color: red;
+	border: 1px solid red;
+}
+
+.notices {
+	background: #F1F1F1 url(icon_notice.png) 10px center no-repeat;
+	color: black;
+	border: 1px solid black;
+}
+
+.inline-error {
+	font-weight: bold;
+	color: red;
+}
+
+sup {
+	color: red;
+}
+
+#togglehelp {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+.help {
+	display: none;
+	border: 1px solid #360;
+	background: #cfc;
+	margin: 10px;
+	font-size: 0.8em;
+}
+
+.help h5 {
+	background: #360;
+	color: #fff;
+	font-size: 1.1em;
+	padding: 3px;
+	letter-spacing: 0.1em;
+}
+
+.help p {
+	margin: 10px;
+}
+
+.help dl,
+.help ul,
+.help ol {
+	margin: 4px 10px;
+}
+
+dt {
+	font-weight: bold;
+	margin-top: 3px;
+}
+
+dd {
+	margin-left: 6px;
+}
+
+button.delete,
+a.edit {
+	display: block;
+	border: none;
+	width: 20px;
+	height: 20px;
+	cursor: hand;
+	cursor: pointer;
+}
+
+button.delete {
+	background: transparent url(b_drop.png) center center no-repeat;
+}
+
+a.edit {
+	background: transparent url(b_edit.png) center center no-repeat;
+}
+
+button.delete span,
+a.edit span {
+	display: none;
+}
+
+#addpoll,
+.editpoll {
+	background: transparent url(b_save.png) 4px center no-repeat;
+	padding: 2px 2px 2px 22px;
+	width: 180px;
+}
+
+.editpoll {
+	margin: 10px 5px;
+}
+
+#deletepolloption {
+	text-align: right;
+	padding-right: 10px;
+}
+
+#deletepolloption input {
+	background: transparent url(b_drop.png) 4px center no-repeat;
+	padding: 2px 2px 2px 22px;
+	width: 90px;
+}
+
+#togglehelp {
+	background: transparent url(b_help.png) 4px center no-repeat;
+	padding: 2px 2px 2px 16px;
+	width: 160px;
+}
+
+#preview {
+	text-align: right;
+	margin: 14px 8px;
+	position: absolute;
+	right: 20px;
+	top: 100px;
+}
+
+#preview a {
+	display: block;
+	background: #ccc url(b_view.png) 4px center no-repeat;
+	padding: 6px 6px 6px 24px;
+	border: 2px outset #fff;
+	width: 80px;
+	text-decoration: none;
+	color: #000;
+	font-weight: bold;
+}
+
+#addpolloption,
+#newcat {
+	background: transparent url(s_tbl.png) 4px center no-repeat;
+	padding: 2px 2px 2px 22px;
+	width: 100px;
+}
+
+.copy,
+.move {
+	width: 20px;
+	height: 20px;
+}
+
+.copy {
+	background: transparent url(b_copy.png) center center no-repeat;
+}
+
+.move {
+	background: transparent url(b_lastpage.png) center center no-repeat;
+}
+
+.move span,
+.copy span {
+	display: none;
+}
+
+input[readonly] {
+	border: 1px solid #000;
+	background: transparent;
+	margin: 1px;
+}
+
+.online {
+	background-color: #0f0;
+}
+
+.offline-past {
+	background-color: #900;
+}
+
+.offline-future {
+	background-color: #f00;
+}
+
+.online span,
+.offline-past span,
+.offline-future span {
+	display: none;
+}
+
+select.categories,
+select.templates {
+	font-size: 0.8em;
+}
+
+.light {
+	background-color: #F6F6F6;
+}
+
+.dark {
+	background-color: #E5E5E5;
+}
+
+
+.answer table {
+	width: 100%;
+	border: none;
+}
+
+.answer input,
+.answer select {
+	margin: 4px 0px;
+}
+
+.answer td {
+	vertical-align: top;
+	border: none;
+	vertical-align: middle;
+	padding-left: 10px;
+}
+
+
+.answer .delete {
+	background: #F6D6D6;
+	text-align: center;
+	width: 90px;
+	padding-left: 0px;
+}
+
+.answer .delete input {
+	margin: 0px;
+}
+
+.answer .data {
+	width: 310px;
+}
+
+.answer label {
+	display: block;
+	float: left;
+	margin: 4px 0px;
+	height: 20px;
+	width: 70px;
+}
+
+.answer .data label {
+	width: 100px;
+}
+
+.answer .data input,
+.answer .data textarea {
+	width: 200px;
+}
+
+.answer .checkbox {
+	clear: both;
+}
+
+.answer .checkbox input {
+	display: inline;
+	float: left;
+	margin: 0px 3px;
+	padding: 0px;
+}
+
+.answer .checkbox label {
+	display: inline;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+}
+
+.answer .data .file {
+	width: 320px;
+}
+
+.answer .thumb {
+	width: 110px;
+	border: 1px solid #000;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+}
+
+.answer .thumb img {
+	margin: 2px 0px;
+}
+
+#basicdata input,
+#basicdata select {
+	margin: 2px 0px;
+}
+
+#basicdata label {
+	display: block;
+	float: left;
+	width: 125px;
+	height: 20px;
+	margin: 2px 0px;
+}
+
+#basicdata input,
+#basicdata textarea {
+	width: 350px;
+}
+
+#newcatdata label {
+	display: block;
+	float: left;
+	width: 120px;
+	height: 25px;
+	padding-top: 2px;
+	overflow: hidden;
+}
+
+#newcatdata input,
+#newcatdata select {
+	margin: 0px 0px 8px 0px;
+}

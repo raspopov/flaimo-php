@@ -1,0 +1,21 @@
+
+
+
+// noch besser überlegen wie man hier vorgeht mit bestätigungsmail
+class AccessRegisterUser extends AccessBase {
+
+	function checkData()
+
+  function addUser($username, $pw)
+	function activateUser($user)
+	
+	function sendMail()
+// option für validate mail in base klasse einbauen
+}
+
+
+class AccessRegisterExtendedUser extends AccessBase {
+ // hier felder wie straße, usw checken
+}
+
+

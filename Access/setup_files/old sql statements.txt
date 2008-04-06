@@ -1,0 +1,184 @@
+	protected function recordLogin($user_id = 0) {
+		$user_id = (int) $user_id;
+		if ($user_id < 1) {return FALSE;}
+		$sql = 'INSERT INTO `' . $this->tables['logins'] . '` (`user`, `date`, `ip`) VALUES (' . parent::getConn()->real_escape_string($user_id) . ', UNIX_TIMESTAMP(), INET_ATON("' . parent::getCurrentIP() . '"))';
+		$result =  parent::getConn()->query($sql);
+		if (!$result) {return FALSE;}
+		$sql = 'UPDATE `' . $this->tables['meta'] . '` SET `last_login_date` = UNIX_TIMESTAMP(), `last_login_ip` = INET_ATON("' . parent::getCurrentIP() . '") WHERE `user` = ' . parent::getConn()->real_escape_string($user_id);
+		$result =  parent::getConn()->query($sql);
+		if (!$result) {return FALSE;}
+		return TRUE;
+	} // end function
+	
+	
+	public function isLoggedIn() {
+		$identifier = $token = FALSE;
+
+		if (isset($_SESSION[self::ACCESS_SESSION_NAME . '_i']) && parent::isFilledString($_SESSION[self::ACCESS_SESSION_NAME . '_i'])) {
+	    $identifier = parent::getConn()->real_escape_string($_SESSION[self::ACCESS_SESSION_NAME . '_i']);
+
+		} // end if
+
+		if (isset($_SESSION[self::ACCESS_SESSION_NAME . '_t']) && parent::isFilledString($_SESSION[self::ACCESS_SESSION_NAME . '_t'])) {
+	    $token = parent::getConn()->real_escape_string($_SESSION[self::ACCESS_SESSION_NAME . '_t']);
+		} // end if
+
+		if (($identifier == FALSE || $token == FALSE) && isset($_COOKIE[self::ACCESS_SESSION_NAME])) {
+			$temp = explode(':', $_COOKIE[self::ACCESS_SESSION_NAME]);
+			$identifier = $temp[0];
+			$token = $temp[1];
+		} // end if
+
+		if ($identifier == FALSE || $token == FALSE) {
+			$this->deleteLoginData();
+			return -1;
+		} // end if
+
+		$sql = 'SELECT `id` FROM `' . $this->tables['base'] . '` WHERE `status` = ' . ACCESS_STATUS_ACTIVE . ' AND `identifier` = "' . $identifier  . '" AND `token` ="' . $token . '" AND `timeout` > UNIX_TIMESTAMP() LIMIT 1';
+		$result =  parent::getConn()->query($sql);
+		if (!$result) {return -2;}
+
+		while($row = $result->fetch_row()) {
+			$user = new AccessUser($row[0]);
+			return $user;
+		} // end while
+
+		$this->deleteLoginData();
+		return -3;
+	} // end function
+	
+	
+		protected function fetchData() {
+		if ($this->datafetched != FALSE) { return TRUE;}
+		$sql = 'SELECT `username`, `password`, `status`, `identifier`, `token`, `timeout` FROM `' . $this->tables['base'] . '` WHERE `id` = ' . parent::getConn()->real_escape_string($this->id) . ' LIMIT 1';
+		$result =  parent::getConn()->query($sql);
+
+		$this->datafetched = TRUE;
+		while($row = $result->fetch_row()) {
+			$this->original_data = $row;
+			$this->setUsername($row[0]);
+      $this->setPassword($row[1], TRUE);
+      $this->setStatus($row[2]);
+      $this->setIdentifier($row[3]);
+      $this->setToken($row[4]);
+      $this->setTimeout($row[5]);
+			return TRUE;
+		} // end while
+		return FALSE;
+	} // end function
+	
+	
+	
+	public function login($username = '', $password = '') {
+
+		$username = (string) parent::getConn()->real_escape_string($username);
+		$password = (string) parent::generateCipherPassword(parent::getConn()->real_escape_string($password));
+		$max_tries = parent::getAccessSetting('max_tries');
+		$time_between_tries = parent::getAccessSetting('time_between_tries');
+		$locktime = parent::getAccessSetting('locktime');
+/*
+		echo '<pre>';
+		var_dump($_SESSION['access_login_tries']);
+		echo '<br>';
+		var_dump($_SESSION['access_login_last_try']);
+		echo '<br>';
+		var_dump($_SESSION['access_temp_lock']);
+		echo '<br>';
+		var_dump($password);
+*/
+
+		if (!isset($_SESSION[self::ACCESS_SESSION_NAME . '_tries']) || $_SESSION[self::ACCESS_SESSION_NAME . '_tries'] < 1) {
+			$_SESSION[self::ACCESS_SESSION_NAME . '_tries'] = (int) 1;
+		} // end if
+
+		if (!isset($_SESSION[self::ACCESS_SESSION_NAME . '_last_try']) || $_SESSION[self::ACCESS_SESSION_NAME . '_last_try'] < 0) {
+			$_SESSION[self::ACCESS_SESSION_NAME . '_last_try'] = (int) 0;
+		} // end if
+
+		// temp gesperrt?
+		if (isset($_SESSION[self::ACCESS_SESSION_NAME . '_temp_lock']) && $_SESSION[self::ACCESS_SESSION_NAME . '_temp_lock'] > time()) {
+				return -1;
+		} elseif (isset($_SESSION[self::ACCESS_SESSION_NAME . '_temp_lock']) && $_SESSION[self::ACCESS_SESSION_NAME . '_temp_lock'] <= time()) {
+			unset($_SESSION[self::ACCESS_SESSION_NAME . '_temp_lock']);
+		} // end if
+
+		// prüfen ob zuviele loginversuche
+		if ($_SESSION[self::ACCESS_SESSION_NAME . '_tries'] > $max_tries) {
+      $_SESSION[self::ACCESS_SESSION_NAME . '_temp_lock'] = (int) time() + $locktime;
+			$_SESSION[self::ACCESS_SESSION_NAME . '_last_try'] = (int) 0;
+			$_SESSION[self::ACCESS_SESSION_NAME . '_tries'] = (int) 1;
+			return -2;
+		} // end if
+
+		// wenn unter limit schaun ob letzter loginversuch zeitpunkt weit genug weg wenn nicht fehlermeldung ausgeben
+		if (($_SESSION[self::ACCESS_SESSION_NAME . '_last_try'] + $time_between_tries) > time()) {
+        $_SESSION[self::ACCESS_SESSION_NAME . '_last_try'] = (int) time();
+				return -3;
+		} // end if
+
+		$_SESSION[self::ACCESS_SESSION_NAME . '_tries'] += 1;
+		$_SESSION[self::ACCESS_SESSION_NAME . '_last_try'] = time();
+
+		$sql = 'SELECT `id`, `status` FROM `' . $this->tables['base'] . '` WHERE `username` = "' . $username . '" AND `password` = "' . $password . '" LIMIT 1';
+		$result =  parent::getConn()->query($sql);
+		if (!$result) {return -4;}
+
+		while($row = $result->fetch_row()) {
+			if ($row[1] != ACCESS_STATUS_ACTIVE) {
+				return -6;
+			} // end if
+
+			if ($this->setLoginData($row[0]) < 0) {
+				return -7;
+			} // end if
+			$_SESSION[self::ACCESS_SESSION_NAME . '_last_try'] = (int) 0;
+			$_SESSION[self::ACCESS_SESSION_NAME . '_tries'] = (int) 1;
+      $this->recordLogin($row[0]); // keine fehlerabfrage!
+			return 1;
+		} // end while
+		return -5;
+	} // end function
+	
+	
+	
+	public function sendNewPassword($email = '') {
+
+// noch umschreiben damit mail gesendet wird
+
+		if (parent::isEmailString($email) == FALSE) {
+			return -1;
+		} // end if
+
+		$email = (string) parent::getConn()->real_escape_string($email);
+		$sql = 'SELECT b.`id` FROM `' . $this->tables['extended'] . '` as e LEFT JOIN `' . $this->tables['base'] . '` as b ON (e.`user` = b.`id`) WHERE `email` = "' . $email . '" AND `status` = ' . ACCESS_STATUS_ACTIVE . ' LIMIT 1';
+		$result =  parent::getConn()->query($sql);
+		if (!$result) {return -2;}
+
+
+
+
+
+
+		while($row = $result->fetch_row()) {
+			for($len = 8, $cleartext = ''; strlen($cleartext) < $len; $cleartext .= chr(!mt_rand(0, 2) ? mt_rand(48, 57) : (!mt_rand(0, 1) ? mt_rand(65, 90) : mt_rand(97, 122))));
+			$from = $this->getAccessSetting('pw_mail_sender');
+			$to = $email;
+			$subject = $this->getAccessSetting('pw_mail_text_subject');
+			$text = $this->getAccessSetting('pw_mail_text') . "\n\n";
+			$text .= "\n\n" . $cleartext  . "\n\n";
+			$text .= $this->getAccessSetting('pw_mail_text_signature');
+			// sendmail(mail erzeugen und schicken)
+      $sendmail = TRUE;
+		 	file_put_contents('pwmailoutput.txt', $text); // debug funktion
+			if ($sendmail == TRUE) {
+				$user = new AccessUser($row[0]);
+        $user->setPassword($cleartext);
+        if ($user->updateData() < 0) {
+					return -2;
+				} // end if
+				return 1;
+			} // end if
+			return -3;
+		} // end while
+		return -4;
+	} // end function

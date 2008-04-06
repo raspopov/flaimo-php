@@ -1,0 +1,195 @@
+html, body, div, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dd, dt, span, a, table,
+th, td, tr, tbody, thead, tfoot, form, img, label, code, input, select, textarea,
+pre, fieldset, legend, caption, form, button, blockquote, q, object, iframe {
+   margin: 0px;
+   padding: 0px;
+   font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+/* generelle formatierungen */
+body {
+   background: #f90 url(body_bg.gif) no-repeat;
+   color: #fff;
+   font-size: 0.8em;
+}
+
+a {
+	color: #fff;
+	font-weight: bold;
+}
+
+b, strong, h1, h2, h3, h4, h5, h6, th {
+   font-weight: bold;
+}
+
+h2 {
+	font-size: 3em;
+}
+
+fieldset {
+	background: transparent url(50p_white.png) left top repeat;
+	padding: 10px 10px 10px 10px;
+	margin: 10px;
+	border: 1px solid #5D3F7E;
+}
+
+legend {
+	border: 1px solid #5D3F7E;
+	padding: 1px 10px;
+	background: transparent url(75p_white.png) left top repeat;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+th, td {
+	padding: 2px 4px;
+}
+
+th {
+	background: #f90;
+	color: #fff;
+}
+
+input[type=submit],
+.button,
+a.edit {
+	display: block;
+	border-style: outset;
+	border-width: 2px;
+	background: #f90;
+	color: #fff;
+	text-align: center;
+}
+
+.button
+#content a.edit {
+	padding: 2px;
+	font-weight: normal;
+}
+/* spezielle formatierungen */
+
+#jumptocontent {
+	display: none;
+}
+
+#header {
+	height: 140px;
+}
+
+#header h1 {
+	width: 220px;
+	height: 140px;
+	overflow: hidden;
+	background: transparent url(p2_logo.png) right bottom no-repeat;
+	float: left;
+}
+
+#header h1 span {
+	display: none;
+}
+
+#header p {
+	background: transparent url(25p_white.png) left top repeat;
+	padding: 4px 0px 6px 10px;
+	margin: 0px 10px 0px 230px;
+}
+
+#header h2 {
+	margin: 8px 0px 0px 230px;
+	background: transparent url(h2_back.gif) left center no-repeat;
+	padding-left: 30px;
+}
+
+#category-navigation {
+	background: red;
+	width: 220px;
+	float: left;
+}
+
+#content {
+	background: #FFE5BF;
+	margin-left: 230px;
+	color: #000;
+	padding: 10px;
+}
+
+#content a {
+	color: #000;
+}
+
+#content a.button
+#content a.edit {
+	color: #fff;
+	text-decoration: none;
+}
+
+#content .light {
+	background: transparent url(75p_white.png) left top repeat;
+}
+
+#content .dark {
+	background: transparent url(10p_black.png) left top repeat;
+}
+
+
+input[name=move],
+input[name=copy],
+input[name=delete],
+#content a.edit {
+	padding: 2px;
+	background-position: 4px center;
+	background-repeat: no-repeat;
+}
+
+input[name=move],
+input[name=copy] {
+	padding-left: 30px;
+	width: 120px;
+}
+
+
+input[name=move] {
+	background-image: url(icon_move.png);
+}
+
+input[name=copy] {
+	background-image: url(icon_copy.png);
+}
+
+input[name=delete] {
+	padding-left: 26px;
+	background-image: url(icon_delete.png);
+}
+
+#content a.edit {
+	padding-left: 26px;
+	background-image: url(icon_edit.png);
+}
+
+#polls {
+	border-spacing: 1px;
+	width: 100%;
+}
+
+
+#polls .online {
+	background-color: #3c3;
+}
+
+#polls .offline-future {
+	background-color: #f30;
+}
+
+#polls .offline-past {
+	background-color: #600;
+}
+
+#polls .online span,
+#polls .offline-future span,
+#polls .offline-past span {
+	display: none;
+}
+
+.votes {
+	text-align: center;
+}

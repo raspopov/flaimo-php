@@ -1,0 +1,183 @@
+   11:26:00: i18n trigger für last update machen
+   11:27:00: rahmen ist da.
+   12:47:00: in changelog schreiben, dass da kein update script für neues table layout tabei ist
+   15:19:00: namespace in varchar ändern
+   16:12:00: zuerst daten berichtigen, dann import script machen nur für daten
+danach umbauen und tsten
+danach import sql nochmal machen mit alle SP dabei
+
+   16:52:00: SP ausbessern: translationEntryExists mit 3 argumenten: trans, ns, string
+
+
+
+--------------
+---------------
+
+
+doppelte werte noch überprüfen. wie zB "April"
+
+in php real_addslashes dazugeben
+
+---------------------------
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `translator`.`getTranslation`$$
+
+CREATE PROCEDURE `translator`.`getTranslation`(IN t_string VARCHAR(255), IN loc VARCHAR(5))
+BEGIN
+SELECT `translation` FROM `translations` WHERE `string` = t_string AND FIND_IN_SET(loc, `locale`) > 0 LIMIT 1;
+END$$
+
+DELIMITER ;
+
+---------
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `translator`.`getAllTranslations`$$
+
+CREATE PROCEDURE `translator`.`getAllTranslations`(IN loc VARCHAR(5), IN ns VARCHAR(255))
+BEGIN
+SELECT `string`, `translation` FROM `translations` WHERE  FIND_IN_SET(`namespace`, ns) > 0 AND FIND_IN_SET(loc, `locale`) > 0 ORDER BY `string` ASC;
+END$$
+
+DELIMITER ;
+
+
+---------------
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `translator`.`getLocales`$$
+
+CREATE PROCEDURE `translator`.`getLocales`()
+BEGIN
+SHOW COLUMNS FROM `translations` WHERE `field` = "locale";
+END$$
+
+DELIMITER ;
+
+--------------
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `translator`.`getLastUpdateDateNamespace`$$
+
+CREATE PROCEDURE `translator`.`getLastUpdateDateNamespace`(IN ns VARCHAR(255))
+BEGIN
+SELECT MAX(lastupdate) FROM translations WHERE namespace = ns;
+END$$
+
+DELIMITER ;
+
+--------
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `translator`.`deleteTranslation`$$
+
+CREATE PROCEDURE `translator`.`deleteTranslation`(IN loc VARCHAR(5), IN str VARCHAR(255), IN ns VARCHAR(255))
+BEGIN
+DELETE FROM `translations` WHERE  `namespace` = ns AND `string` = str AND FIND_IN_SET(loc, `locale`) > 0;
+END$$
+
+DELIMITER ;
+
+
+--------
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `translator`.`deleteAllTranslations`$$
+
+CREATE PROCEDURE `translator`.`deleteAllTranslations`(IN str VARCHAR(255), IN ns VARCHAR(255))
+BEGIN
+DELETE FROM `translations` WHERE `string` = str AND `namespace` = ns;
+END$$
+
+DELIMITER ;
+
+
+--------
+
+bei addtranslation 2 schritte: zuerst schaun ob "translation" und "namespace" spalte schon exisiteren. wenn ja einfahc locale zu bestehenden eintrag geben, ansonsten komplett neu anlegen
+
+ev 2 abfragen kobninieren. schaun wie das geht mit SP
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `translator`.`translationEntryExists`$$
+
+CREATE PROCEDURE `translator`.`translationEntryExists`(IN trans VARCHAR(255), IN ns VARCHAR(255))
+BEGIN
+SELECT `id` from `translations` WHERE `translation` = trans AND `namespace` = ns ORDER BY `id` ASC LIMIT 1;
+END$$
+
+DELIMITER ;
+
+
+-----------
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `translator`.`addLocaleToTranslation`$$
+
+CREATE PROCEDURE `translator`.`addLocaleToTranslation`(IN tid INT, IN loc VARCHAR(255))
+BEGIN
+UPDATE `translations` SET `locale` = loc WHERE `id`= tid;
+END$$
+DELIMITER ;
+
+
+------------
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `translator`.`addNewTranslation`$$
+
+CREATE PROCEDURE `translator`.`addNewTranslation`(IN loc VARCHAR(255), IN str VARCHAR(255), IN ns VARCHAR(255), IN trans TEXT)
+BEGIN
+INSERT INTO translations VALUES (NULL, loc, ns, str, trans, UNIX_TIMESTAMP());
+END$$
+
+DELIMITER ;
+
+
+
+
+
+--------------------
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `translator`.`addTranslation`$$
+
+CREATE PROCEDURE `translator`.`addTranslation`(IN loc VARCHAR(255), IN str VARCHAR(255), IN ns VARCHAR(255), IN trans TEXT)
+BEGIN
+DECLARE done INT DEFAULT 0;
+DECLARE tid INT DEFAULT 0;
+DECLARE t_locales VARCHAR(255);
+DECLARE entrycheck CURSOR FOR SELECT `id`, `locale` from `translations` WHERE `translation` = trans AND `namespace` = ns ORDER BY `id` ASC LIMIT 1;
+DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
+
+OPEN entrycheck;
+
+REPEAT
+FETCH entrycheck INTO tid, t_locales;
+UNTIL done END REPEAT;
+
+CLOSE entrycheck;
+
+IF tid > 0 THEN
+SET loc = CONCAT(loc, ',', t_locales);
+CALL addLocaleToTranslation(tid, loc);
+ELSE
+CALL addNewTranslation(loc, str, ns, trans);
+END IF;
+
+END$$
+
+DELIMITER ;

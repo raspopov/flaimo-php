@@ -1,0 +1,1 @@
+SELECT base.id FROM `base` left join meta on (base.id = meta.user) WHERE status = 5 and register_date+24h < NOW()

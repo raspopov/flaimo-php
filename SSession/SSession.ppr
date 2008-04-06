@@ -1,0 +1,54 @@
+[Config]
+Relative path=1
+Compilator.SaveAll=0
+Compilator.Capture=0
+Compilator.HideOutput=0
+DefaultDir=C:\Dokumente und Einstellungen\michael.wimmer\Eigene Dateien\HTML\SSession
+DefaultCPIndex=7
+LogtoEnd=1
+DontOpen=1
+FileFormat=0
+DocumentRoot=\SSession
+HTServer=localhost
+[Project tree]
+SSession
+	+www_root
+		www_root\sample.php
+	+inc
+		inc\interface.SSessionDB.inc.php
+		inc\class.SSessionDBSQLite3.inc.php
+		inc\class.SSessionDBSQLite2.inc.php
+		inc\class.SSessionDBMySQL.inc.php
+		inc\class.SSession.inc.php
+[Open project files]
+0=New1.txt
+1=www_root\sample.php
+2=inc\interface.SSessionDB.inc.php
+3=inc\class.SSessionDBSQLite3.inc.php
+4=inc\class.SSession.inc.php
+5=inc\class.SSessionDBMySQL.inc.php
+6=..\..\test.php
+[Selected Project Files]
+Main=www_root\sample.php
+Selected=inc\class.SSession.inc.php
+[New1.txt]
+TopLine=1
+Caret=1,1
+[www_root\sample.php]
+TopLine=1
+Caret=1,1
+[inc\interface.SSessionDB.inc.php]
+TopLine=1
+Caret=1,1
+[inc\class.SSessionDBSQLite3.inc.php]
+TopLine=36
+Caret=36,18
+[inc\class.SSession.inc.php]
+TopLine=184
+Caret=14,200
+[inc\class.SSessionDBMySQL.inc.php]
+TopLine=55
+Caret=3,16
+[..\..\test.php]
+TopLine=1
+Caret=11,2

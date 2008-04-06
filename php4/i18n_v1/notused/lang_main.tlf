@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<tlf xmlns:tlf="http://www.flaimo.com/tlf" version="0.1">
+	<id>lang_main</id>
+	<language>de</language>
+	<copyright>2003 - Flaimo.com</copyright>
+	<translator contact="flaimo@gmx.net" date="2003-01-05 04:04+0100">Flaimo</translator>
+	<lastchange contact="flaimo@gmx.net" date="2003-01-05 04:04+0100">Flaimo</lastchange>
+	<comment>FLP Translation file</comment>
+	<translations>
+		<translation>
+			<string>no_comments</string>
+			<trans>Keine Kommentare gefunden</trans>
+			<status>fuzzy</status>
+			<comment>Full tag with comment, status and sources. below is a simple version</comment>
+			<sources>
+				<source file="example.php">15</source>
+				<source file="example2.php">234</source>
+			</sources>
+		</translation>
+		<translation>
+			<string>enter_mail_address</string>
+			<trans>E-Mail Adresse eingeben</trans>
+		</translation>
+		<translation>
+			<string>monday_long</string>
+			<trans>Montag</trans>
+		</translation>
+	</translations>
+</tlf>

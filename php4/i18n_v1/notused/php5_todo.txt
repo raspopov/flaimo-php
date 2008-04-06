@@ -1,0 +1,84 @@
+einbauen:
+
+- Added optional parameter to file() which makes the result array not contain
+  the line endings and to skip empty lines. (Ilia)
+
+
+
+
+interface class "TranslatorInterface"
+
+zB  class TranslatorMySQL implements TranslatorInterface
+
+und eine Translator Klasse die dann damit arbeitet
+
+if "mysql" $translator = new TranslatorMySQL
+
+
+
+<?php
+namespace i18n {
+
+  class Translator {
+    //...code...
+    function __construct() {
+      print("hey");
+    }
+  }
+}
+
+$lg = new i18n::Translator();
+?>
+
+
+-----------------------------------------
+
+A "class method" is a method that can be called without creating an instance of the class.
+A "class variable" is a variable that can be accessed without creating an instance of the class (and without needing a get method)
+
+Example 11: class methods and class variables
+
+
+<?php
+class Language {
+  static public $pi = 3.14151692;
+
+  static public function IsValidLanguageCode($code) {
+    return TRUE;
+  }
+}
+
+$s = Language::$pi;
+$isvalid = Language::IsValidLanguageCode('de');
+?>
+
+
+
+----------------------------------------------
+
+
+<?php
+abstract class iCal {
+  protected $x;
+
+  abstract function display(); // muss jede extend klasse haben
+
+  function setX($x) {
+    $this->x = $x;
+  }
+}
+
+
+class iCalEvent extends iCal {
+    // Code
+  }
+}
+?>
+
+---------------------------------------------------
+
+Public: The method/variable can be accessed from outside the class.
+Private: Only methods in the same class can access private methods or variables.
+Protected: Only methods in the same class or derived classes can access proteted methods or variables.
+
+--------------------------------------------------
