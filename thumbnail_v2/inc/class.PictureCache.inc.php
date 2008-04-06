@@ -1,16 +1,13 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 //+----------------------------------------------------------------------+
-//| WAMP (XP-SP1/1.3.29/4.1.1/5.0.0RC1)                                    |
+//| WAMP (XP-SP2/2.2/5.2/5.1.0)                                          |
 //+----------------------------------------------------------------------+
-//| Copyright (c) 1992-2004 Michael Wimmer                               |
+//| Copyright(c) 2001-2008 Michael Wimmer                                |
 //+----------------------------------------------------------------------+
-//| I don't have the time to read through all the licences to find out   |
-//| what the exactly say. But it's simple. It's free for non commercial  |
-//| projects, but as soon as you make money with it, i want my share :-) |
-//| (License : Free for non-commercial use)                              |
+//| Licence: GNU General Public License v3                               |
 //+----------------------------------------------------------------------+
-//| Authors: Michael Wimmer <flaimo 'at' gmx 'dot' net>                  |
+//| Authors: Michael Wimmer <flaimo@gmail.com>                           |
 //+----------------------------------------------------------------------+
 //
 // $Id$
@@ -21,13 +18,13 @@
 /**
 * Creates a thumbnail from a source image and caches it for a given time
 *
-* Tested with Apache 1.3.29 and PHP 5.0.0RC1
-* Last change: 2004-03-25
+* Tested with Apache 2.2 and PHP 5.2.
+* Last change: 2008-04-06
 *
 * @access public
-* @author Michael Wimmer <flaimo 'at' gmx 'dot' net>
+* @author Michael Wimmer <flaimo@gmail.com>
 * @copyright Michael Wimmer
-* @link http://www.flaimo.com/
+* @link http://code.google.com/p/flaimo-php
 * @package Thumbnail
 * @example sample_thumb.php Sample script
 * @version 2.000
