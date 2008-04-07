@@ -319,7 +319,6 @@ i18n_v2/setup[!!-~]files/mysql2xml.php -text
 i18n_v2/www_root/css.css -text
 i18n_v2/www_root/i18n_example_script.php -text
 i18n_v2/www_root/test.php -text
-iCalendar_v2/changelog -text
 iCalendar_v2/class.iCal.inc.php -text
 iCalendar_v2/class.iCalAlarm.inc.php -text
 iCalendar_v2/class.iCalBase.inc.php -text
@@ -327,6 +326,7 @@ iCalendar_v2/class.iCalEvent.inc.php -text
 iCalendar_v2/class.iCalFreeBusy.inc.php -text
 iCalendar_v2/class.iCalJournal.inc.php -text
 iCalendar_v2/class.iCalToDo.inc.php -text
+iCalendar_v2/noupload/changelog.txt -text
 iCalendar_v2/noupload/classes.zuml -text
 iCalendar_v2/noupload/classes.zuml.bak -text
 iCalendar_v2/sample_ical.php -text

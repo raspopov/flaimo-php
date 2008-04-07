@@ -1,16 +1,13 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 //+----------------------------------------------------------------------+
-//| WAMP (XP-SP1/1.3.24/4.0.12/5.0.0b2-dev)                                    |
+//| WAMP (XP-SP2/2.2/5.2/5.1.0)                                          |
 //+----------------------------------------------------------------------+
-//| Copyright (c) 1992-2003 Michael Wimmer                               |
+//| Copyright(c) 2001-2008 Michael Wimmer                                |
 //+----------------------------------------------------------------------+
-//| I don't have the time to read through all the licences to find out   |
-//| what the exactly say. But it's simple. It's free for non commercial  |
-//| projects, but as soon as you make money with it, i want my share :-) |
-//| (License : Free for non-commercial use)                              |
+//| Licence: GNU General Public License v3                               |
 //+----------------------------------------------------------------------+
-//| Authors: Michael Wimmer <flaimo@gmx.net>                             |
+//| Authors: Michael Wimmer <flaimo@gmail.com>                           |
 //+----------------------------------------------------------------------+
 //
 // $Id$
@@ -21,13 +18,14 @@
 /**
 * Base Class for the different Modules
 *
-* Last Change: 2003-07-07
-* Tested with WAMP (XP-SP1/1.3.27/4.0.12/5.0.0b2-dev)
+* Tested with WAMP (XP-SP2/2.2/5.2/5.1.0)
+* Last Change: 2008-04-07
 *
 * @access protected
-* @author Michael Wimmer <flaimo 'at' gmx 'dot' net>
-* @copyright Michael Wimmer
-* @link http://www.flaimo.com/
+* @author Michael Wimmer <flaimo@gmail.com>
+* @copyright Copyright © 2002-2008, Michael Wimmer
+* @license GNU General Public License v3
+* @link http://code.google.com/p/flaimo-php/
 * @package iCalendar
 * @version 2.002
 */
@@ -237,7 +235,8 @@ abstract class iCalBase {
 	* @uses iCalBase::$summary
 	*/
 	protected function setSummary($summary = '') {
-		$this->summary = (string) $summary;
+		$this->summary = '';
+		if (trim(strlen($summary)) > 0) { $this->summary = (string) $summary; }	
 	} // end function
 
 	/**
@@ -384,7 +383,7 @@ abstract class iCalBase {
 	* @since 2.001 - 2003-98-04
 	*/
 	protected function formatDate($timestamp = 0) {
-		return (string) ((USE_LOCALE_TIME === TRUE) ? date('Ymd\THi00',$timestamp) : gmdate('Ymd\THi00\Z',$timestamp));
+		return (string) ((self::USE_LOCALE_TIME === TRUE) ? date('Ymd\THi00',$timestamp) : gmdate('Ymd\THi00\Z',$timestamp));
 	} // end function
 
 	/**
@@ -473,7 +472,7 @@ abstract class iCalBase {
 	* @return string $lang
 	* @see setLanguage()
 	*/
-	public function &getLanguage() {
+	public function getLanguage() {
 		return $this->lang;
 	} // end function
 
@@ -483,7 +482,7 @@ abstract class iCalBase {
 	* @return string $description
 	* @see setDescription()
 	*/
-	public function &getDescription() {
+	public function getDescription() {
 		return $this->description;
 	} // end function
 
@@ -495,7 +494,7 @@ abstract class iCalBase {
 	* @see getOrganizerMail()
 	* @since 1.011 - 2002-12-22
 	*/
-	public function &getOrganizerName() {
+	public function getOrganizerName() {
 		return $this->organizer[0];
 	} // end function
 
@@ -507,7 +506,7 @@ abstract class iCalBase {
 	* @see getOrganizerName()
 	* @since 1.011 - 2002-12-22
 	*/
-	public function &getOrganizerMail() {
+	public function getOrganizerMail() {
 		return $this->organizer[1];
 	} // end function
 
@@ -518,7 +517,7 @@ abstract class iCalBase {
 	* @see setURL()
 	* @since 1.011 - 2002-12-22
 	*/
-	public function &getURL() {
+	public function getURL() {
 		return $this->url;
 	} // end function
 
@@ -528,7 +527,7 @@ abstract class iCalBase {
 	* @return string $summary
 	* @see setSummary()
 	*/
-	public function &getSummary() {
+	public function getSummary() {
 		return $this->summary;
 	} // end function
 
@@ -538,7 +537,7 @@ abstract class iCalBase {
 	* @return int $sequence
 	* @see setSequence()
 	*/
-	public function &getSequence() {
+	public function getSequence() {
 		return $this->sequence;
 	} // end function
 
@@ -549,7 +548,7 @@ abstract class iCalBase {
 	* @see setDays()
 	* @since 1.010 - 2002-10-26
 	*/
-	public function &getDays() {
+	public function getDays() {
 		return $this->rec_days;
 	} // end function
 
@@ -561,7 +560,7 @@ abstract class iCalBase {
 	* @uses iCalBase::$week_start
 	* @since 1.010 - 2002-10-26
 	*/
-	public function &getWeekStart() {
+	public function getWeekStart() {
 		return ((array_key_exists($this->week_start, $this->short_daynames)) ? $this->short_daynames[$this->week_start] : $this->short_daynames[1]);
 	} // end function
 
@@ -572,7 +571,7 @@ abstract class iCalBase {
 	* @see setAttendees()
 	* @since 1.001 - 2002-10-10
 	*/
-	public function &getAttendees() {
+	public function getAttendees() {
 		return $this->attendees;
 	} // end function
 
@@ -582,7 +581,7 @@ abstract class iCalBase {
 	* @return string $location
 	* @see setLocation()
 	*/
-	public function &getLocation() {
+	public function getLocation() {
 		return $this->location;
 	} // end function
 
@@ -592,7 +591,7 @@ abstract class iCalBase {
 	* @return array $categories_array
 	* @see setCategoriesArray()
 	*/
-	public function &getCategoriesArray() {
+	public function getCategoriesArray() {
 		return $this->categories_array;
 	} // end function
 
@@ -602,7 +601,7 @@ abstract class iCalBase {
 	* @return string $categories
 	* @see setCategories()
 	*/
-	public function &getCategories() {
+	public function getCategories() {
 		return $this->categories;
 	} // end function
 
@@ -613,7 +612,7 @@ abstract class iCalBase {
 	* @see setFrequency()
 	* @since 1.010 - 2002-10-26
 	*/
-	public function &getFrequency() {
+	public function getFrequency() {
 		return $this->frequency;
 	} // end function
 
@@ -624,7 +623,7 @@ abstract class iCalBase {
 	* @see setStatus()
 	* @since 1.011 - 2002-12-22
 	*/
-	public function &getStatus() {
+	public function getStatus() {
 		return $this->status;
 	} // end function
 
@@ -635,7 +634,7 @@ abstract class iCalBase {
 	* @see setInterval()
 	* @since 1.010 - 2002-10-26
 	*/
-	public function &getInterval() {
+	public function getInterval() {
 		return $this->interval;
 	} // end function
 
@@ -661,7 +660,7 @@ abstract class iCalBase {
 	* @return string $class
 	* @see setClass()
 	*/
-	public function &getClass() {
+	public function getClass() {
 		return $this->class;
 	} // end function
 
@@ -671,7 +670,7 @@ abstract class iCalBase {
 	* @return string $priority
 	* @see setPriority()
 	*/
-	public function &getPriority() {
+	public function getPriority() {
 		return $this->priority;
 	} // end function
 
@@ -682,7 +681,7 @@ abstract class iCalBase {
 	* @see setLastModTS()
 	* @since 1.020 - 2002-12-24
 	*/
-	public function &getLastModTS() {
+	public function getLastModTS() {
 		return $this->last_mod_ts;
 	} // end function
 
@@ -693,7 +692,7 @@ abstract class iCalBase {
 	* @see setLastMod()
 	* @since 1.020 - 2002-12-24
 	*/
-	public function &getLastMod() {
+	public function getLastMod() {
 		return $this->last_mod;
 	} // end function
 } // end class iCalBase

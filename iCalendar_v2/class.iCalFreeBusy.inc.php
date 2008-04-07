@@ -1,16 +1,13 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 //+----------------------------------------------------------------------+
-//| WAMP (XP-SP1/1.3.27/4.0.12/5.0.0b2-dev)                                    |
+//| WAMP (XP-SP2/2.2/5.2/5.1.0)                                          |
 //+----------------------------------------------------------------------+
-//| Copyright (c) 1992-2003 Michael Wimmer                               |
+//| Copyright(c) 2001-2008 Michael Wimmer                                |
 //+----------------------------------------------------------------------+
-//| I don't have the time to read through all the licences to find out   |
-//| what the exactly say. But it's simple. It's free for non commercial  |
-//| projects, but as soon as you make money with it, i want my share :-) |
-//| (License : Free for non-commercial use)                              |
+//| Licence: GNU General Public License v3                               |
 //+----------------------------------------------------------------------+
-//| Authors: Michael Wimmer <flaimo@gmx.net>                             |
+//| Authors: Michael Wimmer <flaimo@gmail.com>                           |
 //+----------------------------------------------------------------------+
 //
 // $Id$
@@ -25,15 +22,16 @@ include_once 'class.iCalBase.inc.php';
 /**
 * Container for a single freebusy
 *
-* Tested with WAMP (XP-SP1/1.3.27/4.0.12/5.0.0b2-dev)
-* Last Change: 2003-07-07
+* Tested with WAMP (XP-SP2/2.2/5.2/5.1.0)
+* Last Change: 2008-04-07
 *
 * @access public
-* @author Michael Wimmer <flaimo 'at' gmx 'dot' net>
-* @copyright Michael Wimmer
-* @link http://www.flaimo.com/
+* @author Michael Wimmer <flaimo@gmail.com>
+* @copyright Copyright © 2002-2008, Michael Wimmer
+* @license GNU General Public License v3
+* @link http://code.google.com/p/flaimo-php/
 * @package iCalendar
-* @version 2.001
+* @version 2.002
 */
 class iCalFreeBusy extends iCalBase {
 

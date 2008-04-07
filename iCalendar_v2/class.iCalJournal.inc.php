@@ -25,15 +25,16 @@ include_once 'class.iCalBase.inc.php';
 /**
 * Container for a single Journal
 *
-* Tested with WAMP (XP-SP1/1.3.27/4.0.12/5.0.0b2-dev)
-* Last Change: 2003-07-07
+* Tested with WAMP (XP-SP2/2.2/5.2/5.1.0)
+* Last Change: 2008-04-07
 *
 * @access public
-* @author Michael Wimmer <flaimo 'at' gmx 'dot' net>
-* @copyright Michael Wimmer
-* @link http://www.flaimo.com/
+* @author Michael Wimmer <flaimo@gmail.com>
+* @copyright Copyright © 2002-2008, Michael Wimmer
+* @license GNU General Public License v3
+* @link http://code.google.com/p/flaimo-php/
 * @package iCalendar
-* @version 2.001
+* @version 2.002
 */
 class iCalJournal extends iCalBase {
 
@@ -254,7 +255,7 @@ class iCalJournal extends iCalBase {
 		if (strlen(trim($uid)) > 0) {
             $this->uid = (string) $uid;
         } else {
-            $rawid = (string) $this->startdate . 'plus' .  $this->summary;
+            $rawid = (string) $this->startdate . 'plus' .  parent::getSummary();
             $this->uid = (string) md5($rawid);
         } // end if
 	} // end function

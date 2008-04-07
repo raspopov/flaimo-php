@@ -1,16 +1,13 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 //+----------------------------------------------------------------------+
-//| WAMP (XP-SP1/1.3.27/4.0.12/5.0.0b2-dev)                                    |
+//| WAMP (XP-SP2/2.2/5.2/5.1.0)                                          |
 //+----------------------------------------------------------------------+
-//| Copyright (c) 1992-2003 Michael Wimmer                               |
+//| Copyright(c) 2001-2008 Michael Wimmer                                |
 //+----------------------------------------------------------------------+
-//| I don't have the time to read through all the licences to find out   |
-//| what the exactly say. But it's simple. It's free for non commercial  |
-//| projects, but as soon as you make money with it, i want my share :-) |
-//| (License : Free for non-commercial use)                              |
+//| Licence: GNU General Public License v3                               |
 //+----------------------------------------------------------------------+
-//| Authors: Michael Wimmer <flaimo@gmx.net>                             |
+//| Authors: Michael Wimmer <flaimo@gmail.com>                           |
 //+----------------------------------------------------------------------+
 //
 // $Id$
@@ -43,16 +40,15 @@ function __autoload($class){
 * “File >> Import” in Outlook to import the whole series and not just the
 * first date.
 *
-* Last Change: 2003-07-07
-* Tested with WAMP (XP-SP1/1.3.27/4.0.12/5.0.0b2-dev)
+* Tested with WAMP (XP-SP2/2.2/5.2/5.1.0)
+* Last Change: 2008-04-07
 *
 * @access public
-* @author Michael Wimmer <flaimo 'at' gmx 'dot' net>
-* @copyright Michael Wimmer
-* @link http://www.flaimo.com/
+* @author Michael Wimmer <flaimo@gmail.com>
+* @copyright Copyright © 2002-2008, Michael Wimmer
+* @license GNU General Public License v3
+* @link http://code.google.com/p/flaimo-php/
 * @package iCalendar
-* @abstract
-* @example sample_ical.php Sample script
 * @version 2.002
 */
 class iCal {
@@ -196,7 +192,7 @@ class iCal {
 		//bei Windows und Linux alle Sonderzeichen kodieren
 		else
 		  {*/
-		if (ENCODE === TRUE) {
+		if (self::ENCODE === TRUE) {
 			$quotprint = (string) str_replace('\r\n',chr(13) . chr(10),$quotprint);
 			$quotprint = (string) str_replace('\n',chr(13) . chr(10),$quotprint);
 			$quotprint = (string) preg_replace("~([\x01-\x1F\x3D\x7F-\xFF])~e", "sprintf('=%02X', ord('\\1'))", $quotprint);
@@ -215,7 +211,7 @@ class iCal {
 	* @since 2.002 - 2003-11-12
 	*/
 	private function returnQPtext() {
-		if (ENCODE === TRUE) {
+		if (self::ENCODE === TRUE) {
 			return (string) ';ENCODING=QUOTED-PRINTABLE';
 		} // end if
 		return (string) '';
@@ -916,7 +912,7 @@ class iCal {
 	* @since 1.001 - 2002-10-10
 	*/
 	private function generateOutput($format = 'ics') {
-		function &isEmpty(&$variable) {
+		function isEmpty($variable) {
             return (boolean) ((strlen(trim($variable)) > 0) ? FALSE : TRUE);
         }
 
