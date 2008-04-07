@@ -10,14 +10,13 @@ require_once 'class.I18Nbase.inc.php';
 
 /**
 * extended translator class with Gettext as a backend
-* @author Michael Wimmer <flaimo@gmx.net>
-* @category FLP
-* @copyright Copyright © 2002-2006, Michael Wimmer
+* @author Michael Wimmer <flaimo@gmail.com>
+* @category flaimo-php
 * @example  ../www_root/i18n_example_script.php  i18n example script
-* @license Free for non-commercial use
-* @link http://flp.sf.net/
-* @package I18N
-* @version 2.2
+* @license GNU General Public License v3
+* @link http://code.google.com/p/flaimo-php/
+* @package i18n
+* @version 2.3
 */
 class I18NtranslatorGettextExtended extends I18NtranslatorGettext { // implements I18NtranslatorInterfaceExtended {
 

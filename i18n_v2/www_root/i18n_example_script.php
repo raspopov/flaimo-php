@@ -69,7 +69,7 @@ $format_string	= new I18NformatString();
 		</style>
 	</head>
 	<body>
-		<h1><a href="https://sourceforge.net/projects/php-flp/">FLP – i18n</a> <small>(V2.1b2)</small></h1>
+		<h1><a href="https://sourceforge.net/projects/php-flp/">FLP – i18n</a> <small>(V2.3)</small></h1>
 			<ul id="menu">
 				<li><a href="#translator">Translator</a></li>
 				<li><a href="#date">Date</a></li>

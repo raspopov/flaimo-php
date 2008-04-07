@@ -301,13 +301,13 @@ i18n_v2/locale/translations.sqlite3 -text
 i18n_v2/noupload/class.I18NtranslatorMySQL5.inc.php -text
 i18n_v2/noupload/class.I18NtranslatorMySQL5Extended.inc.php -text
 i18n_v2/noupload/i18nclasses.EAP -text
+i18n_v2/noupload/mysql5[!!-~]überlegungen.txt -text
 i18n_v2/noupload/tes.php -text
 i18n_v2/noupload/test.php -text
 i18n_v2/setup[!!-~]files/class.I18NtranslatorMySQL5.inc.php -text
 i18n_v2/setup[!!-~]files/class.I18NtranslatorMySQL5Extended.inc.php -text
 i18n_v2/setup[!!-~]files/create[!!-~]mysql[!!-~]4.1[!!-~]table[!!-~]with[!!-~]this[!!-~]if[!!-~]needed.sql -text
 i18n_v2/setup[!!-~]files/create[!!-~]mysql[!!-~]5[!!-~]table[!!-~]with[!!-~]this[!!-~]if[!!-~]needed.sql -text
-i18n_v2/setup[!!-~]files/docs/Thumbs.db -text
 i18n_v2/setup[!!-~]files/docs/changelog_i18n.htm -text
 i18n_v2/setup[!!-~]files/docs/doc.css -text
 i18n_v2/setup[!!-~]files/docs/getting_started_deutsch_deprecated.htm -text
@@ -316,7 +316,6 @@ i18n_v2/setup[!!-~]files/docs/logo.png -text
 i18n_v2/setup[!!-~]files/mysql2sqlite2.php -text
 i18n_v2/setup[!!-~]files/mysql2sqlite3.php -text
 i18n_v2/setup[!!-~]files/mysql2xml.php -text
-i18n_v2/setup[!!-~]files/mysql5[!!-~]überlegungen.txt -text
 i18n_v2/www_root/css.css -text
 i18n_v2/www_root/i18n_example_script.php -text
 i18n_v2/www_root/test.php -text
