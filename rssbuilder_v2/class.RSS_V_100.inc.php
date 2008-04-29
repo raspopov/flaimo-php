@@ -144,6 +144,11 @@ class RSS_V_100 extends RSS_V_abstract {
 			$$item_title->appendChild($this->xml->createTextNode($rss_item->getTitle()));
 			$$item->appendChild($$item_title);
 
+			$item_author = '$item_author_' . $id;
+			$$item_author = $this->xml->createElement('author');
+			$$item_author->appendChild($this->xml->createTextNode($rss_item->getAuthor()));
+			$$item->appendChild($$item_author);
+
 			$item_link = '$item_link_' . $id;
 			$$item_link = $this->xml->createElement('link');
 			$$item_link->appendChild($this->xml->createTextNode($rss_item->getLink()));
