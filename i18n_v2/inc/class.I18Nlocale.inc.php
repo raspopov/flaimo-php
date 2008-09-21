@@ -103,7 +103,7 @@ class I18Nlocale extends I18Nbase {
 		if (($lastdot = strrpos($host,'.')) < 1) {
 			return (boolean) FALSE;
 		} // end if
-		$parts = explode('.', $host);
+		$parts = split('[.]', $host);
 		$domain_name = array_pop($parts);
 		/* top level domains (com, org, gov, aero, info)
 			or eu-domain are all english */
@@ -129,7 +129,7 @@ class I18Nlocale extends I18Nbase {
 			return (boolean) FALSE;
 		} // endif
 		$this->locales[] = strtolower($locale);
-		$temp = explode('-', $locale);
+		$temp = split('[-]', $locale);
 		$language = trim($temp[0]);
 
 		if (parent::isValidLocaleCode($language) === TRUE) {
@@ -151,14 +151,14 @@ class I18Nlocale extends I18Nbase {
 	* @uses I18Nlocale::$countries
 	*/
 	protected function readUserHeader() {
-		$client_header = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+		$client_header = split('[,]', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
 		if (count($client_header) < 1) {
 			return (boolean) FALSE;
 		} // end if
 
 		foreach ($client_header as $raw_entry) {
-			$temp = explode(';', $raw_entry);
+			$temp = split('[;]', $raw_entry);
 			$locale = trim($temp[0]);
 			$this->addLocale($locale);
 		} // end foreach

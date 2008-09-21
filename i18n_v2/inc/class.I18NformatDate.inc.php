@@ -368,7 +368,7 @@ class I18NformatDate extends I18Nbase {
 	* @author http://www.ypass.net/crap/internettime/ <http://www.ypass.net/crap/internettime/>
 	*/
 	public static function swatchTime($timestamp = 0) {
-		$rawbeat = explode('.',(($timestamp % 86400) / 86.4));
+		$rawbeat = split('[.]',(($timestamp % 86400) / 86.4), 2);
 		return '@' . sprintf('%03d', $rawbeat[0]) . '://' . substr($rawbeat[1], 0, 2);
 	} // end function
 
