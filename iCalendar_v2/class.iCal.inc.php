@@ -973,7 +973,9 @@ class iCal {
 				if (!isEmpty($event->getStatus())) {
 					$this->output .= (string) 'STATUS:' . $this->getStatusName($event->getStatus()) . "\r\n";
 				} // end if
-				$this->output .= (string) $this->generateAlarmOutput($event->getAlarm(), $format);
+				if (!isEmpty($event->getAlarm())) {				
+					$this->output .= (string) $this->generateAlarmOutput($event->getAlarm(), $format);
+				} // end if
 				$this->output .= (string) "END:VEVENT\r\n";
 			} // end foreach
 			$todokeys = (array) array_keys($this->icaltodos);
