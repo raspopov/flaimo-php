@@ -32,7 +32,7 @@ class RSS_V_091 extends RSS_V_abstract {
 		} // end if
 		
 		if ($this->rssdata->getDCDate() != FALSE) {
-			$date = $this->xml->createTextNode(date('Y-m-d\TH:i:sO', $this->rssdata->getDCDate()));
+			$date = $this->xml->createTextNode(date('r', $this->rssdata->getDCDate()));
 			$pub_date = $this->xml->createElement('pubDate');
 			$lb_date = $this->xml->createElement('lastBuildDate');
 			$pub_date->appendChild($date);

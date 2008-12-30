@@ -159,7 +159,7 @@ class RSS_V_200 extends RSS_V_abstract {
 		} // end if
 
 		if ($this->rssdata->getSYBase() != FALSE) {
-			$basedate = $this->xml->createTextNode(date('Y-m-d\TH:i:sO', $this->rssdata->getSYBase()));
+			$basedate = $this->xml->createTextNode(date('r', $this->rssdata->getSYBase()));
 			$base = $this->xml->createElement('sy:updateBase');
 			$base->appendChild($basedate);
 			$channel->appendChild($base);
@@ -197,7 +197,7 @@ class RSS_V_200 extends RSS_V_abstract {
 
 			$item_date = '$item_date_' . $id;
 			$item_date_string = '$item_date_string_' . $id;
-			$$item_date_string = $this->xml->createTextNode(date('Y-m-d\TH:i:sO', $rss_item->getItemDate()));
+			$$item_date_string = $this->xml->createTextNode(date('r', $rss_item->getItemDate()));
 			$$item_date = $this->xml->createElement('pubDate');
 			$$item_date->appendChild($$item_date_string);
 			$$item->appendChild($$item_date);

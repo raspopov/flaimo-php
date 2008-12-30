@@ -60,7 +60,7 @@ class RSS_V_100 extends RSS_V_abstract {
 		} // end if
 
 		if ($this->rssdata->getDCDate() != FALSE) {
-			$date = $this->xml->createTextNode(date('Y-m-d\TH:i:sO', $this->rssdata->getDCDate()));
+			$date = $this->xml->createTextNode(date('r', $this->rssdata->getDCDate()));
 			$pub_date = $this->xml->createElement('dc:date');
 			$pub_date->appendChild($date);
 			$channel->appendChild($pub_date);
@@ -103,7 +103,7 @@ class RSS_V_100 extends RSS_V_abstract {
 		} // end if
 
 		if ($this->rssdata->getSYBase() != FALSE) {
-			$basedate = $this->xml->createTextNode(date('Y-m-d\TH:i:sO', $this->rssdata->getSYBase()));
+			$basedate = $this->xml->createTextNode(date('r', $this->rssdata->getSYBase()));
 			$base = $this->xml->createElement('sy:updateBase');
 			$base->appendChild($basedate);
 			$channel->appendChild($base);
@@ -165,7 +165,7 @@ class RSS_V_100 extends RSS_V_abstract {
 			$$item->appendChild($$item_sub);
 
 			$item_date = '$item_date_' . $id;
-			$date_string = $this->xml->createTextNode(date('Y-m-d\TH:i:sO', $rss_item->getItemDate()));
+			$date_string = $this->xml->createTextNode(date('r', $rss_item->getItemDate()));
 			$$item_date = $this->xml->createElement('dc:date');
 			$$item_date->appendChild($date_string);
 			$$item->appendChild($$item_date);
