@@ -58,7 +58,7 @@ class I18NformatString extends I18Nbase {
 	* @uses I18Nbase::getI18Nsetting()
 	*/
 	protected function fetchBadWords() {
-		$tmp = split('[,]',$this->translator->getTranslatorLocale()->getL10Nsetting('badwords'));
+		$tmp = explode(',',$this->translator->getTranslatorLocale()->getL10Nsetting('badwords'));
 		$tmp = array_map('trim', $tmp);
 		foreach ($tmp as $word) {
 			$this->bad_words[$word] = str_repeat(parent::getI18Nsetting('replace_char'), mb_strlen($word));

@@ -129,7 +129,7 @@ class I18Nlocale extends I18Nbase {
 			return (boolean) FALSE;
 		} // endif
 		$this->locales[] = strtolower($locale);
-		$temp = split('[-]', $locale);
+		$temp = (array) explode('-', $locale);
 		$language = trim($temp[0]);
 
 		if (parent::isValidLocaleCode($language) === TRUE) {

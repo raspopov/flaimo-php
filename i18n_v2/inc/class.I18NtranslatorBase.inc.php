@@ -106,10 +106,10 @@ abstract class I18NtranslatorBase extends I18Nbase {
 	protected function setNamespaces($namespaces = '') {
 		$this->namespaces = array();
 		if (parent::isFilledString($namespaces) == TRUE) {
-			$this->namespaces = split('[,]', $namespaces);
+			$this->namespaces = explode(',', $namespaces);
 		} // end if
 
-		$this->namespaces = array_merge(split('[,]', parent::getI18Nsetting('default_namespaces')), $this->namespaces);
+		$this->namespaces = array_merge(explode(',', parent::getI18Nsetting('default_namespaces')), $this->namespaces);
 		$this->namespaces = array_filter(array_unique(array_map('trim', $this->namespaces)), 'strlen');
 	} // end function
 
