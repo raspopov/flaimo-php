@@ -10,7 +10,7 @@ require_once 'class.AtomBuilderBase.inc.php';
 * @license GNU General Public License v3
 * @link http://code.google.com/p/flaimo-php/
 * @package Atom
-* @version 1.02
+* @version 1.03
 */
 abstract class AtomBuilder_V_abstract extends AtomBuilderBase implements AtomBuilderInterface {
 

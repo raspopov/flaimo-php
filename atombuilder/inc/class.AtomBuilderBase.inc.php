@@ -11,7 +11,7 @@ function __autoload($class = ''){
 * @license GNU General Public License v3
 * @link http://code.google.com/p/flaimo-php/
 * @package Atom
-* @version 1.02
+* @version 1.03
 */
 abstract class AtomBuilderBase {
 	protected $allowed_datatypes = array('string', 'int', 'boolean',

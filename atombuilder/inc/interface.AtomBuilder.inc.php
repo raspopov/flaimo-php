@@ -7,7 +7,7 @@
 * @license GNU General Public License v3
 * @link http://code.google.com/p/flaimo-php/
 * @package Atom
-* @version 1.02
+* @version 1.03
 */
 interface AtomBuilderInterface {
 	public function getAtomOutput();
