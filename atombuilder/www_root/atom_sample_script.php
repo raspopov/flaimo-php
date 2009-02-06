@@ -1,9 +1,9 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 //+----------------------------------------------------------------------+
-//| WAMP (XP-SP2/2.2/5.2/5.1.0)                                          |
+//| WAMP (XP-SP2/2.2/5.2/5.3.0)                                          |
 //+----------------------------------------------------------------------+
-//| Copyright(c) 2001-2008 Michael Wimmer                                |
+//| Copyright(c) 2001-2009 Michael Wimmer                                |
 //+----------------------------------------------------------------------+
 //| Licence: GNU General Public License v3                               |
 //+----------------------------------------------------------------------+
@@ -47,7 +47,7 @@ $entry_1->setPublished('2005-10-29T14:34:00.25Z'); // optional
 $entry_1->setAuthor('Flaimo', 'flaimo@example.com', 'http://example.com/'); // name required, email and url are optional
 $entry_1->addContributor('Matt', 'matt@example.com'); // optional
 $entry_1->addContributor('Joe');
-$entry_1->setRights('2005-2006 © Example.com'); // optional
+$entry_1->setRights('2005-2009 © Example.com'); // optional
 
 /* optional links */
 $entry_1->addLink('http://www.meyerweb.com/', 'meyerweb.com', 'via', 'text/html', 'en'); // for example if you post your plog entry in reply to someone elses plog entry
