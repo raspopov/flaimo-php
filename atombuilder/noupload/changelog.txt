@@ -1,4 +1,9 @@
 =======================
+1.03
+-----------------------
+* Removed eregi function to prevent warnings in PHP 5.3
+
+=======================
 1.02
 -----------------------
 * Added attribute to the saveAtom method, so a custom filename can be specified
