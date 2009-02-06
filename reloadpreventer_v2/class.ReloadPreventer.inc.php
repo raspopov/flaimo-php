@@ -1,9 +1,9 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 //+----------------------------------------------------------------------+
-//| WAMP (XP-SP2/2.2/5.2/5.1.0)                                          |
+//| WAMP (XP-SP2/2.2/5.2/5.3.0)                                          |
 //+----------------------------------------------------------------------+
-//| Copyright(c) 2001-2008 Michael Wimmer                                |
+//| Copyright(c) 2001-2009 Michael Wimmer                                |
 //+----------------------------------------------------------------------+
 //| Licence: GNU General Public License v3                               |
 //+----------------------------------------------------------------------+
@@ -22,8 +22,8 @@
 * have valitated all of your important code fragments, otherwise
 * the session token and the form token will never match up.
 *
-* Tested with Apache 2.2 and PHP 5.2
-* Last change: 2008-04-06
+* Tested with Apache 2.2 and PHP 5.3
+* Last change: 2009-02-06
 *
 * @desc Preventing data being parsed twice
 * @access public
@@ -32,7 +32,7 @@
 * @link http://code.google.com/p/flaimo-php/
 * @package ReloadPreventer
 * @example sample_rp.php Sample script
-* @version 2.002
+* @version 2.003
 */
 class ReloadPreventer {
 
