@@ -88,7 +88,7 @@ class ReloadPreventer {
 	*/
 	public function setTokenSession() {
 		if ($this->new_token_set === FALSE) {
-			session_register(self::SESSIONNAME);
+			$_SESSION[self::SESSIONNAME] = null;
 			$this->setToken(md5(microtime()));
 			$_SESSION[self::SESSIONNAME] = (string) $this->token;
 		} // end if
