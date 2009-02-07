@@ -16,7 +16,7 @@ require_once 'class.I18Nbase.inc.php';
 * @license GNU General Public License v3
 * @link http://code.google.com/p/flaimo-php/
 * @package i18n
-* @version 2.3
+* @version 2.3.1
 */
 class I18NtranslatorText extends I18NtranslatorBase implements I18NtranslatorInterface {
 

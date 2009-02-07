@@ -7,7 +7,7 @@
 * @license GNU General Public License v3
 * @link http://code.google.com/p/flaimo-php/
 * @package i18n
-* @version 2.3
+* @version 2.3.1
 */
 interface I18NtranslatorInterfaceExtended {
 	/**

@@ -36,7 +36,7 @@ function getPrepStat($index, $conn, $sql = '') {
 * @license GNU General Public License v3
 * @link http://code.google.com/p/flaimo-php/
 * @package i18n
-* @version 2.3
+* @version 2.3.1
 */
 class I18NtranslatorSQLite3 extends I18NtranslatorBase implements I18NtranslatorInterface {
 
