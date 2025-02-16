@@ -14,7 +14,7 @@ abstract class ObjectList extends RSSBase implements IteratorAggregate {
 
 	protected $size = 20;
 	protected $offset = 0;
-	public $objects;
+	public $objects = [];
 	protected $factory;
 
 	function __construct($offset = 0, $size = 20) {
@@ -68,4 +68,3 @@ abstract class ObjectList extends RSSBase implements IteratorAggregate {
 		return new ObjectIterator($this);
 	} // end function
 } // end class
-?>
