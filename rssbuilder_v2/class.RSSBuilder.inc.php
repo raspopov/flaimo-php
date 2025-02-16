@@ -49,9 +49,9 @@ class RSSBuilder extends RSSBase {
 							   $author = '',
 							   $comments = '',
 							   $image = '') {
-		$this->rss_itemlist->addRSSItem(new RSSItem($about, $title, $link,
-										$description, $subject, $date, $author,
-										$comments, $image));
+		$newItem = new RSSItem($about, $title, $link, $description, $subject,
+			$date, $author, $comments, $image);
+		$this->rss_itemlist->addRSSItem($newItem);
 	} // end function
 
 	public function addDCdata($publisher = '',
@@ -195,4 +195,3 @@ class RSSBuilder extends RSSBase {
 		return $this->version_objects[$version]->outputRSS();
 	} // end function
 } // end class
-?>
