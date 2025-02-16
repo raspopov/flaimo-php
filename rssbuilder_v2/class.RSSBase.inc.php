@@ -1,7 +1,4 @@
 <?php
-function __autoload($class = ''){
-	require_once('class.' . $class . '.inc.php');
-} // end function
 /**
 * Class for creating an RSS-feed
 * @author Michael Wimmer <flaimo@gmail.com>
@@ -71,4 +68,3 @@ abstract class RSSBase {
 	} // end function
 
 } // end class
-?>

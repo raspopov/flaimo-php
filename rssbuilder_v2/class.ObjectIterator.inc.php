@@ -43,4 +43,3 @@ class ObjectIterator implements Iterator {
 		$this->current = 0;
 	} // end function
 } // end class
-?>

@@ -207,7 +207,7 @@ class RSS_V_200 extends RSS_V_abstract {
 			$$item_guid->appendChild($this->xml->createTextNode($rss_item->getLink()));
 			$$item->appendChild($$item_guid);
 
-			if ($rss_item->getComments() != FALSE) {
+			if ( $rss_item->getComments() != FALSE ) {
 				$item_comments = '$item_comments_' . $id;
 				$$item_comments = $this->xml->createElement('comments');
 				$$item_comments->appendChild($this->xml->createTextNode($rss_item->getComments()));
@@ -217,4 +217,3 @@ class RSS_V_200 extends RSS_V_abstract {
 		} // end foreach
 	} // function
 } // end class
-?>
